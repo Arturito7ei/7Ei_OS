@@ -1,0 +1,4 @@
+# Obsidian config (local to each vault instance, not shared)
+.obsidian/
+.trash/
+.DS_Store
