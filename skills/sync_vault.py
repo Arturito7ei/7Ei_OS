@@ -59,13 +59,13 @@ CATEGORY_EMOJI = {
 
 # ── Parsing ──────────────────────────────────────────────────────────────────
 
+VALID_CATEGORIES = set(CATEGORY_EMOJI.keys())
+
 def parse_catalog(path: Path) -> list[dict]:
     """Parse catalog.md and return list of skill entries."""
     text = path.read_text()
     skills = []
 
-    # Match skill rows: | Name | Source | Description |
-    # Skip header rows and separator rows
     lines = text.split("\n")
     current_category = None
 
@@ -75,16 +75,17 @@ def parse_catalog(path: Path) -> list[dict]:
         if cat_match and not line.startswith("|"):
             raw = cat_match.group(1).strip()
             # Remove emoji prefix
-            current_category = re.sub(r"^[^\w\s]+\s*", "", raw).strip()
+            name = re.sub(r"^[^\w\s]+\s*", "", raw).strip()
+            # Only treat as category if it's a known skill category
+            current_category = name if name in VALID_CATEGORIES else None
             continue
 
-        # Table rows: | skill | source | description |
+        # Table rows: | Name | Source | Description |
         if line.startswith("|") and "---" not in line and current_category:
             parts = [p.strip() for p in line.split("|")[1:-1]]
             if len(parts) >= 3 and parts[0] and parts[0] != "Skill":
                 name, source, description = parts[0], parts[1], parts[2]
                 if name and description and not name.startswith("-"):
-                    # Determine file path in 7Ei_OS/skills/
                     skill_dir = SKILLS_DIR / _slugify(name)
                     skill_file = skill_dir / "SKILL.md"
                     skills.append({
@@ -208,21 +209,36 @@ def generate_moc(skills: list[dict]) -> str:
 # ── Symlink setup ─────────────────────────────────────────────────────────────
 
 def setup_workspace_symlinks(skills: list[dict]):
-    """Create symlinks in workspace skills dir pointing to 7Ei_OS skill files."""
+    """Create symlinks in workspace skills dir pointing to 7Ei_OS skill dirs."""
+    import shutil
     workspace = WORKSPACE_SKILLS
     workspace.mkdir(parents=True, exist_ok=True)
 
     for skill in skills:
-        src = skill["skill_file"].resolve()
+        # Link to the parent skill directory, not just SKILL.md
+        src = skill["skill_file"].parent.resolve()  # e.g. .../skills/kronos/
         dst = workspace / skill["slug"]
         dst_parent = dst.parent
         dst_parent.mkdir(parents=True, exist_ok=True)
 
-        if dst.exists() or dst.is_symlink():
+        if dst.is_symlink():
+            existing = dst.readlink()
+            if existing.resolve() == src:
+                print(f"  ✅ {dst.name} (already linked correctly)")
+                continue
             dst.unlink()
-        if src.exists():
-            dst.symlink_to(src)
-            print(f"  🔗 {dst.name} → {src.relative_to(REPO_ROOT)}")
+        elif dst.exists() and dst.is_dir():
+            # Existing directory — back it up then symlink
+            backup = workspace / f"{skill['slug']}_dir_backup"
+            if backup.exists():
+                shutil.rmtree(backup)
+            shutil.move(str(dst), str(backup))
+            print(f"  📦 {dst.name}/ backed up → {backup.name}/")
+        elif dst.exists():
+            dst.unlink()
+
+        dst.symlink_to(src)
+        print(f"  🔗 {dst.name} → {src.relative_to(REPO_ROOT)}/")
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
