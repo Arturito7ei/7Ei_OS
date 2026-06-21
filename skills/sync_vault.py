@@ -28,14 +28,21 @@ REPO_ROOT = Path(__file__).parent.parent.resolve()
 SKILLS_DIR = REPO_ROOT / "skills"
 CATALOG_PATH = SKILLS_DIR / "catalog.md"
 
-# Obsidian vault (Arturito's Mac mini — adjust for other agents)
+# ── Paths ───────────────────────────────────────────────────────────────────
+# Canonical 7Ei_OS install (override with SEIOS_ROOT env var)
+SEIOS_ROOT = Path(os.environ.get(
+    "7EIOS_ROOT",
+    str(REPO_ROOT)  # assume 7Ei_OS is cloned here
+))
+
+# Obsidian vault (override with OBSIDIAN_VAULT env var)
 OBSIDIAN_VAULT = Path(os.environ.get(
     "OBSIDIAN_VAULT",
     "/Users/artutito/Library/Mobile Documents/com~apple~CloudDocs/7Ei-MC_TARCO_Vault/TARCO-MC_Vault"
 ))
 SKILL_LIBRARY_DIR = OBSIDIAN_VAULT / "Skill-Library"
 
-# Workspace skills dir (where agents look for local skill files)
+# Workspace skills dir (override with WORKSPACE_SKILLS env var)
 WORKSPACE_SKILLS = Path(os.environ.get(
     "WORKSPACE_SKILLS",
     "/Users/artutito/.openclaw/workspace/skills"
@@ -209,14 +216,18 @@ def generate_moc(skills: list[dict]) -> str:
 # ── Symlink setup ─────────────────────────────────────────────────────────────
 
 def setup_workspace_symlinks(skills: list[dict]):
-    """Create symlinks in workspace skills dir pointing to 7Ei_OS skill dirs."""
+    """Create symlinks for workspace/7Ei-specific skills only.
+    Bundled and plugin skills are NOT symlinked — they live in the OpenClaw install."""
     import shutil
     workspace = WORKSPACE_SKILLS
     workspace.mkdir(parents=True, exist_ok=True)
 
-    for skill in skills:
-        # Link to the parent skill directory, not just SKILL.md
-        src = skill["skill_file"].parent.resolve()  # e.g. .../skills/kronos/
+    # Only symlink skills whose source starts with "workspace" (7Ei-owned)
+    workspace_skills = [s for s in skills if s["source"].startswith("workspace")]
+
+    print(f"  [Only {len(workspace_skills)} workspace skills get symlinked]")
+    for skill in workspace_skills:
+        src = skill["skill_file"].parent.resolve()
         dst = workspace / skill["slug"]
         dst_parent = dst.parent
         dst_parent.mkdir(parents=True, exist_ok=True)
@@ -228,7 +239,6 @@ def setup_workspace_symlinks(skills: list[dict]):
                 continue
             dst.unlink()
         elif dst.exists() and dst.is_dir():
-            # Existing directory — back it up then symlink
             backup = workspace / f"{skill['slug']}_dir_backup"
             if backup.exists():
                 shutil.rmtree(backup)
