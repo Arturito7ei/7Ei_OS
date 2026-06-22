@@ -59,3 +59,29 @@ During `/consolidate-memory`, check:
 3. Are there L0 rules being overridden at L3 without justification?
 
 Flag drift in `tasks/lessons.md` for human review.
+
+## Tri-Sync: 7Ei_OS ↔ Obsidian Vault ↔ Paperclip
+
+Added 2026-06-22 (TAR-8).
+
+```
+7Ei_OS (L0)                    TARCO-MC_Vault (L1)              Paperclip (runtime)
+───────────                    ───────────────────              ───────────────────
+protocols/*.md          →      Protocols/ summaries
+skills/catalog.md       →      Skill-Library/          ←       sync_vault.py
+agents/README.md        ↔      07-Agents/              ←       Paperclip API
+architecture/*.md       ↔      02-Architecture/ADRs
+```
+
+| What | Authoritative Source | Mirror | Refresh Trigger |
+|------|---------------------|--------|-----------------|
+| OS protocols | `7Ei_OS/protocols/` | `vault/Protocols/` | Protocol change |
+| Skills | `7Ei_OS/skills/catalog.md` | `vault/Skill-Library/` | `sync_vault.py` after catalog edit |
+| Paperclip agents | Paperclip API | `vault/07-Agents/` | Agent hire/update/remove |
+| Org identity | `vault/Company/` | — | Vault is SoT |
+| ADRs | `vault/02-Architecture/` | — | Vault is SoT |
+
+Drift check (weekly or on `/consolidate-memory`):
+1. Does `07-Agents/MOC-Agents.md` match Paperclip agent list?
+2. Does `Skill-Library/` match `skills/catalog.md`? (run `sync_vault.py --dry-run`)
+3. Do vault `Protocols/` summaries link to current 7Ei_OS protocol files?

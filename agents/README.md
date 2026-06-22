@@ -28,3 +28,15 @@ An agent instance is a specific deployment of the 7Ei agent template (`architect
 3. Reference the identity from `identity/`
 4. Define instance-specific capabilities and permissions
 5. Follow `bootstrap/onboarding.md` for first-time setup
+
+## Paperclip Agents (TARCO)
+
+TARCO runs on [Paperclip](https://paperclip.ing) for task orchestration and heartbeats. The vault mirror lives in `TARCO-MC_Vault/07-Agents/`.
+
+| Agent | Role | Runtime | Vault Note |
+|-------|------|---------|------------|
+| ArturitoGP | CEO | grok_local | `07-Agents/Agent — ArturitoGP.md` |
+| CTO | CTO | grok_local | `07-Agents/Agent — CTO.md` |
+| Arturito R2D2 | Orchestrator | grok_local | `07-Agents/Agent — Arturito R2D2.md` |
+
+See `integrations/paperclip.md` for sync rules between Paperclip, 7Ei_OS, and the vault.
