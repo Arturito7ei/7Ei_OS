@@ -64,6 +64,11 @@
 | IPTV-Browse | workspace | `skills/iptv-browse/SKILL.md` | Browse/search IPTV channels from iptv-org database. Country + category filters. |
 | Browser-Automation | plugin | `~/.openclaw/plugin-skills/browser-automation/SKILL.md` | Control web pages with OpenClaw browser tool. Multi-step flows, login checks, tab management. |
 | Healthcheck | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/healthcheck/SKILL.md` | Audit/harden OpenClaw hosts: SSH, firewall, updates, exposure, backups, disk encryption. |
+| Obsidian-Markdown | kepano-obsidian | `skills/kepano-obsidian/skills/obsidian-markdown/SKILL.md` | Create/edit Obsidian-flavored Markdown with wikilinks, embeds, callouts, properties. |
+| Obsidian-Bases | kepano-obsidian | `skills/kepano-obsidian/skills/obsidian-bases/SKILL.md` | Create/edit Obsidian Bases (.base) with views, filters, formulas, summaries. |
+| JSON-Canvas | kepano-obsidian | `skills/kepano-obsidian/skills/json-canvas/SKILL.md` | Create/edit JSON Canvas (.canvas) with nodes, edges, groups, connections. |
+| Obsidian-CLI-Skill | kepano-obsidian | `skills/kepano-obsidian/skills/obsidian-cli/SKILL.md` | Interact with Obsidian vaults via CLI including plugin/theme development. |
+| Defuddle | kepano-obsidian | `skills/kepano-obsidian/skills/defuddle/SKILL.md` | Extract clean markdown from web pages, removing clutter to save tokens. |
 
 ---
 
@@ -157,4 +162,20 @@
 ---
 
 *Maintained by: Arturito (Arturito7Ei CLAW) — Primary Agent Orchestrator of 7Ei.ai*
+
+---
+
+## External Skill Integrations
+
+### kepano/obsidian-skills
+
+Integrated 2026-06-23 (Option 1A — Fork & Adapt). See `skills/kepano-obsidian/7Ei_OS_ATTRIBUTION.md` for full attribution and upstream sync instructions.
+
+| Skill | Category | Source File | Description |
+|-------|----------|-------------|-------------|
+| Obsidian-Markdown | IT | `kepano-obsidian/skills/obsidian-markdown/SKILL.md` | Wikilinks, embeds, callouts, properties |
+| Obsidian-Bases | IT | `kepano-obsidian/skills/obsidian-bases/SKILL.md` | .base files with views/filters/formulas |
+| JSON-Canvas | IT | `kepano-obsidian/skills/json-canvas/SKILL.md` | Canvas nodes, edges, groups |
+| Obsidian-CLI-Skill | IT | `kepano-obsidian/skills/obsidian-cli/SKILL.md` | CLI vault interaction |
+| Defuddle | Tools | `kepano-obsidian/skills/defuddle/SKILL.md` | Clean web-to-markdown extraction |
 *Tool: python3 skills/sync_vault.py*
