@@ -11,7 +11,17 @@ How 7Ei agents work together without stepping on each other.
 
 ## Task Handoff
 
-Agents coordinate via YAML files in `platform/coordination/tasks/`:
+**Primary channel: Mission Control** (`https://7ei-backend.fly.dev`, agent API). MC provides what the YAML files approximated, hardened: atomic task checkout (CAS claim — exactly one owner), dependencies (`blocked_by` gates claims), run telemetry + resumable session state, unified timeline (comments/attachments/runs), approval gates, and heartbeats. Agents interact via their agent token:
+
+```
+GET  /api/agent/tasks?state=assigned   → what's mine?
+POST /api/agent/tasks/:id/claim        → atomic claim (one winner)
+POST /api/agent/tasks/:id/result       → output + done|failed
+POST /api/agent/tasks/:id/comment      → progress notes on the timeline
+POST /api/agent/heartbeat              → green|amber liveness
+```
+
+**Fallback channel** (MC unreachable, or work outside MC's scope): YAML files in `platform/coordination/tasks/`:
 
 ```yaml
 # platform/coordination/tasks/TASK-001.yaml
@@ -50,7 +60,8 @@ pending → in_progress → done
 
 | Channel | Use For | Agents |
 |---------|---------|--------|
-| `platform/coordination/tasks/` | Task handoff (YAML) | All agents |
+| Mission Control (agent API + Cockpit) | Task handoff, heartbeats, approvals, run telemetry — PRIMARY | All agents |
+| `platform/coordination/tasks/` | Task handoff (YAML) — fallback when MC unavailable | All agents |
 | Git commits and PRs | Code changes, reviews | All agents |
 | Obsidian vault (Open7Ei_ObsidianVault) | Shared knowledge, research | Claude + Claw |
 | Telegram | Human notifications, quick updates | Claw → Human |
@@ -66,17 +77,19 @@ pending → in_progress → done
 ## Heartbeat Pattern
 
 Agents signal activity through:
-1. Git commits (natural heartbeat)
-2. Task status updates in `platform/coordination/tasks/`
-3. Memory updates in `memory/recent.md`
+1. **`POST /api/agent/heartbeat`** (green/amber) — MC's heartbeat engine tracks staleness and surfaces it in the Cockpit (primary)
+2. Git commits (natural heartbeat)
+3. Task status updates (MC timeline, or YAML fallback)
+4. Memory updates in the vault (`Memory/agents/<agent>/recent.md`)
 
-If an agent hasn't committed in 24 hours on an active task, the orchestrator should check status.
+If an agent's MC heartbeat goes stale on an active task, the orchestrator should check status.
 
 ## Escalation
 
 | Situation | Action |
 |-----------|--------|
-| Task blocked for 4+ hours | Flag in handoff file, notify orchestrator |
+| Task blocked for 4+ hours | Mark task blocked in MC (comment with reason), notify orchestrator |
+| Action needs human approval | MC approval request (auto-created by execution policies) — human decides in Cockpit |
 | Agent capabilities insufficient | Reassign to agent with right tools |
 | Cross-agent conflict | Orchestrator decides, documents in lessons |
 | Human decision needed | Mark task blocked, notify via Telegram |

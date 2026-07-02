@@ -72,16 +72,26 @@ tasks/
 
 ## Cross-Agent Memory
 
-Agents share knowledge via:
-- **Git** — `memory/` directory in the shared agent repo (source of truth)
-- **Obsidian Sync** — real-time vault synchronization
-- **Task handoff files** — `platform/coordination/tasks/*.yaml`
+**Primary bus: the Mission Control agent API over the shared vault.** Every agent — regardless of runtime — reads and writes shared memory through MC, which persists to the org's Obsidian vault (git):
 
-Each agent reads shared memory but writes to its own section or files to avoid conflicts.
+```
+GET  /api/agent/memory/tree|file          → read anywhere in the vault
+PUT  /api/agent/memory/file               → write (memory:write capability + policy gates)
+POST /api/agent/memory/session-summary    → append session summary to YOUR OWN
+                                            Memory/agents/<slug>/recent.md (path fixed)
+```
+
+Vault namespaces: `Memory/agents/<agent-slug>/{long-term,recent,lessons,kv}.md` per agent; org tiers at `Memory/{long-term,lessons}.md` change via promotion only. MC additionally injects org + agent long-term memory into every MC agent's system prompt at boot, exports each agent's key-value memory to `kv.md` nightly, and runs the weekly consolidation (see below).
+
+Secondary channels: git commits in identity repos, Obsidian Sync, and task handoff (see coordination protocol).
+
+Each agent reads shared memory anywhere but writes only to its own namespace; org-tier writes go through gated promotion.
 
 ## Consolidation
 
-Run periodically (weekly or when 5+ entries accumulate in `lessons.md`):
+The mechanical half is AUTOMATED: every Sunday ≥04:00 UTC, Mission Control archives session blocks older than 7 days from each agent's `recent.md` to `archive-recent.md` (lossless) and opens a review task for the orchestrator with a per-agent report. The semantic half (promotion) is the orchestrator's job, executed through the gated memory endpoints.
+
+Manual fallback — run when 5+ entries accumulate in `lessons.md`:
 
 1. Scan `recent.md` and `lessons.md` for promotable patterns
 2. Promote stable knowledge to `long-term.md`
