@@ -27,7 +27,7 @@ An agent instance is a specific deployment of the 7Ei agent template (`architect
 2. Create an instance profile in this folder
 3. Reference the identity from `identity/`
 4. Define instance-specific capabilities and permissions
-5. Follow `bootstrap/onboarding.md` for first-time setup
+5. Follow `onboarding/README.md` for first-time setup (verification gate: `onboarding/checklist.md`)
 
 ## Paperclip Agents (TARCO)
 
