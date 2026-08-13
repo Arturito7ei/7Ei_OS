@@ -6,7 +6,7 @@
 >
 > **To add/edit a skill:** Edit `skills/<name>/SKILL.md`, update this catalog, then run `python3 skills/sync_vault.py` to regenerate the Obsidian vault.
 >
-> **Last updated:** 2026-06-22
+> **Last updated:** 2026-08-13
 
 ---
 
@@ -94,6 +94,7 @@
 
 | Skill | Source | Skill File | Description |
 |-------|--------|------------|-------------|
+| tech-radar-evaluate | workspace | `skills/tech-radar-evaluate/SKILL.md` | Evaluate tools/skills for 7Ei: sovereignty-first rubric, adopt/trial/hold/avoid verdict, citations. Use before imports or stack changes. |
 | Summarize | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/summarize/SKILL.md` | Summarize/transcribe URLs, YouTube/videos, podcasts, PDFs, articles, local files. |
 | Session-Logs | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/session-logs/SKILL.md` | Search and analyze session logs with jq. Find past decisions in older sessions. |
 
