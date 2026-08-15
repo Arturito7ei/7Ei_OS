@@ -6,7 +6,7 @@
 >
 > **To add/edit a skill:** Edit `skills/<name>/SKILL.md`, update this catalog, then run `python3 skills/sync_vault.py` to regenerate the Obsidian vault.
 >
-> **Last updated:** 2026-06-22
+> **Last updated:** 2026-08-15
 
 ---
 
@@ -53,6 +53,7 @@
 
 | Skill | Source | Skill File | Description |
 |-------|--------|------------|-------------|
+| secret-hygiene | workspace | `skills/secret-hygiene/SKILL.md` | Reference secrets by 1Password item name or scoped env path only. Never paste values into chat, logs, or git. Human-only rotation. |
 | n8n-Workflow-Automation | workspace | `skills/n8n-workflow-automation/SKILL.md` | Design robust n8n workflow JSON with idempotency, retry, error handling, human-in-the-loop queues. |
 
 ---
