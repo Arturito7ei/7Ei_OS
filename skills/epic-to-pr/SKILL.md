@@ -83,11 +83,29 @@ EOF
 **Buzz-hosted repo:**
 
 ```bash
-buzz issues create --repo-id <id> --title "Epic: <title>" \
-  --content "..." --channel <channel-uuid>
+buzz issues create --repo-owner <hex> --repo-id <id> \
+  --title "Epic: <title>" \
+  --content "$(cat <<'EOF'
+## Hypothesis
+...
+
+## Outcome
+...
+
+## Done-when
+- [ ] ...
+
+## Channel
+<buzz-channel-uuid>
+
+## RACI
+- Accountable: ...
+- Responsible: ...
+EOF
+)"
 ```
 
-Use the `link` field from the response verbatim in channel posts — never invent HTTPS URLs for Buzz repos.
+`buzz issues create` has no `--channel` flag — put the channel UUID in the issue body (same pattern as GitHub). Use the `link` field from the response verbatim in channel posts — never invent HTTPS URLs for Buzz repos.
 
 ### 3. Break into stories
 
@@ -123,11 +141,13 @@ gh pr create --title "..." --body "..."
 **Buzz-hosted (required channel preservation):**
 
 ```bash
-buzz pr open --repo-id <id> --title "..." --content "..." \
+buzz pr open --repo-owner <hex> --repo-id <id> \
+  --subject "..." --body "..." \
+  --commit "$(git rev-parse HEAD)" --clone <clone-url> \
   --channel <channel-uuid>
 ```
 
-Announce in channel with the returned `link` field (renders as preview card in Buzz Desktop).
+Only `buzz pr open` takes `--channel` (NIP-29 h-tag). Announce in channel with the returned `link` field (renders as preview card in Buzz Desktop).
 
 ### 6. Review and close
 
@@ -151,7 +171,7 @@ Announce in channel with the returned `link` field (renders as preview card in B
 
 - [ ] Hypothesis one-liner exists before stories
 - [ ] Every story has done-when
-- [ ] PR/issue includes `--channel <uuid>` when work originated in Buzz
+- [ ] Buzz PRs pass `--channel <uuid>` when work originated in Buzz; Buzz issues put the channel UUID in the body (no `--channel` on `issues create`)
 - [ ] Channel announcement uses Buzz `link` field, not guessed URLs
 - [ ] No dual-primary Jira + GitHub for same epic
 - [ ] No commits on `main` for multi-day work
