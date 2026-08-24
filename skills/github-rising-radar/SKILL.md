@@ -42,6 +42,10 @@ python3 skills/github-rising-radar/scripts/scan.py \
 
 # Re-render last snapshot without API calls
 python3 skills/github-rising-radar/scripts/scan.py --report-only
+
+# HTML dashboard (from latest.json — no API)
+python3 skills/github-rising-radar/scripts/generate_dashboard.py
+open skills/github-rising-radar/dashboard/index.html
 ```
 
 ## Scan Tracks (default)
@@ -80,8 +84,19 @@ Customize: `--tracks ai,agent --days 60 --min-stars 100`
 | `skills/github-rising-radar/data/latest.json` | Last scan (for deltas) |
 | `skills/github-rising-radar/data/snapshots/*.json` | Historical snapshots |
 | `~/.buzz/RESEARCH/GITHUB_RISING_RADAR_*.md` | Human-readable weekly report |
+| `skills/github-rising-radar/dashboard/index.html` | Self-contained HTML dashboard (regenerate via `generate_dashboard.py`) |
 
 Snapshot data is gitignored — lives on operator machine only.
+
+## Dashboard
+
+After each scan, regenerate the dashboard:
+
+```bash
+python3 skills/github-rising-radar/scripts/generate_dashboard.py
+```
+
+Quality bar (gauntlet-loop trial): GitHub Trending at-a-glance cards + ThoughtWorks Radar track clarity. For polished visual passes on the dashboard itself, bind `gauntlet-loop` skill.
 
 ## Limitations
 
