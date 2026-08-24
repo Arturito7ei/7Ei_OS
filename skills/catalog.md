@@ -87,6 +87,7 @@
 
 | Skill | Source | Skill File | Description |
 |-------|--------|------------|-------------|
+| epic-to-pr | workspace | `skills/epic-to-pr/SKILL.md` | Epic hypothesis → stories → worktree → PR with Buzz channel link. GitHub Issues default; Jira optional per venture. |
 | Things-Mac | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/things-mac/SKILL.md` | Manage Things 3 todos, inbox, projects, areas, tags on macOS. |
 
 ---
