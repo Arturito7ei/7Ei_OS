@@ -98,6 +98,17 @@ python3 skills/github-rising-radar/scripts/generate_dashboard.py
 
 Quality bar (gauntlet-loop trial): GitHub Trending at-a-glance cards + ThoughtWorks Radar track clarity. For polished visual passes on the dashboard itself, bind `gauntlet-loop` skill.
 
+## Research hub (GitHub Pages)
+
+After each scan, publish the weekly hub for browser access:
+
+```bash
+python3 skills/github-rising-radar/scripts/generate_research_hub.py
+# commits docs/ → GitHub Pages at https://arturito7ei.github.io/7Ei_OS/
+```
+
+Outputs: `docs/index.html` (hub), `docs/radar.html` (dashboard), `docs/reports/YYYY-MM-DD.html` (scan + chooser archive). Reads markdown from `~/.buzz/RESEARCH/`.
+
 ## Limitations
 
 - **No official GitHub Trending API** — we reconstruct via Search API + velocity (GitHub docs: no trending endpoint). Verified 2026-08-13.
