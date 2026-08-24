@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7Ei GitHub Rising Radar</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --fire: #f78166;
+  --green: #3fb950;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header.page { padding: 2rem 2rem 1rem; border-bottom: 1px solid var(--border); }
+header.page h1 { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; }
+header.page .sub { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+.badge { display: inline-block; background: #21262d; border: 1px solid var(--border); border-radius: 2em; padding: 0.15rem 0.65rem; font-size: 0.75rem; color: var(--muted); margin-left: 0.5rem; }
+main { max-width: 1280px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.kpi .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.kpi .value { font-size: 1.75rem; font-weight: 700; margin-top: 0.25rem; }
+.kpi .hint { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+section { margin-bottom: 2.5rem; }
+section h2 { font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+section h2 .emoji { font-size: 1.25rem; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+.repo-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.15rem; transition: border-color 0.15s; }
+.repo-card:hover { border-color: var(--accent); }
+.repo-card header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem; }
+.repo-name { font-weight: 600; font-size: 0.95rem; word-break: break-all; }
+.delta { background: rgba(247,129,102,0.15); color: var(--fire); font-size: 0.75rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 4px; white-space: nowrap; }
+.desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.65rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.metrics { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.5rem; }
+.metrics strong { color: var(--text); }
+.lang { font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 4px; background: color-mix(in srgb, var(--lang-color) 20%, transparent); color: var(--lang-color); border: 1px solid color-mix(in srgb, var(--lang-color) 40%, transparent); }
+.topics { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.topic { font-size: 0.68rem; background: #21262d; color: var(--muted); padding: 0.1rem 0.4rem; border-radius: 3px; }
+.bar-chart { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.bar-row { display: grid; grid-template-columns: 140px 1fr 70px; gap: 0.75rem; align-items: center; margin-bottom: 0.65rem; }
+.bar-label { font-size: 0.82rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--fire), #ffa657); border-radius: 4px; }
+.bar-val { font-size: 0.8rem; color: var(--fire); font-weight: 600; text-align: right; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.tab { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 0.4rem 0.85rem; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }
+.tab:hover { color: var(--text); border-color: var(--muted); }
+.tab.active { background: #21262d; color: var(--text); border-color: var(--accent); }
+.empty { color: var(--muted); font-size: 0.9rem; }
+footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2rem; border-top: 1px solid var(--border); }
+@media (max-width: 640px) {
+  header.page, main { padding-left: 1rem; padding-right: 1rem; }
+  .bar-row { grid-template-columns: 100px 1fr 55px; }
+}
+</style>
+</head>
+<body>
+<header class="page">
+  <h1>GitHub Rising Radar <span class="badge">7Ei R&D</span></h1>
+  <p class="sub">Star velocity intake · scanned 2026-08-19 07:06 UTC · tracks: ai, agent, devtools, general</p>
+</header>
+<main>
+  <div class="kpis">
+    <div class="kpi">
+      <div class="label">Repos tracked</div>
+      <div class="value">26</div>
+      <div class="hint">4 scan tracks</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Combined stars</div>
+      <div class="value">656.2k</div>
+      <div class="hint">across snapshot</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Top climber Δ</div>
+      <div class="value">—</div>
+      <div class="hint">first scan baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Peak velocity</div>
+      <div class="value">28.1k</div>
+      <div class="hint">deepseek-harness ⭐/day</div>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="emoji">🔥</span> Fastest climbers since last scan</h2>
+    <div class="bar-chart"><p class="empty">First scan — re-run weekly for delta climbers.</p></div>
+  </section>
+
+  <section>
+    <h2><span class="emoji">📈</span> Top velocity</h2>
+    <div class="card-grid">
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">deepseek-ai/deepseek-harness</a>
+            
+          </header>
+          <p class="desc">DeepSeek Harness: Everything is a Plugin.</p>
+          <div class="metrics">
+            <span class="metric"><strong>28.1k</strong> ⭐/day</span>
+            <span class="metric"><strong>163.0k</strong> total</span>
+            <span class="metric"><strong>5.8</strong>d old</span>
+            <span class="lang" style="--lang-color:#3178c6">TypeScript</span>
+          </div>
+          <div class="topics"><span class="topic">ai-agents</span><span class="topic">cordis</span><span class="topic">dsh</span><span class="topic">dsh-plugin</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">anywhere-labs/deepseek-harness-desktop</a>
+            
+          </header>
+          <p class="desc">为 DeepSeek Harness (DSH) 插件生态打造的现代化桌面端解决方案。万物皆「插件」，桌面本身也是「插件」。</p>
+          <div class="metrics">
+            <span class="metric"><strong>2.5k</strong> ⭐/day</span>
+            <span class="metric"><strong>14.2k</strong> total</span>
+            <span class="metric"><strong>5.6</strong>d old</span>
+            <span class="lang" style="--lang-color:#3178c6">TypeScript</span>
+          </div>
+          <div class="topics"><span class="topic">cordis</span><span class="topic">cordis-plugin</span><span class="topic">deepseek</span><span class="topic">deepseek-harness</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/guillaumemeyer/watermarks-remover" target="_blank" rel="noopener">guillaumemeyer/watermarks-remover</a>
+            
+          </header>
+          <p class="desc">Strip multi-vendor AI provenance marks: Unicode text hygiene, statistical rewrite hooks, and C2PA/metadata from PNG/JPEG</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.9k</strong> ⭐/day</span>
+            <span class="metric"><strong>14.7k</strong> total</span>
+            <span class="metric"><strong>7.6</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"><span class="topic">agent-skill</span><span class="topic">ai</span><span class="topic">c2pa</span><span class="topic">claude</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">awesome-dsh-plugin/awesome-dsh-plugin</a>
+            
+          </header>
+          <p class="desc">A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.6k</strong> ⭐/day</span>
+            <span class="metric"><strong>9.4k</strong> total</span>
+            <span class="metric"><strong>5.7</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"><span class="topic">awesome</span><span class="topic">awesome-list</span><span class="topic">deepseek-harness</span><span class="topic">dsh</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">DietrichGebert/ponytail</a>
+            
+          </header>
+          <p class="desc">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.5k</strong> ⭐/day</span>
+            <span class="metric"><strong>105.6k</strong> total</span>
+            <span class="metric"><strong>68.3</strong>d old</span>
+            <span class="lang" style="--lang-color:#f7df1e">JavaScript</span>
+          </div>
+          <div class="topics"><span class="topic">agent-skills</span><span class="topic">ai-agents</span><span class="topic">claude</span><span class="topic">claude-code</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/firecrawl/anydoc" target="_blank" rel="noopener">firecrawl/anydoc</a>
+            
+          </header>
+          <p class="desc">Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js an</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.1k</strong> ⭐/day</span>
+            <span class="metric"><strong>17.1k</strong> total</span>
+            <span class="metric"><strong>15.6</strong>d old</span>
+            <span class="lang" style="--lang-color:#dea584">Rust</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/odysseus-dev/odysseus" target="_blank" rel="noopener">odysseus-dev/odysseus</a>
+            
+          </header>
+          <p class="desc">Self-hosted AI workspace. </p>
+          <div class="metrics">
+            <span class="metric"><strong>1.1k</strong> ⭐/day</span>
+            <span class="metric"><strong>85.7k</strong> total</span>
+            <span class="metric"><strong>79.7</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener">xai-org/grok-build</a>
+            
+          </header>
+          <p class="desc">SpaceXAI&#x27;s coding agent harness and TUI. Fullscreen, mouse interactive, extensible.</p>
+          <div class="metrics">
+            <span class="metric"><strong>723.6</strong> ⭐/day</span>
+            <span class="metric"><strong>25.7k</strong> total</span>
+            <span class="metric"><strong>35.5</strong>d old</span>
+            <span class="lang" style="--lang-color:#dea584">Rust</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/yc-software/qm" target="_blank" rel="noopener">yc-software/qm</a>
+            
+          </header>
+          <p class="desc">Multiplayer agent harness for work.</p>
+          <div class="metrics">
+            <span class="metric"><strong>680</strong> ⭐/day</span>
+            <span class="metric"><strong>13.9k</strong> total</span>
+            <span class="metric"><strong>20.5</strong>d old</span>
+            <span class="lang" style="--lang-color:#3178c6">TypeScript</span>
+          </div>
+          <div class="topics"><span class="topic">ai</span><span class="topic">assistant</span><span class="topic">harness</span><span class="topic">qm</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">JustVugg/colibri</a>
+            
+          </header>
+          <p class="desc">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immens</p>
+          <div class="metrics">
+            <span class="metric"><strong>521.7</strong> ⭐/day</span>
+            <span class="metric"><strong>25.4k</strong> total</span>
+            <span class="metric"><strong>48.8</strong>d old</span>
+            <span class="lang" style="--lang-color:#555555">C</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/andrewyng/openworker" target="_blank" rel="noopener">andrewyng/openworker</a>
+            
+          </header>
+          <p class="desc"></p>
+          <div class="metrics">
+            <span class="metric"><strong>489.6</strong> ⭐/day</span>
+            <span class="metric"><strong>14.8k</strong> total</span>
+            <span class="metric"><strong>30.2</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/Fei-Away/Codex-Dream-Skin" target="_blank" rel="noopener">Fei-Away/Codex-Dream-Skin</a>
+            
+          </header>
+          <p class="desc">Codex Dream Skin</p>
+          <div class="metrics">
+            <span class="metric"><strong>400.4</strong> ⭐/day</span>
+            <span class="metric"><strong>13.9k</strong> total</span>
+            <span class="metric"><strong>34.8</strong>d old</span>
+            <span class="lang" style="--lang-color:#f7df1e">JavaScript</span>
+          </div>
+          <div class="topics"></div>
+        </article></div>
+  </section>
+
+  <section>
+    <h2><span class="emoji">🎯</span> By track</h2>
+    <div class="tabs" id="track-tabs"><button class="tab active" data-track="ai">AI / LLM (1)</button><button class="tab" data-track="agent">Agent / MCP (0)</button><button class="tab" data-track="devtools">Dev Tools (0)</button><button class="tab" data-track="general">General Rising (25)</button></div>
+    
+        <section class="track-panel" data-track="ai" hidden>
+          <h2>AI / LLM</h2>
+          <div class="card-grid">
+        <article class="repo-card" data-track="ai">
+          <header>
+            <a class="repo-name" href="https://github.com/laoshan-song/Awesome-LLM-Interview" target="_blank" rel="noopener">laoshan-song/Awesome-LLM-Interview</a>
+            
+          </header>
+          <p class="desc"> LLM interview prep notes: Transformer, RLHF, DPO, LoRA, KV Cache,RAG, MoE, distributed training &amp; 2026 frontier topics</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.6</strong> ⭐/day</span>
+            <span class="metric"><strong>129</strong> total</span>
+            <span class="metric"><strong>83.1</strong>d old</span>
+            <span class="lang" style="--lang-color:#e34c26">HTML</span>
+          </div>
+          <div class="topics"></div>
+        </article></div>
+        </section>
+        <section class="track-panel" data-track="agent" hidden>
+          <h2>Agent / MCP</h2>
+          <div class="card-grid"><p class="empty">No repos in this track.</p></div>
+        </section>
+        <section class="track-panel" data-track="devtools" hidden>
+          <h2>Dev Tools</h2>
+          <div class="card-grid"><p class="empty">No repos in this track.</p></div>
+        </section>
+        <section class="track-panel" data-track="general" hidden>
+          <h2>General Rising</h2>
+          <div class="card-grid">
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">deepseek-ai/deepseek-harness</a>
+            
+          </header>
+          <p class="desc">DeepSeek Harness: Everything is a Plugin.</p>
+          <div class="metrics">
+            <span class="metric"><strong>28.1k</strong> ⭐/day</span>
+            <span class="metric"><strong>163.0k</strong> total</span>
+            <span class="metric"><strong>5.8</strong>d old</span>
+            <span class="lang" style="--lang-color:#3178c6">TypeScript</span>
+          </div>
+          <div class="topics"><span class="topic">ai-agents</span><span class="topic">cordis</span><span class="topic">dsh</span><span class="topic">dsh-plugin</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">anywhere-labs/deepseek-harness-desktop</a>
+            
+          </header>
+          <p class="desc">为 DeepSeek Harness (DSH) 插件生态打造的现代化桌面端解决方案。万物皆「插件」，桌面本身也是「插件」。</p>
+          <div class="metrics">
+            <span class="metric"><strong>2.5k</strong> ⭐/day</span>
+            <span class="metric"><strong>14.2k</strong> total</span>
+            <span class="metric"><strong>5.6</strong>d old</span>
+            <span class="lang" style="--lang-color:#3178c6">TypeScript</span>
+          </div>
+          <div class="topics"><span class="topic">cordis</span><span class="topic">cordis-plugin</span><span class="topic">deepseek</span><span class="topic">deepseek-harness</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/guillaumemeyer/watermarks-remover" target="_blank" rel="noopener">guillaumemeyer/watermarks-remover</a>
+            
+          </header>
+          <p class="desc">Strip multi-vendor AI provenance marks: Unicode text hygiene, statistical rewrite hooks, and C2PA/metadata from PNG/JPEG</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.9k</strong> ⭐/day</span>
+            <span class="metric"><strong>14.7k</strong> total</span>
+            <span class="metric"><strong>7.6</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"><span class="topic">agent-skill</span><span class="topic">ai</span><span class="topic">c2pa</span><span class="topic">claude</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">awesome-dsh-plugin/awesome-dsh-plugin</a>
+            
+          </header>
+          <p class="desc">A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.6k</strong> ⭐/day</span>
+            <span class="metric"><strong>9.4k</strong> total</span>
+            <span class="metric"><strong>5.7</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"><span class="topic">awesome</span><span class="topic">awesome-list</span><span class="topic">deepseek-harness</span><span class="topic">dsh</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">DietrichGebert/ponytail</a>
+            
+          </header>
+          <p class="desc">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.5k</strong> ⭐/day</span>
+            <span class="metric"><strong>105.6k</strong> total</span>
+            <span class="metric"><strong>68.3</strong>d old</span>
+            <span class="lang" style="--lang-color:#f7df1e">JavaScript</span>
+          </div>
+          <div class="topics"><span class="topic">agent-skills</span><span class="topic">ai-agents</span><span class="topic">claude</span><span class="topic">claude-code</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/firecrawl/anydoc" target="_blank" rel="noopener">firecrawl/anydoc</a>
+            
+          </header>
+          <p class="desc">Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js an</p>
+          <div class="metrics">
+            <span class="metric"><strong>1.1k</strong> ⭐/day</span>
+            <span class="metric"><strong>17.1k</strong> total</span>
+            <span class="metric"><strong>15.6</strong>d old</span>
+            <span class="lang" style="--lang-color:#dea584">Rust</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/odysseus-dev/odysseus" target="_blank" rel="noopener">odysseus-dev/odysseus</a>
+            
+          </header>
+          <p class="desc">Self-hosted AI workspace. </p>
+          <div class="metrics">
+            <span class="metric"><strong>1.1k</strong> ⭐/day</span>
+            <span class="metric"><strong>85.7k</strong> total</span>
+            <span class="metric"><strong>79.7</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener">xai-org/grok-build</a>
+            
+          </header>
+          <p class="desc">SpaceXAI&#x27;s coding agent harness and TUI. Fullscreen, mouse interactive, extensible.</p>
+          <div class="metrics">
+            <span class="metric"><strong>723.6</strong> ⭐/day</span>
+            <span class="metric"><strong>25.7k</strong> total</span>
+            <span class="metric"><strong>35.5</strong>d old</span>
+            <span class="lang" style="--lang-color:#dea584">Rust</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/yc-software/qm" target="_blank" rel="noopener">yc-software/qm</a>
+            
+          </header>
+          <p class="desc">Multiplayer agent harness for work.</p>
+          <div class="metrics">
+            <span class="metric"><strong>680</strong> ⭐/day</span>
+            <span class="metric"><strong>13.9k</strong> total</span>
+            <span class="metric"><strong>20.5</strong>d old</span>
+            <span class="lang" style="--lang-color:#3178c6">TypeScript</span>
+          </div>
+          <div class="topics"><span class="topic">ai</span><span class="topic">assistant</span><span class="topic">harness</span><span class="topic">qm</span></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">JustVugg/colibri</a>
+            
+          </header>
+          <p class="desc">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immens</p>
+          <div class="metrics">
+            <span class="metric"><strong>521.7</strong> ⭐/day</span>
+            <span class="metric"><strong>25.4k</strong> total</span>
+            <span class="metric"><strong>48.8</strong>d old</span>
+            <span class="lang" style="--lang-color:#555555">C</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/andrewyng/openworker" target="_blank" rel="noopener">andrewyng/openworker</a>
+            
+          </header>
+          <p class="desc"></p>
+          <div class="metrics">
+            <span class="metric"><strong>489.6</strong> ⭐/day</span>
+            <span class="metric"><strong>14.8k</strong> total</span>
+            <span class="metric"><strong>30.2</strong>d old</span>
+            <span class="lang" style="--lang-color:#3572a5">Python</span>
+          </div>
+          <div class="topics"></div>
+        </article>
+        <article class="repo-card" data-track="general">
+          <header>
+            <a class="repo-name" href="https://github.com/Fei-Away/Codex-Dream-Skin" target="_blank" rel="noopener">Fei-Away/Codex-Dream-Skin</a>
+            
+          </header>
+          <p class="desc">Codex Dream Skin</p>
+          <div class="metrics">
+            <span class="metric"><strong>400.4</strong> ⭐/day</span>
+            <span class="metric"><strong>13.9k</strong> total</span>
+            <span class="metric"><strong>34.8</strong>d old</span>
+            <span class="lang" style="--lang-color:#f7df1e">JavaScript</span>
+          </div>
+          <div class="topics"></div>
+        </article></div>
+        </section>
+  </section>
+
+  <section>
+    <h2><span class="emoji">🔥</span> All climbers (detail)</h2>
+    <div class="card-grid"><p class="empty">No deltas vs previous snapshot.</p></div>
+  </section>
+</main>
+<footer>
+  Generated by <code>github-rising-radar/scripts/generate_dashboard.py</code> ·
+  BYOK via <code>gh</code> CLI · Next: <code>tech-radar-evaluate</code> → <code>RD_CANDIDATE_QUEUE.md</code>
+</footer>
+<script>
+document.querySelectorAll('#track-tabs .tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#track-tabs .tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.track-panel').forEach(p => p.hidden = true);
+    btn.classList.add('active');
+    const panel = document.querySelector('.track-panel[data-track="' + btn.dataset.track + '"]');
+    if (panel) panel.hidden = false;
+  });
+});
+const firstPanel = document.querySelector('.track-panel');
+if (firstPanel) firstPanel.hidden = false;
+</script>
+</body>
+</html>
