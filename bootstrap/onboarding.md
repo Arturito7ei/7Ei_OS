@@ -1,6 +1,8 @@
 # Agent Onboarding — moved
 
-> **The canonical onboarding path now lives in [`onboarding/`](../onboarding/README.md)** — runtime-neutral core, machine-checkable verification gate (`onboarding/checklist.md`), and per-runtime adapters (`onboarding/runtimes/`). Onboarding a new project repo: `onboarding/new-project.md`.
+> **Start here:** [`CATCH_UP.md`](CATCH_UP.md) (mandatory first-read, any runtime).
+>
+> **The canonical onboarding path** (join + verification) lives in [`onboarding/`](../onboarding/README.md) — runtime-neutral core, machine-checkable gate (`onboarding/checklist.md`), and per-runtime adapters (`onboarding/runtimes/`). Onboarding a new project repo: `onboarding/new-project.md`.
 
 Quick pointers preserved from the original checklist:
 

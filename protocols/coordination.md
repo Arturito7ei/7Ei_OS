@@ -4,6 +4,8 @@ How 7Ei agents work together without stepping on each other.
 
 ## Active Agents
 
+Live runtime roster: `README.md` (this table is historical instance names and may lag).
+
 | Agent | Runtime | Capabilities | Primary Repos |
 |-------|---------|-------------|---------------|
 | Arturito7EiClaude | Claude Code | Code, architecture, orchestration, planning | All repos |
