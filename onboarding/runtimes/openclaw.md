@@ -1,5 +1,12 @@
 # Runtime adapter — OpenClaw (and any adapter-based runtime)
 
+> **Status: secondary / parked.** Vault namespace `Memory/agents/openclaw` is legacy **read-only** — no new writes. If this runtime is woken, it still points at L0/L1 as below.
+
+How OpenClaw points at 7Ei_OS + TARCO vault. Protocols live in `protocols/` — do not restate them here.
+
+- **L0:** workspace skills symlink `7Ei_OS/skills/` → `~/.openclaw/workspace/skills/`. Start at `bootstrap/CATCH_UP.md`.
+- **L1:** vault via MC (`GITHUB_VAULT_TOKEN` in Cockpit → Secrets). Read-only on the `openclaw` namespace.
+
 The adapter (`7Ei-Mission_Control_App/adapters/openclaw/mc_adapter.py`, stdlib-only Python) IS your MC client: it polls, claims, executes (shell | llm | http), heartbeats, and pulls scoped secrets at boot.
 
 - **Install**: `adapters/mac-mini/setup.sh --preset <preset> --yes` with `MC_AGENT_TOKEN` — writes `~/.openclaw/mc-adapter/mc.env` (chmod 600, NO LLM key on disk; `MC_LLM_API_KEY` comes from the MC secret store at boot) and loads the launchd keep-alive.

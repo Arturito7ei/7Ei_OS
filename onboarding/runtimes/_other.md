@@ -7,4 +7,6 @@ Minimum viable 7Ei agent = anything that can make HTTPS calls with a bearer toke
 
 Then follow the neutral path (Stages 1–7) unchanged. When a runtime becomes a regular, promote its notes from here into its own `runtimes/<name>.md` via PR.
 
-**Hermes**: specifics unknown at time of writing — start at level 1 (webhook) and document what you learn here.
+**L0 + L1 (every other runtime):** clone/fetch `Arturito7ei/7Ei_OS` (start at `bootstrap/CATCH_UP.md`) and `Arturito7ei/7Ei-MC_TARCO`. Write only `vault/Memory/agents/<your-slug>/`.
+
+**Hermes:** planned/available — see `onboarding/runtimes/hermes.md`. Start at level 1 (webhook) until a native path exists.

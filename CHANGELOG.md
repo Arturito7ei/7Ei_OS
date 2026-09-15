@@ -6,6 +6,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [0.3.0] - 2026-09-15
+
+### Added
+- `bootstrap/CATCH_UP.md` — mandatory first-read order for any new/swapped agent (how → who → what’s live → blueprints → runtime adapter)
+- `blueprints/README.md` — orchestration index (workflow, coordination, session-continuity, spawning, sprint-cycle, epic-to-pr)
+- Runtime adapters: `onboarding/runtimes/buzz.md`, `arturita.md`, `hermes.md`
+
+### Changed
+- `README.md` Quick Start now leads with CATCH_UP; runtime table reflects Buzz (primary), Arturita Grok (remote), Claude Code, OpenClaw (parked), Hermes (planned)
+- `bootstrap/onboarding.md` points at CATCH_UP.md
+- Existing runtime adapters add explicit L0/L1 pointers
+
+---
+
 ## [0.2.0] - 2026-03-19
 
 ### Added

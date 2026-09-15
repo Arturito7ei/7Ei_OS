@@ -1,6 +1,6 @@
 # Onboarding a new PROJECT repo
 
-(For onboarding an AGENT, see `README.md`.) Adding 7Ei_OS support to a codebase:
+(For onboarding an AGENT, see `bootstrap/CATCH_UP.md` then `README.md`.) Adding 7Ei_OS support to a codebase:
 
 1. **Minimal root `CLAUDE.md`** (Layer 3 only — keep it <70 lines):
 

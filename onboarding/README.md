@@ -1,10 +1,14 @@
 # Agent Onboarding — the canonical path
 
-How ANY new agent joins 7Ei — Claude Code, Cowork/Dispatch, OpenClaw, Cursor, Hermes, or a future runtime. The core path below is runtime-neutral; your runtime's specifics are in `runtimes/<your-runtime>.md`. You are DONE only when every item in `checklist.md` passes.
+**First read:** [`bootstrap/CATCH_UP.md`](../bootstrap/CATCH_UP.md) (how → who → what's live → blueprints → your runtime adapter). Then this file.
+
+How ANY new agent joins 7Ei — Buzz, Arturita/Grok, Claude Code, OpenClaw, Cursor, Hermes, or a future runtime. The core path below is runtime-neutral; your runtime's specifics are in `runtimes/<your-runtime>.md`. You are DONE only when every item in `checklist.md` passes.
 
 Two systems you will touch constantly, learn them first:
 - **Mission Control (MC)** — `https://7ei-backend.fly.dev`, the coordination + memory bus. You get an agent token (`mca_…`); every task, heartbeat, and shared-memory operation goes through its agent API.
 - **The vault** — Obsidian repo `Arturito7ei/7Ei-MC_TARCO` (`vault/`), the shared knowledge store. You read anywhere; you write ONLY in your own namespace `Memory/agents/<your-slug>/`.
+
+Runtime adapters (L0 + L1 pointers only): `runtimes/buzz.md` · `arturita.md` · `claude-code.md` · `openclaw.md` · `hermes.md` · `cursor.md` · `_other.md`.
 
 ## Stage 1 — Identity (who are you?)
 
@@ -14,7 +18,7 @@ Two systems you will touch constantly, learn them first:
 
 ## Stage 2 — Environment (where are you?)
 
-Read, in order: `README.md` + `ARCHITECTURE.md` (the 5-layer knowledge model), `agents/README.md` (who else is active — you are not alone), `projects/` (ongoing work), and the vault starting at `00-Index/MOC-home.md` then `07-Agents/MOC-Agents.md`. Answer for yourself: who are the other agents, what are they working on right now (vault `07-Agents/Activity.md` tells you where to look), and which projects touch your role?
+Read, in order: `bootstrap/CATCH_UP.md`, `README.md` + `ARCHITECTURE.md` (the 5-layer knowledge model), vault `Memory/agents/README.md` + `07-Agents/MOC-Agents.md` (who else is live), `agents/README.md` (instance profiles; may lag), `projects/` (ongoing work), and the vault starting at `00-Index/MOC-home.md`. Answer for yourself: who are the other agents, what are they working on right now (vault `07-Agents/Activity.md` tells you where to look), and which projects touch your role?
 
 ## Stage 3 — Protocols (how do we work?)
 

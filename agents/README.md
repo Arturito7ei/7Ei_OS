@@ -1,6 +1,8 @@
 # Agent Instances
 
-> Profiles of all active agent instances operating under 7Ei.
+> Profiles of agent instances operating under 7Ei.
+>
+> **Live roster:** L0 runtimes → `README.md`. L1 seats → vault `Memory/agents/README.md` + `07-Agents/MOC-Agents.md`. Profiles in this folder may lag.
 
 ## What Is an Agent Instance?
 
@@ -8,11 +10,15 @@ An agent instance is a specific deployment of the 7Ei agent template (`architect
 
 ## Active Instances
 
+Live runtime roster: `README.md`. This folder holds instance profiles (may lag L1).
+
 | Instance | Runtime | Primary Role | Status |
 |----------|---------|-------------|--------|
 | [[arturito-dispatch]] | Claude Dispatch (Cowork) | Sprint planning, tool orchestration, remote ops | Active |
 | [[arturito-claude-code]] | Claude Code | Code execution, work order implementation | Active |
-| [[arturito-openclaw]] | Open Claw + Telegram | Operations, browser automation, Jira | Active |
+| [[arturito-openclaw]] | Open Claw + Telegram | Operations, browser automation, Jira | Secondary / parked |
+
+Buzz fleet seats (`7man`, `7rd`, `7ops`, `7dev`, `7fin`, `7mkt`) and Arturita (Grok Bot) have no profile in this folder — see vault `Memory/agents/README.md`.
 
 ## Instance vs. Identity
 
