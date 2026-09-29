@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week of 2026-09-08 — 7Ei Research</title>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+  --green: #3fb950; --fire: #f78166;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+nav { background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1rem; }
+nav h1 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+nav .sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; }
+nav ul { list-style: none; }
+nav li { margin-bottom: 0.35rem; }
+nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
+nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
+main { padding: 2rem 2.5rem 4rem; max-width: 960px; }
+.hero { margin-bottom: 2rem; }
+.hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); margin-top: 0.5rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.card h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+.card p { font-size: 0.82rem; color: var(--muted); }
+.card .cta { display: inline-block; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; }
+.badge { display: inline-block; background: rgba(63,185,80,0.15); color: var(--green); font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.35rem; }
+section { margin-bottom: 2rem; }
+section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+.week-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.week-row { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.65rem 1rem; font-size: 0.88rem; }
+.week-row .date { color: var(--muted); font-size: 0.78rem; }
+.report-body h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+.report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+.report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; }
+.report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
+.report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
+.report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.report-body em { color: var(--muted); font-size: 0.85rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } nav { border-right: none; border-bottom: 1px solid var(--border); } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h1>7Ei Research</h1>
+  <p class="sub">Weekly radar · chooser · evals</p>
+  <ul><li><a href="index.html">Home</a></li><li><a href="radar.html">Radar dashboard</a></li><li><a href="reports/2026-09-29.html">2026-09-29</a></li><li><a href="reports/2026-09-08.html" class="active">2026-09-08</a></li><li><a href="reports/2026-08-24.html">2026-08-24</a></li><li><a href="reports/2026-08-19.html">2026-08-19</a></li><li><a href="reports/2026-08-17.html">2026-08-17</a></li><li><a href="reports/2026-08-13.html">2026-08-13</a></li></ul>
+</nav>
+<main><div class="hero"><h2>Week of 2026-09-08</h2><p><a href="radar.html">Open interactive radar dashboard →</a></p></div>
+<div class="report-body">
+<h1>Weekly Skill Chooser — week of 2026-09-08</h1>
+<p>Fresh scan: <code>RESEARCH/GITHUB_RISING_RADAR_2026_09_08.md</code> (2026-09-08T13:37 UTC, <code>gh</code> BYOK verified).</p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<tr><td>Δ since 2026-08-24</td><td>deepseek-harness +25.7k · ponytail +22.5k · anydoc +2.6k · openworker +2.5k · openwiki +708</td></tr>
+<tr><td>Author capacity</td><td><strong>1 implement + 1 optional trial</strong> (7MAN gate)</td></tr>
+<tr><td>Thin clusters</td><td>Agent docs (openwiki) · doc ingestion (anydoc) · dsh ecosystem (still rising)</td></tr>
+</tbody></table>
+<h3>Recommended picks (reply with IDs)</h3>
+<table><thead><tr><th>#</th><th>id</th><th>for agent(s)</th><th>cluster</th><th>verdict</th><th>ask</th></tr></thead><tbody>
+<tr><td>1</td><td><code>openwiki-trial</code></td><td>7RD → 7DEV</td><td>Research / Eng</td><td><strong>Trial</strong></td><td>Score + pilot on <code>7Ei-Mission_Control_App</code> or <code>7Ei_OS</code> — agent-maintained repo wiki; complements graphify</td></tr>
+<tr><td>2</td><td><code>anydoc-trial</code></td><td>7DEV / 7OPS</td><td>DevTools</td><td><strong>Trial</strong></td><td>Local Office/PDF→Markdown (<code>@firecrawl/anydoc@0.2.4</code>); vault + MC attachment pipeline</td></tr>
+<tr><td>3</td><td><code>deepseek-harness-ui</code></td><td>Thierry / 7RD</td><td>Research</td><td><strong>Trial</strong> (unchanged)</td><td>Opt-in <code>dsh web</code> only; headless + MC adapter <strong>Hold</strong> (spike 2026-08-26)</td></tr>
+<tr><td>4</td><td><code>awesome-dsh-plugin</code></td><td>7DEV</td><td>DevTools</td><td><strong>Trial</strong> (carry)</td><td>Cherry-pick dsh Cordis patterns; no fleet install</td></tr>
+<tr><td>5</td><td><code>addyosmani-cherry-pick</code></td><td>7DEV</td><td>Engineering</td><td><strong>Hold</strong></td><td>Wave-3 when Eng capacity opens</td></tr>
+</tbody></table>
+<h3>Explicitly not recommending</h3>
+<table><thead><tr><th>id / repo</th><th>verdict</th><th>why</th></tr></thead><tbody>
+<tr><td>andrewyng/openworker</td><td><strong>Hold</strong></td><td>Overlaps Buzz fleet + Cursor + MC; desktop Slack coworker is a fourth coordination surface</td></tr>
+<tr><td>ponytail / watermarks-remover / img2threejs</td><td><strong>Skip</strong></td><td>Hype; no 7Ei problem fit</td></tr>
+<tr><td>grok-build</td><td><strong>Avoid</strong></td><td>Grok Bot Avoid verdict stands (2026-08-23)</td></tr>
+<tr><td>deepseek-harness headless / <code>runtime:dsh</code></td><td><strong>Hold</strong></td><td>MC spike kill criteria hit 2026-08-26</td></tr>
+</tbody></table>
+<h3>Recommended human reply</h3>
+<p><code>trial openwiki-trial, anydoc-trial · carry deepseek-harness-ui if bandwidth</code></p>
+<hr>
+<p><em>Owner: 7RD · Gate: 7MAN · Final pick: Thierry</em></p>
+<hr>
+<h1>GitHub Rising Radar — 2026-09-08 13:37 UTC</h1>
+<p>Star velocity = total stars ÷ repo age (days). Delta = stars since last scan.</p>
+<h2>🔥 Fastest climbers since last scan</h2>
+<table><thead><tr><th>Repo</th><th>Δ stars</th><th>⭐/day</th><th>Total</th><th>Age (d)</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td>+25734</td><td>8282.3</td><td>215922</td><td>26.1</td></tr>
+<tr><td><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></td><td>+22554</td><td>1488.4</td><td>131768</td><td>88.5</td></tr>
+<tr><td><a href="https://github.com/vorssaint/vorssaint-utils">vorssaint/vorssaint-utils</a></td><td>+7303</td><td>192.8</td><td>16952</td><td>87.9</td></tr>
+<tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td>+3681</td><td>765.5</td><td>21340</td><td>27.9</td></tr>
+<tr><td><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin/awesome-dsh-plugin</a></td><td>+2807</td><td>572.7</td><td>14884</td><td>26.0</td></tr>
+<tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td>+2580</td><td>578.5</td><td>20756</td><td>35.9</td></tr>
+<tr><td><a href="https://github.com/andrewyng/openworker">andrewyng/openworker</a></td><td>+2469</td><td>345.6</td><td>17449</td><td>50.5</td></tr>
+<tr><td><a href="https://github.com/img2threejs/img2threejs">img2threejs/img2threejs</a></td><td>+2362</td><td>280.5</td><td>15551</td><td>55.4</td></tr>
+<tr><td><a href="https://github.com/lidge-jun/opencodex">lidge-jun/opencodex</a></td><td>+1970</td><td>170.6</td><td>13921</td><td>81.6</td></tr>
+<tr><td><a href="https://github.com/JustVugg/colibri">JustVugg/colibri</a></td><td>+1044</td><td>391.9</td><td>27058</td><td>69.0</td></tr>
+<tr><td><a href="https://github.com/baidu/Unlimited-OCR">baidu/Unlimited-OCR</a></td><td>+938</td><td>308.7</td><td>25377</td><td>82.2</td></tr>
+<tr><td><a href="https://github.com/langchain-ai/openwiki">langchain-ai/openwiki</a></td><td>+708</td><td>209.4</td><td>16245</td><td>77.6</td></tr>
+<tr><td><a href="https://github.com/Yu9191/wloc">Yu9191/wloc</a></td><td>+703</td><td>134.6</td><td>10273</td><td>76.3</td></tr>
+<tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td>+603</td><td>476.8</td><td>26573</td><td>55.7</td></tr>
+<tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td>+580</td><td>361.2</td><td>14714</td><td>40.7</td></tr>
+</tbody></table>
+<h2>General Rising — top velocity</h2>
+<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td>8282.3</td><td>215922</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></td><td>1488.4</td><td>131768</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/anywhere-labs/dsh-desktop">anywhere-labs/dsh-desktop</a></td><td>945.1</td><td>24459</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td>765.5</td><td>21340</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td>578.5</td><td>20756</td><td>Rust</td></tr>
+<tr><td><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin/awesome-dsh-plugin</a></td><td>572.7</td><td>14884</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td>476.8</td><td>26573</td><td>Rust</td></tr>
+<tr><td><a href="https://github.com/JustVugg/colibri">JustVugg/colibri</a></td><td>391.9</td><td>27058</td><td>C</td></tr>
+<tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td>361.2</td><td>14714</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/andrewyng/openworker">andrewyng/openworker</a></td><td>345.6</td><td>17449</td><td>Python</td></tr>
+</tbody></table>
+<hr>
+<p><em>Next: run <code>tech-radar-evaluate</code> on interesting candidates → append <code>RESEARCH/RD_CANDIDATE_QUEUE.md</code></em></p>
+</div>
+<footer>Generated 2026-09-29 14:12 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+</main>
+</div>
+</body>
+</html>

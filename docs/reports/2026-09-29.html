@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week of 2026-09-29 — 7Ei Research</title>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+  --green: #3fb950; --fire: #f78166;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+nav { background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1rem; }
+nav h1 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+nav .sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; }
+nav ul { list-style: none; }
+nav li { margin-bottom: 0.35rem; }
+nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
+nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
+main { padding: 2rem 2.5rem 4rem; max-width: 960px; }
+.hero { margin-bottom: 2rem; }
+.hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); margin-top: 0.5rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.card h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+.card p { font-size: 0.82rem; color: var(--muted); }
+.card .cta { display: inline-block; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; }
+.badge { display: inline-block; background: rgba(63,185,80,0.15); color: var(--green); font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.35rem; }
+section { margin-bottom: 2rem; }
+section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+.week-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.week-row { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.65rem 1rem; font-size: 0.88rem; }
+.week-row .date { color: var(--muted); font-size: 0.78rem; }
+.report-body h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+.report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+.report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; }
+.report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
+.report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
+.report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.report-body em { color: var(--muted); font-size: 0.85rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } nav { border-right: none; border-bottom: 1px solid var(--border); } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h1>7Ei Research</h1>
+  <p class="sub">Weekly radar · chooser · evals</p>
+  <ul><li><a href="index.html">Home</a></li><li><a href="radar.html">Radar dashboard</a></li><li><a href="reports/2026-09-29.html" class="active">2026-09-29</a></li><li><a href="reports/2026-09-08.html">2026-09-08</a></li><li><a href="reports/2026-08-24.html">2026-08-24</a></li><li><a href="reports/2026-08-19.html">2026-08-19</a></li><li><a href="reports/2026-08-17.html">2026-08-17</a></li><li><a href="reports/2026-08-13.html">2026-08-13</a></li></ul>
+</nav>
+<main><div class="hero"><h2>Week of 2026-09-29</h2><p><a href="radar.html">Open interactive radar dashboard →</a></p></div>
+<div class="report-body">
+<h1>Weekly Skill Chooser — week of 2026-09-29</h1>
+<p>Hub was stale at 2026-08-24 until this scan. Overnight 28d radar was empty (query-encoding bug, now fixed). Hermes-profile Trial of 5 skills already ran 2026-09-29 05:08Z — <strong>no fleet bind</strong>.</p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<tr><td>Scan file</td><td><code>RESEARCH/GITHUB_RISING_RADAR_2026_09_29.md</code></td></tr>
+<tr><td>Snapshot</td><td><code>2026-09-29T141141Z</code> · 117 repos · Δ vs 2026-09-08</td></tr>
+<tr><td>Queue delta</td><td>5 new intake rows (below) + overnight Hermes Trial rows already queued</td></tr>
+<tr><td>Author capacity</td><td><strong>1 Trial</strong> (Hermes profile or eval note) — no fleet install</td></tr>
+<tr><td>Thin clusters</td><td>Agent memory (TARCOH token bloat) · local serving (future 48 GB box)</td></tr>
+</tbody></table>
+<h3>Choose up to 2 to implement (reply with IDs)</h3>
+<table><thead><tr><th>#</th><th>id</th><th>for agent(s)</th><th>cluster</th><th>ask</th><th>cost if we skip</th></tr></thead><tbody>
+<tr><td>1</td><td><code>okf-agent-memory</code></td><td>7RD → Hermes</td><td>Research / Hermes</td><td><strong>Trial</strong> — git-native Go memory + MCP, MIT, no external DB (<code>gh api repos/okf-memory/okf-agent-memory</code>, pushed 2026-09-27, 738★)</td><td>TARCOH context bloat stays unaddressed</td></tr>
+<tr><td>2</td><td><code>freetoken-local-serve</code></td><td>7RD + 7MAN</td><td>Infra</td><td><strong>Hold → Trial on 48 GB+</strong> — desktop serving for large MoE (<code>FlashML-org/FreeToken</code>, Apache-2.0, +1856 Δ / 13.9k★)</td><td>Fine on current 16 GB Mac mini</td></tr>
+<tr><td>3</td><td><code>laya-decision</code></td><td>7RD</td><td>Research</td><td><strong>Hold</strong> — local typed yes/no router (Apache-2.0, HF). Score when we have a classification job</td><td>No current wound</td></tr>
+<tr><td>4</td><td><code>reef-self-improve</code></td><td>7RD</td><td>Research</td><td><strong>Hold</strong> — overlaps <code>self-improving-agent</code> skill; Apache-2.0, 7.2k★</td><td>Duplicate SoT risk</td></tr>
+<tr><td>5</td><td><code>openai-codex-security</code></td><td>7OPS / 7RD</td><td>Operations</td><td><strong>Hold (P01)</strong> — OpenAI Codex Security CLI, Apache-2.0, +311 Δ. Escalate to Arturito before Trial</td><td>Miss AppSec signal; likely vendor-tied</td></tr>
+</tbody></table>
+<h3>Explicitly not recommending this week</h3>
+<table><thead><tr><th>id / repo</th><th>why parked</th></tr></thead><tbody>
+<tr><td><code>KKKKhazix/AIHOT</code></td><td>2600★ in ~14h (<code>created_at</code> 2026-09-28T23:40Z) — treat as star-farm until proven</td></tr>
+<tr><td><code>hypit-ai/hypit</code></td><td>Viral-video clone / 100 variants — copyright; license <code>NOASSERTION</code></td></tr>
+<tr><td><code>boyang-hu/website-rebuild-skill</code></td><td>Already <strong>Avoid</strong> (1:1 site clone)</td></tr>
+<tr><td><code>RongleCat/awesome-grok-bot</code></td><td>Overlaps grok-bot <strong>Avoid</strong> (2026-08-23)</td></tr>
+<tr><td><code>mikehasa/golive-skill</code></td><td>Overnight <strong>Hold</strong> — skills-guard DANGEROUS, no <code>--force</code></td></tr>
+<tr><td>watermarks-remover / HowToLiveBetter / jev-chat / dsh hype</td><td>Star velocity ≠ 7Ei skill fit</td></tr>
+<tr><td>Mega-pack <code>--all</code></td><td>Precedence 01 + context poison</td></tr>
+<tr><td>Fleet bind of overnight Hermes five</td><td>Stay Hermes-profile Trial 14d</td></tr>
+</tbody></table>
+<h3>Recommended human reply</h3>
+<p><code>trial okf-agent-memory · hold freetoken until 48GB box · skip rest</code></p>
+<hr>
+<p><em>Owner: 7RD · Gate: 7MAN · Final pick: Thierry</em></p>
+<hr>
+<h1>GitHub Rising Radar — 2026-09-29 14:11 UTC</h1>
+<p>90-day window, tracks <code>skills,ai,agent,devtools,general</code>, 117 repos. Snapshot: <code>REPOS/7Ei_OS/skills/github-rising-radar/data/snapshots/2026-09-29T141141Z.json</code>. Delta baseline: last good weekly <code>2026-09-08T133743Z</code> (25 repos).</p>
+<p>Overnight <code>--days 28</code> scans (2026-09-28 23:07Z, 2026-09-29 05:03Z, 05:04Z) returned <strong>0</strong> repos because <code>scan.py</code> wrapped <code>(topic:llm)</code> and <code>urllib.parse.quote</code> encoded it as <code>%28…%29</code>. After the fix, the same 28-day <code>topic:llm stars:&gt;50</code> query is <code>total_count=117</code> (<code>gh api</code> 2026-09-29 14:11Z). Public hub had stayed on <strong>2026-08-24</strong> (<code>docs/reports/</code> last written 2026-08-24; Pages <code>last-modified: 2026-09-15</code>).</p>
+<p>Star velocity = total stars ÷ repo age (days). Delta = stars since 2026-09-08.</p>
+<h2>🔥 Fastest climbers since last scan</h2>
+<table><thead><tr><th>Repo</th><th>Δ stars</th><th>⭐/day</th><th>Total</th><th>Age (d)</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td>+23692</td><td>5088.0</td><td>239614</td><td>47.1</td></tr>
+<tr><td><a href="https://github.com/anywhere-labs/dsh-desktop">anywhere-labs/dsh-desktop</a></td><td>+5029</td><td>628.7</td><td>29488</td><td>46.9</td></tr>
+<tr><td><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin/awesome-dsh-plugin</a></td><td>+2371</td><td>367.0</td><td>17255</td><td>47.0</td></tr>
+<tr><td><a href="https://github.com/FlashML-org/FreeToken">FlashML-org/FreeToken</a></td><td>+1856</td><td>197.5</td><td>13969</td><td>70.7</td></tr>
+<tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td>+1719</td><td>471.5</td><td>23059</td><td>48.9</td></tr>
+<tr><td><a href="https://github.com/img2threejs/img2threejs">img2threejs/img2threejs</a></td><td>+1626</td><td>224.6</td><td>17177</td><td>76.5</td></tr>
+<tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td>+1498</td><td>391.1</td><td>22254</td><td>56.9</td></tr>
+<tr><td><a href="https://github.com/andrewyng/openworker">andrewyng/openworker</a></td><td>+915</td><td>256.8</td><td>18364</td><td>71.5</td></tr>
+<tr><td><a href="https://github.com/trycompai/crm">trycompai/crm</a></td><td>+915</td><td>183.6</td><td>10960</td><td>59.7</td></tr>
+<tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td>+579</td><td>353.7</td><td>27152</td><td>76.8</td></tr>
+<tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td>+568</td><td>247.5</td><td>15282</td><td>61.8</td></tr>
+<tr><td><a href="https://github.com/Fei-Away/Codex-Dream-Skin">Fei-Away/Codex-Dream-Skin</a></td><td>+459</td><td>195.1</td><td>14838</td><td>76.1</td></tr>
+<tr><td><a href="https://github.com/oso95/scroll-world">oso95/scroll-world</a></td><td>+444</td><td>113.1</td><td>9575</td><td>84.7</td></tr>
+<tr><td><a href="https://github.com/openai/codex-security">openai/codex-security</a></td><td>+311</td><td>140.1</td><td>10882</td><td>77.7</td></tr>
+</tbody></table>
+<h2>General Rising — top velocity</h2>
+<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td>5088.0</td><td>239614</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/NandhaKishorM/laya">NandhaKishorM/laya</a></td><td>2479.4</td><td>28246</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/browser-use/jev-ultrafast">browser-use/jev-ultrafast</a></td><td>1678.9</td><td>21314</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/eternity4719/HowToLiveBetter">eternity4719/HowToLiveBetter</a></td><td>1196.4</td><td>26934</td><td>HTML</td></tr>
+<tr><td><a href="https://github.com/anywhere-labs/dsh-desktop">anywhere-labs/dsh-desktop</a></td><td>628.7</td><td>29488</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td>471.5</td><td>23059</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td>391.1</td><td>22254</td><td>Rust</td></tr>
+<tr><td><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin/awesome-dsh-plugin</a></td><td>367.0</td><td>17255</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td>353.7</td><td>27152</td><td>Rust</td></tr>
+<tr><td><a href="https://github.com/andrewyng/openworker">andrewyng/openworker</a></td><td>256.8</td><td>18364</td><td>Python</td></tr>
+</tbody></table>
+<h2>AI / LLM — top velocity</h2>
+<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/KKKKhazix/AIHOT">KKKKhazix/AIHOT</a></td><td>2600.0</td><td>2600</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat/jev-chat-jarvis</a></td><td>871.4</td><td>7079</td><td>Kotlin</td></tr>
+<tr><td><a href="https://github.com/hypit-ai/hypit">hypit-ai/hypit</a></td><td>282.5</td><td>17459</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/Human-Agent-Society/reef">Human-Agent-Society/reef</a></td><td>245.5</td><td>7249</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/deeplethe/utopia">deeplethe/utopia</a></td><td>151.2</td><td>7980</td><td>Rust</td></tr>
+<tr><td><a href="https://github.com/FareedKhan-dev/kimi-k3-in-c">FareedKhan-dev/kimi-k3-in-c</a></td><td>148.5</td><td>8793</td><td>C</td></tr>
+<tr><td><a href="https://github.com/bojieli/ai-infra-book">bojieli/ai-infra-book</a></td><td>147.8</td><td>5610</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/trailhq/Graft">trailhq/Graft</a></td><td>106.7</td><td>9395</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/drumih/turbo-fieldfare">drumih/turbo-fieldfare</a></td><td>92.5</td><td>6841</td><td>Swift</td></tr>
+<tr><td><a href="https://github.com/Nanako0129/sepia">Nanako0129/sepia</a></td><td>89.9</td><td>2909</td><td>Python</td></tr>
+</tbody></table>
+<h2>Dev Tools — top velocity</h2>
+<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/dzhng/jevgrep">dzhng/jevgrep</a></td><td>486.8</td><td>1665</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/mikehasa/golive-skill">mikehasa/golive-skill</a></td><td>181.1</td><td>1091</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget">MeteorNOX/DeepSeek-Balance-Whale-Widget</a></td><td>81.2</td><td>3447</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/ShawnPana/phone-harness">ShawnPana/phone-harness</a></td><td>58.6</td><td>3088</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/superdesigndev/treg">superdesigndev/treg</a></td><td>50.0</td><td>3802</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/lennney/stop-that-shit">lennney/stop-that-shit</a></td><td>48.7</td><td>2384</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/QwenAudio/qwen-audio-agent">QwenAudio/qwen-audio-agent</a></td><td>43.7</td><td>2816</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/Tiger3807861189/J-Space-Cognition-Suite">Tiger3807861189/J-Space-Cognition-Suite</a></td><td>43.2</td><td>3003</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/seanhowarthdev/Roam-Control">seanhowarthdev/Roam-Control</a></td><td>39.8</td><td>993</td><td>—</td></tr>
+<tr><td><a href="https://github.com/zeronsh/zeron">zeronsh/zeron</a></td><td>34.7</td><td>2464</td><td>Rust</td></tr>
+</tbody></table>
+<h2>Agent / MCP — top velocity</h2>
+<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills">Ryze-AI-Adgent/open-seo-mcp-skills</a></td><td>94.4</td><td>2889</td><td>Shell</td></tr>
+<tr><td><a href="https://github.com/duty1g/x64dbg-mcp-server">duty1g/x64dbg-mcp-server</a></td><td>56.4</td><td>2142</td><td>Zig</td></tr>
+<tr><td><a href="https://github.com/2akouwu/reverify">2akouwu/reverify</a></td><td>42.3</td><td>1251</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/okf-memory/okf-agent-memory">okf-memory/okf-agent-memory</a></td><td>31.1</td><td>738</td><td>Go</td></tr>
+<tr><td><a href="https://github.com/jianruntech/geo-score">jianruntech/geo-score</a></td><td>28.8</td><td>615</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/shinthink/blitzstrike">shinthink/blitzstrike</a></td><td>28.6</td><td>488</td><td>TypeScript</td></tr>
+<tr><td><a href="https://github.com/cinderline/northcinder">cinderline/northcinder</a></td><td>28.2</td><td>1214</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/ZeroDayEvil/ai-security-tool">ZeroDayEvil/ai-security-tool</a></td><td>21.5</td><td>413</td><td>HTML</td></tr>
+<tr><td><a href="https://github.com/vshulcz/deja-vu">vshulcz/deja-vu</a></td><td>14.1</td><td>1088</td><td>Go</td></tr>
+<tr><td><a href="https://github.com/antibrow/dsh-antibrow">antibrow/dsh-antibrow</a></td><td>13.3</td><td>577</td><td>JavaScript</td></tr>
+</tbody></table>
+<h2>Agent Skills — top velocity</h2>
+<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/jtydhr88/screenwriting-skills">jtydhr88/screenwriting-skills</a></td><td>63.2</td><td>1458</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/breakstageaxe61/genspark-claw">breakstageaxe61/genspark-claw</a></td><td>30.9</td><td>108</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/boyang-hu/website-rebuild-skill">boyang-hu/website-rebuild-skill</a></td><td>26.9</td><td>1330</td><td>JavaScript</td></tr>
+<tr><td><a href="https://github.com/jtydhr88/music-composition-skills">jtydhr88/music-composition-skills</a></td><td>11.6</td><td>139</td><td>—</td></tr>
+<tr><td><a href="https://github.com/RongleCat/awesome-grok-bot">RongleCat/awesome-grok-bot</a></td><td>8.6</td><td>350</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/MiniMax-AI/awesome-minimax-h3-integration">MiniMax-AI/awesome-minimax-h3-integration</a></td><td>8.5</td><td>403</td><td>—</td></tr>
+<tr><td><a href="https://github.com/ashutoshsinghpr7/wikiskill">ashutoshsinghpr7/wikiskill</a></td><td>8.2</td><td>251</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/jtydhr88/lyric-writing-skills">jtydhr88/lyric-writing-skills</a></td><td>8.0</td><td>96</td><td>—</td></tr>
+<tr><td><a href="https://github.com/Neeeophytee/finding-unknowns-skills">Neeeophytee/finding-unknowns-skills</a></td><td>3.9</td><td>339</td><td>Python</td></tr>
+<tr><td><a href="https://github.com/TanShilongMario/visual-memory-translator-SKILL">TanShilongMario/visual-memory-translator-SKILL</a></td><td>3.5</td><td>188</td><td>—</td></tr>
+</tbody></table>
+<hr>
+<p><em>Next: run <code>tech-radar-evaluate</code> on interesting candidates → append <code>RESEARCH/RD_CANDIDATE_QUEUE.md</code></em></p>
+</div>
+<footer>Generated 2026-09-29 14:12 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+</main>
+</div>
+</body>
+</html>
