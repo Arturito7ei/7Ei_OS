@@ -53,8 +53,10 @@ DEFAULT_TRACKS = {
 def run_gh_search(query: str, days: int, min_stars: int, per_page: int = 30) -> list[dict]:
     cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
     parts = [f"stars:>{min_stars}", f"created:>{cutoff}"]
+    # Do not wrap the track query in parentheses: quoting `(topic:llm)` as %28…%29
+    # makes GitHub Search return 0 hits (verified 2026-09-29).
     if query.strip():
-        parts.insert(0, f"({query})")
+        parts.insert(0, query.strip())
     q = " ".join(parts)
 
     cmd = [
@@ -172,7 +174,7 @@ def render_report(all_repos: list[dict], previous: dict[str, dict], tracks: dict
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Scan rising GitHub repos")
-    parser.add_argument("--tracks", default="ai,agent,devtools,general", help="Comma-separated track ids")
+    parser.add_argument("--tracks", default="skills,ai,agent,devtools,general", help="Comma-separated track ids")
     parser.add_argument("--days", type=int, default=90, help="Lookback window for created: filter")
     parser.add_argument("--min-stars", type=int, default=50, help="Minimum star count")
     parser.add_argument("--per-page", type=int, default=25, help="Results per track")

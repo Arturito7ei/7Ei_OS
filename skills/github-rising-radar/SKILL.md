@@ -115,6 +115,7 @@ Outputs: `docs/index.html` (hub), `docs/radar.html` (dashboard), `docs/reports/Y
 - Search index lag ~ minutes; not real-time tick data.
 - Spam / star-bought repos appear — triage with `pushed_at`, commit activity, README quality.
 - Tracks are keyword/topic heuristics — edit `DEFAULT_TRACKS` in `scripts/scan.py` for new clusters.
+- **Do not wrap track queries in parentheses.** `quote("(topic:llm)")` → `%28…%29` and GitHub Search returns **0** hits on `topic:*`. Verified 2026-09-29 (`gh api` `total_count=0` with parens, `117` without, `--days 28`).
 
 ## Alternatives (evaluated 2026-08-13)
 
