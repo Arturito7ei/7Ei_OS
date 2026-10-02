@@ -18,6 +18,8 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from radar_columns import fmt_desc
+
 SKILL_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = SKILL_ROOT / "data"
 LATEST_PATH = DATA_DIR / "latest.json"
@@ -122,7 +124,9 @@ def render_html(data: dict, previous: dict[str, dict]) -> str:
         delta_html = ""
         if show_delta and r.get("star_delta"):
             delta_html = f'<span class="delta">+{fmt_num(r["star_delta"])}</span>'
-        desc = esc((r.get("description") or "")[:120])
+        desc = esc(fmt_desc(r, limit=180))
+        if desc == "—":
+            desc = ""
         topics = r.get("topics") or []
         topic_html = "".join(f'<span class="topic">{esc(t)}</span>' for t in topics[:4])
         return f"""
@@ -163,12 +167,34 @@ def render_html(data: dict, previous: dict[str, dict]) -> str:
     bar_rows = ""
     for r in climbers[:10]:
         pct = min(100, round(100 * r["star_delta"] / max_delta))
+        bar_desc = esc(fmt_desc(r, limit=80))
         bar_rows += f"""
         <div class="bar-row">
-          <a class="bar-label" href="{esc(r['html_url'])}" target="_blank">{esc(r['full_name'].split('/')[-1])}</a>
+          <div class="bar-meta">
+            <a class="bar-label" href="{esc(r['html_url'])}" target="_blank" title="{esc(fmt_desc(r, limit=200))}">{esc(r['full_name'].split('/')[-1])}</a>
+            <p class="bar-desc">{bar_desc}</p>
+          </div>
           <div class="bar-track"><div class="bar-fill" style="width:{pct}%"></div></div>
           <span class="bar-val">+{fmt_num(r['star_delta'])}</span>
         </div>"""
+
+    def table_row(r: dict, show_delta: bool = False) -> str:
+        delta_cell = f"<td>+{fmt_num(r['star_delta'])}</td>" if show_delta and r.get("star_delta") else ""
+        return (
+            "<tr>"
+            f'<td><a href="{esc(r["html_url"])}" target="_blank" rel="noopener">{esc(r["full_name"])}</a></td>'
+            f'<td class="col-desc">{esc(fmt_desc(r, limit=180))}</td>'
+            f"{delta_cell}"
+            f'<td>{fmt_num(r.get("stars_per_day", 0))}</td>'
+            f'<td>{fmt_num(r.get("stargazers_count", 0))}</td>'
+            f'<td>{r.get("age_days", "—")}</td>'
+            f'<td>{esc(r.get("language") or "—")}</td>'
+            f'<td>{esc(TRACK_LABELS.get(r.get("_track", ""), r.get("_track", "—")))}</td>'
+            "</tr>"
+        )
+
+    climber_table_rows = "".join(table_row(r, show_delta=True) for r in climbers[:15])
+    ranked_table_rows = "".join(table_row(r) for r in sorted(repos, key=lambda x: x.get("stars_per_day", 0), reverse=True))
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -218,11 +244,19 @@ section h2 .emoji {{ font-size: 1.25rem; }}
 .topics {{ display: flex; flex-wrap: wrap; gap: 0.35rem; }}
 .topic {{ font-size: 0.68rem; background: #21262d; color: var(--muted); padding: 0.1rem 0.4rem; border-radius: 3px; }}
 .bar-chart {{ background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }}
-.bar-row {{ display: grid; grid-template-columns: 140px 1fr 70px; gap: 0.75rem; align-items: center; margin-bottom: 0.65rem; }}
-.bar-label {{ font-size: 0.82rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+.bar-row {{ display: grid; grid-template-columns: 220px 1fr 70px; gap: 0.75rem; align-items: center; margin-bottom: 0.85rem; }}
+.bar-meta {{ min-width: 0; }}
+.bar-label {{ font-size: 0.82rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }}
+.bar-desc {{ font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
 .bar-track {{ height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; }}
 .bar-fill {{ height: 100%; background: linear-gradient(90deg, var(--fire), #ffa657); border-radius: 4px; }}
 .bar-val {{ font-size: 0.8rem; color: var(--fire); font-weight: 600; text-align: right; }}
+.repo-table-wrap {{ overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }}
+.repo-table {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; }}
+.repo-table th, .repo-table td {{ border-bottom: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; vertical-align: top; }}
+.repo-table th {{ color: var(--muted); font-weight: 600; background: #21262d; position: sticky; top: 0; }}
+.repo-table tr:last-child td {{ border-bottom: none; }}
+.repo-table .col-desc {{ min-width: 16rem; max-width: 28rem; color: var(--muted); }}
 .tabs {{ display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }}
 .tab {{ background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 0.4rem 0.85rem; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }}
 .tab:hover {{ color: var(--text); border-color: var(--muted); }}
@@ -231,7 +265,7 @@ section h2 .emoji {{ font-size: 1.25rem; }}
 footer {{ text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2rem; border-top: 1px solid var(--border); }}
 @media (max-width: 640px) {{
   header.page, main {{ padding-left: 1rem; padding-right: 1rem; }}
-  .bar-row {{ grid-template-columns: 100px 1fr 55px; }}
+  .bar-row {{ grid-template-columns: 120px 1fr 55px; }}
 }}
 </style>
 </head>
@@ -283,6 +317,22 @@ footer {{ text-align: center; color: var(--muted); font-size: 0.75rem; padding: 
   <section>
     <h2><span class="emoji">🔥</span> All climbers (detail)</h2>
     <div class="card-grid">{climber_cards or '<p class="empty">No deltas vs previous snapshot.</p>'}</div>
+    <div class="repo-table-wrap" style="margin-top:1rem">
+      <table class="repo-table">
+        <thead><tr><th>Repo</th><th>Description</th><th>Δ</th><th>⭐/day</th><th>Total</th><th>Age</th><th>Lang</th><th>Track</th></tr></thead>
+        <tbody>{climber_table_rows or '<tr><td colspan="8" class="empty">No deltas vs previous snapshot.</td></tr>'}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="emoji">📋</span> All repos</h2>
+    <div class="repo-table-wrap">
+      <table class="repo-table">
+        <thead><tr><th>Repo</th><th>Description</th><th>⭐/day</th><th>Total</th><th>Age</th><th>Lang</th><th>Track</th></tr></thead>
+        <tbody>{ranked_table_rows or '<tr><td colspan="7" class="empty">No data.</td></tr>'}</tbody>
+      </table>
+    </div>
   </section>
 </main>
 <footer>

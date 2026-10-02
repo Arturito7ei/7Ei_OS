@@ -23,7 +23,7 @@ nav ul { list-style: none; }
 nav li { margin-bottom: 0.35rem; }
 nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
 nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
-main { padding: 2rem 2.5rem 4rem; max-width: 960px; }
+main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
 .hero { margin-bottom: 2rem; }
 .hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
 .hero p { color: var(--muted); margin-top: 0.5rem; }
@@ -42,10 +42,12 @@ section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
 .report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
 .report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
 .report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body { overflow-x: auto; }
 .report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
-.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
 .report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
 .report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body .col-desc { min-width: 14rem; max-width: 28rem; color: var(--muted); font-weight: 400; }
 .report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
 .report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 .report-body em { color: var(--muted); font-size: 0.85rem; }
@@ -65,44 +67,15 @@ footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border
 <h1>GitHub Rising Radar — 2026-08-19 07:06 UTC</h1>
 <p>Star velocity = total stars ÷ repo age (days). Delta = stars since last scan.</p>
 <h2>🔥 Fastest climbers since last scan</h2>
-<table><thead><tr><th>Repo</th><th>Δ stars</th><th>⭐/day</th><th>Total</th><th>Age (d)</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td>+17646</td><td>28118.2</td><td>163037</td><td>5.8</td></tr>
-<tr><td><a href="https://github.com/anywhere-labs/deepseek-harness-desktop">anywhere-labs/deepseek-harness-desktop</a></td><td>+3101</td><td>2535.6</td><td>14219</td><td>5.6</td></tr>
-<tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td>+1978</td><td>1933.7</td><td>14709</td><td>7.6</td></tr>
-<tr><td><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></td><td>+1110</td><td>1546.8</td><td>105581</td><td>68.3</td></tr>
-<tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td>+487</td><td>1094.8</td><td>17083</td><td>15.6</td></tr>
-<tr><td><a href="https://github.com/lidge-jun/opencodex">lidge-jun/opencodex</a></td><td>+467</td><td>180.7</td><td>11083</td><td>61.3</td></tr>
-<tr><td><a href="https://github.com/odysseus-dev/odysseus">odysseus-dev/odysseus</a></td><td>+187</td><td>1075.1</td><td>85692</td><td>79.7</td></tr>
-<tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td>+184</td><td>723.6</td><td>25658</td><td>35.5</td></tr>
-<tr><td><a href="https://github.com/img2threejs/img2threejs">img2threejs/img2threejs</a></td><td>+177</td><td>347.0</td><td>12203</td><td>35.2</td></tr>
-<tr><td><a href="https://github.com/Yu9191/wloc">Yu9191/wloc</a></td><td>+173</td><td>166.0</td><td>9300</td><td>56.0</td></tr>
-<tr><td><a href="https://github.com/JustVugg/colibri">JustVugg/colibri</a></td><td>+168</td><td>521.7</td><td>25449</td><td>48.8</td></tr>
-<tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td>+155</td><td>680.0</td><td>13913</td><td>20.5</td></tr>
-<tr><td><a href="https://github.com/baidu/Unlimited-OCR">baidu/Unlimited-OCR</a></td><td>+119</td><td>389.2</td><td>24107</td><td>61.9</td></tr>
-<tr><td><a href="https://github.com/andrewyng/openworker">andrewyng/openworker</a></td><td>+102</td><td>489.6</td><td>14796</td><td>30.2</td></tr>
-<tr><td><a href="https://github.com/langchain-ai/openwiki">langchain-ai/openwiki</a></td><td>+102</td><td>267.4</td><td>15325</td><td>57.3</td></tr>
-</tbody></table>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>Δ stars</th><th>⭐/day</th><th>Total</th><th>Age (d)</th></tr></thead><tbody><tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td class="col-desc">DeepSeek Harness: Everything is a Plugin.</td><td>+17646</td><td>28118.2</td><td>163037</td><td>5.8</td></tr><tr><td><a href="https://github.com/anywhere-labs/deepseek-harness-desktop">anywhere-labs/deepseek-harness-desktop</a></td><td class="col-desc">—</td><td>+3101</td><td>2535.6</td><td>14219</td><td>5.6</td></tr><tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td class="col-desc">A privacy-first app that strips AI watermarks from content you own.</td><td>+1978</td><td>1933.7</td><td>14709</td><td>7.6</td></tr><tr><td><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></td><td class="col-desc">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</td><td>+1110</td><td>1546.8</td><td>105581</td><td>68.3</td></tr><tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td class="col-desc">Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js and Python bindings.</td><td>+487</td><td>1094.8</td><td>17083</td><td>15.6</td></tr><tr><td><a href="https://github.com/lidge-jun/opencodex">lidge-jun/opencodex</a></td><td class="col-desc">Universal provider proxy for OpenAI Codex &amp; Claude Code — use any LLM (Claude, Gemini, Grok, DeepSeek, Ollama…) with Codex CLI, App, SDK, a…</td><td>+467</td><td>180.7</td><td>11083</td><td>61.3</td></tr><tr><td><a href="https://github.com/odysseus-dev/odysseus">odysseus-dev/odysseus</a></td><td class="col-desc">—</td><td>+187</td><td>1075.1</td><td>85692</td><td>79.7</td></tr><tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td class="col-desc">SpaceXAI&#x27;s coding agent harness and TUI. Fullscreen, mouse interactive, extensible.</td><td>+184</td><td>723.6</td><td>25658</td><td>35.5</td></tr><tr><td><a href="https://github.com/img2threejs/img2threejs">img2threejs/img2threejs</a></td><td class="col-desc">Rebuild the object in a reference image as a code-only, procedural, quality-gated, animation-ready Three.js model. Token-efficient image-to…</td><td>+177</td><td>347.0</td><td>12203</td><td>35.2</td></tr><tr><td><a href="https://github.com/Yu9191/wloc">Yu9191/wloc</a></td><td class="col-desc">修改 Apple 网络定位（gs-loc）返回坐标 · 支持 Surge / Quantumult X / Loon / Stash · 快捷指令一键设置/恢复定位</td><td>+173</td><td>166.0</td><td>9300</td><td>56.0</td></tr><tr><td><a href="https://github.com/JustVugg/colibri">JustVugg/colibri</a></td><td class="col-desc">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦</td><td>+168</td><td>521.7</td><td>25449</td><td>48.8</td></tr><tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td class="col-desc">Multiplayer agent harness for work.</td><td>+155</td><td>680.0</td><td>13913</td><td>20.5</td></tr><tr><td><a href="https://github.com/baidu/Unlimited-OCR">baidu/Unlimited-OCR</a></td><td class="col-desc">Unlimited OCR Works: Welcome the Era of One-shot Long-horizon Parsing.</td><td>+119</td><td>389.2</td><td>24107</td><td>61.9</td></tr><tr><td><a href="https://github.com/andrewyng/openworker">andrewyng/openworker</a></td><td class="col-desc">—</td><td>+102</td><td>489.6</td><td>14796</td><td>30.2</td></tr><tr><td><a href="https://github.com/langchain-ai/openwiki">langchain-ai/openwiki</a></td><td class="col-desc">OpenWiki is a CLI that writes and maintains agent documentation for your codebase.</td><td>+102</td><td>267.4</td><td>15325</td><td>57.3</td></tr></tbody></table>
 <h2>General Rising — top velocity</h2>
-<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td>28118.2</td><td>163037</td><td>TypeScript</td></tr>
-<tr><td><a href="https://github.com/anywhere-labs/deepseek-harness-desktop">anywhere-labs/deepseek-harness-desktop</a></td><td>2535.6</td><td>14219</td><td>TypeScript</td></tr>
-<tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td>1933.7</td><td>14709</td><td>Python</td></tr>
-<tr><td><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin/awesome-dsh-plugin</a></td><td>1642.9</td><td>9390</td><td>Python</td></tr>
-<tr><td><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></td><td>1546.8</td><td>105581</td><td>JavaScript</td></tr>
-<tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td>1094.8</td><td>17083</td><td>Rust</td></tr>
-<tr><td><a href="https://github.com/odysseus-dev/odysseus">odysseus-dev/odysseus</a></td><td>1075.1</td><td>85692</td><td>Python</td></tr>
-<tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td>723.6</td><td>25658</td><td>Rust</td></tr>
-<tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td>680.0</td><td>13913</td><td>TypeScript</td></tr>
-<tr><td><a href="https://github.com/JustVugg/colibri">JustVugg/colibri</a></td><td>521.7</td><td>25449</td><td>C</td></tr>
-</tbody></table>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a></td><td class="col-desc">DeepSeek Harness: Everything is a Plugin.</td><td>28118.2</td><td>163037</td><td>TypeScript</td></tr><tr><td><a href="https://github.com/anywhere-labs/deepseek-harness-desktop">anywhere-labs/deepseek-harness-desktop</a></td><td class="col-desc">—</td><td>2535.6</td><td>14219</td><td>TypeScript</td></tr><tr><td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td><td class="col-desc">A privacy-first app that strips AI watermarks from content you own.</td><td>1933.7</td><td>14709</td><td>Python</td></tr><tr><td><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin/awesome-dsh-plugin</a></td><td class="col-desc">A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表</td><td>1642.9</td><td>9390</td><td>Python</td></tr><tr><td><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></td><td class="col-desc">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</td><td>1546.8</td><td>105581</td><td>JavaScript</td></tr><tr><td><a href="https://github.com/firecrawl/anydoc">firecrawl/anydoc</a></td><td class="col-desc">Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js and Python bindings.</td><td>1094.8</td><td>17083</td><td>Rust</td></tr><tr><td><a href="https://github.com/odysseus-dev/odysseus">odysseus-dev/odysseus</a></td><td class="col-desc">—</td><td>1075.1</td><td>85692</td><td>Python</td></tr><tr><td><a href="https://github.com/xai-org/grok-build">xai-org/grok-build</a></td><td class="col-desc">SpaceXAI&#x27;s coding agent harness and TUI. Fullscreen, mouse interactive, extensible.</td><td>723.6</td><td>25658</td><td>Rust</td></tr><tr><td><a href="https://github.com/yc-software/qm">yc-software/qm</a></td><td class="col-desc">Multiplayer agent harness for work.</td><td>680.0</td><td>13913</td><td>TypeScript</td></tr><tr><td><a href="https://github.com/JustVugg/colibri">JustVugg/colibri</a></td><td class="col-desc">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦</td><td>521.7</td><td>25449</td><td>C</td></tr></tbody></table>
 <h2>AI / LLM — top velocity</h2>
-<table><thead><tr><th>Repo</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/laoshan-song/Awesome-LLM-Interview">laoshan-song/Awesome-LLM-Interview</a></td><td>1.6</td><td>129</td><td>HTML</td></tr>
-</tbody></table>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://github.com/laoshan-song/Awesome-LLM-Interview">laoshan-song/Awesome-LLM-Interview</a></td><td class="col-desc">—</td><td>1.6</td><td>129</td><td>HTML</td></tr></tbody></table>
 <hr>
 <p><em>Next: run <code>tech-radar-evaluate</code> on interesting candidates → append <code>RESEARCH/RD_CANDIDATE_QUEUE.md</code></em></p>
 </div>
-<footer>Generated 2026-10-02 04:11 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+<footer>Generated 2026-10-02 05:07 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
 </main>
 </div>
 </body>

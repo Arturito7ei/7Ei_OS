@@ -23,7 +23,7 @@ nav ul { list-style: none; }
 nav li { margin-bottom: 0.35rem; }
 nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
 nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
-main { padding: 2rem 2.5rem 4rem; max-width: 960px; }
+main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
 .hero { margin-bottom: 2rem; }
 .hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
 .hero p { color: var(--muted); margin-top: 0.5rem; }
@@ -42,10 +42,12 @@ section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
 .report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
 .report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
 .report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body { overflow-x: auto; }
 .report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
-.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
 .report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
 .report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body .col-desc { min-width: 14rem; max-width: 28rem; color: var(--muted); font-weight: 400; }
 .report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
 .report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 .report-body em { color: var(--muted); font-size: 0.85rem; }
@@ -87,7 +89,7 @@ footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border
   <h3>Archive</h3>
   <div class="week-list"><div class="week-row"><a href="reports/2026-10-02.html">Week of 2026-10-02</a><span class="date">scan + chooser</span></div><div class="week-row"><a href="reports/2026-09-29.html">Week of 2026-09-29</a><span class="date">scan + chooser</span></div><div class="week-row"><a href="reports/2026-09-08.html">Week of 2026-09-08</a><span class="date">scan + chooser</span></div><div class="week-row"><a href="reports/2026-08-24.html">Week of 2026-08-24</a><span class="date">scan + chooser</span></div><div class="week-row"><a href="reports/2026-08-19.html">Week of 2026-08-19</a><span class="date">scan + chooser</span></div><div class="week-row"><a href="reports/2026-08-17.html">Week of 2026-08-17</a><span class="date">scan + chooser</span></div><div class="week-row"><a href="reports/2026-08-13.html">Week of 2026-08-13</a><span class="date">scan + chooser</span></div></div>
 </section>
-<footer>Generated 2026-10-02 04:11 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+<footer>Generated 2026-10-02 05:07 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
 </main>
 </div>
 </body>

@@ -20,6 +20,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote
 
+from radar_columns import fmt_desc
+
 SKILL_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = SKILL_ROOT / "data"
 SNAPSHOT_DIR = DATA_DIR / "snapshots"
@@ -137,10 +139,13 @@ def render_report(all_repos: list[dict], previous: dict[str, dict], tracks: dict
 
     if climbers:
         lines += ["## 🔥 Fastest climbers since last scan", ""]
-        lines += ["| Repo | Δ stars | ⭐/day | Total | Age (d) |", "|---|---:|---:|---:|---:|"]
+        lines += [
+            "| Repo | Description | Δ stars | ⭐/day | Total | Age (d) |",
+            "|---|---|---:|---:|---:|---:|",
+        ]
         for r in climbers[:15]:
             lines.append(
-                f"| [{r['full_name']}]({r['html_url']}) | +{r['star_delta']} | {r['stars_per_day']} | {r['stargazers_count']} | {r['age_days']} |"
+                f"| [{r['full_name']}]({r['html_url']}) | {fmt_desc(r)} | +{r['star_delta']} | {r['stars_per_day']} | {r['stargazers_count']} | {r['age_days']} |"
             )
         lines.append("")
     elif previous:
@@ -157,11 +162,13 @@ def render_report(all_repos: list[dict], previous: dict[str, dict], tracks: dict
         label = tracks.get(track_id, {}).get("label", track_id)
         ranked = sorted(track_repos, key=lambda x: x["stars_per_day"], reverse=True)[:10]
         lines += [f"## {label} — top velocity", ""]
-        lines += ["| Repo | ⭐/day | Total | Language |", "|---|---:|---:|---|"]
+        lines += [
+            "| Repo | Description | ⭐/day | Total | Language |",
+            "|---|---|---:|---:|---|",
+        ]
         for r in ranked:
-            desc = (r.get("description") or "")[:60].replace("|", "/")
             lines.append(
-                f"| [{r['full_name']}]({r['html_url']}) | {r['stars_per_day']} | {r['stargazers_count']} | {r.get('language') or '—'} |"
+                f"| [{r['full_name']}]({r['html_url']}) | {fmt_desc(r)} | {r['stars_per_day']} | {r['stargazers_count']} | {r.get('language') or '—'} |"
             )
         lines.append("")
 
