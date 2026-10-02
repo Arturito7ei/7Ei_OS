@@ -20,6 +20,8 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
+from radar_columns import insert_description_column, load_description_index
+
 SKILL_ROOT = Path(__file__).resolve().parent.parent
 REPO_ROOT = SKILL_ROOT.parent.parent
 DEFAULT_RESEARCH = Path.home() / ".buzz" / "RESEARCH"
@@ -45,7 +47,7 @@ nav ul { list-style: none; }
 nav li { margin-bottom: 0.35rem; }
 nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
 nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
-main { padding: 2rem 2.5rem 4rem; max-width: 960px; }
+main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
 .hero { margin-bottom: 2rem; }
 .hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
 .hero p { color: var(--muted); margin-top: 0.5rem; }
@@ -64,10 +66,12 @@ section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
 .report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
 .report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
 .report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body { overflow-x: auto; }
 .report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
-.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
 .report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
 .report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body .col-desc { min-width: 14rem; max-width: 28rem; color: var(--muted); font-weight: 400; }
 .report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
 .report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 .report-body em { color: var(--muted); font-size: 0.85rem; }
@@ -92,7 +96,26 @@ def md_inline(s: str) -> str:
     return s
 
 
-def md_to_html(text: str) -> str:
+def _table_html(rows: list[list[str]]) -> str:
+    header = rows[0]
+    desc_idx = {i for i, c in enumerate(header) if c.strip().lower() == "description"}
+
+    def cell(tag: str, idx: int, value: str) -> str:
+        cls = ' class="col-desc"' if idx in desc_idx else ""
+        return f"<{tag}{cls}>{md_inline(value)}</{tag}>"
+
+    parts = [
+        "<table><thead><tr>"
+        + "".join(cell("th", i, c) for i, c in enumerate(header))
+        + "</tr></thead><tbody>"
+    ]
+    for row in rows[1:]:
+        parts.append("<tr>" + "".join(cell("td", i, c) for i, c in enumerate(row)) + "</tr>")
+    parts.append("</tbody></table>")
+    return "".join(parts)
+
+
+def md_to_html(text: str, desc_by_repo: dict[str, str] | None = None) -> str:
     text = strip_frontmatter(text)
     lines = text.splitlines()
     out: list[str] = []
@@ -114,10 +137,9 @@ def md_to_html(text: str) -> str:
                 i += 1
             i -= 1
             if rows:
-                out.append("<table><thead><tr>" + "".join(f"<th>{md_inline(c)}</th>" for c in rows[0]) + "</tr></thead><tbody>")
-                for row in rows[1:]:
-                    out.append("<tr>" + "".join(f"<td>{md_inline(c)}</td>" for c in row) + "</tr>")
-                out.append("</tbody></table>")
+                if desc_by_repo:
+                    rows = insert_description_column(rows, desc_by_repo)
+                out.append(_table_html(rows))
         elif line.startswith("- "):
             out.append("<ul>")
             while i < len(lines) and lines[i].startswith("- "):
@@ -229,14 +251,20 @@ def render_index(weeks: list[str], latest: str | None) -> str:
     return page_shell("Weekly Research Hub", "home", body, weeks)
 
 
-def render_week_report(date: str, scan: str | None, chooser: str | None, weeks: list[str]) -> str:
+def render_week_report(
+    date: str,
+    scan: str | None,
+    chooser: str | None,
+    weeks: list[str],
+    desc_by_repo: dict[str, str] | None = None,
+) -> str:
     parts = [f'<div class="hero"><h2>Week of {date}</h2><p><a href="radar.html">Open interactive radar dashboard →</a></p></div>']
     parts.append('<div class="report-body">')
     if chooser:
-        parts.append(md_to_html(chooser))
+        parts.append(md_to_html(chooser, desc_by_repo))
         parts.append("<hr>")
     if scan:
-        parts.append(md_to_html(scan))
+        parts.append(md_to_html(scan, desc_by_repo))
     elif not chooser:
         parts.append("<p>No scan or chooser files found for this week.</p>")
     parts.append("</div>")
@@ -258,6 +286,7 @@ def main() -> None:
 
     weeks = discover_weeks(research_dir)
     latest = weeks[0] if weeks else None
+    desc_by_repo = load_description_index(SKILL_ROOT)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -280,7 +309,9 @@ def main() -> None:
     for w in weeks:
         scan, chooser = load_week_content(research_dir, w)
         if scan or chooser:
-            (reports_dir / f"{week_slug(w)}.html").write_text(render_week_report(w, scan, chooser, weeks))
+            (reports_dir / f"{week_slug(w)}.html").write_text(
+                render_week_report(w, scan, chooser, weeks, desc_by_repo)
+            )
 
     print(f"Hub: {output_dir / 'index.html'}")
     print(f"Dashboard: {output_dir / 'radar.html'}")

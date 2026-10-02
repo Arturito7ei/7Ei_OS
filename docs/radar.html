@@ -46,11 +46,19 @@ section h2 .emoji { font-size: 1.25rem; }
 .topics { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .topic { font-size: 0.68rem; background: #21262d; color: var(--muted); padding: 0.1rem 0.4rem; border-radius: 3px; }
 .bar-chart { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
-.bar-row { display: grid; grid-template-columns: 140px 1fr 70px; gap: 0.75rem; align-items: center; margin-bottom: 0.65rem; }
-.bar-label { font-size: 0.82rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-row { display: grid; grid-template-columns: 220px 1fr 70px; gap: 0.75rem; align-items: center; margin-bottom: 0.85rem; }
+.bar-meta { min-width: 0; }
+.bar-label { font-size: 0.82rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.bar-desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .bar-track { height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; }
 .bar-fill { height: 100%; background: linear-gradient(90deg, var(--fire), #ffa657); border-radius: 4px; }
 .bar-val { font-size: 0.8rem; color: var(--fire); font-weight: 600; text-align: right; }
+.repo-table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+.repo-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.repo-table th, .repo-table td { border-bottom: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; vertical-align: top; }
+.repo-table th { color: var(--muted); font-weight: 600; background: #21262d; position: sticky; top: 0; }
+.repo-table tr:last-child td { border-bottom: none; }
+.repo-table .col-desc { min-width: 16rem; max-width: 28rem; color: var(--muted); }
 .tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
 .tab { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 0.4rem 0.85rem; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }
 .tab:hover { color: var(--text); border-color: var(--muted); }
@@ -59,7 +67,7 @@ section h2 .emoji { font-size: 1.25rem; }
 footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2rem; border-top: 1px solid var(--border); }
 @media (max-width: 640px) {
   header.page, main { padding-left: 1rem; padding-right: 1rem; }
-  .bar-row { grid-template-columns: 100px 1fr 55px; }
+  .bar-row { grid-template-columns: 120px 1fr 55px; }
 }
 </style>
 </head>
@@ -105,7 +113,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/NandhaKishorM/laya" target="_blank" rel="noopener">NandhaKishorM/laya</a>
             
           </header>
-          <p class="desc">Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward </p>
+          <p class="desc">Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward pass, in 100+ languages, with a router that picks the right…</p>
           <div class="metrics">
             <span class="metric"><strong>2.1k</strong> ⭐/day</span>
             <span class="metric"><strong>29.9k</strong> total</span>
@@ -175,7 +183,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/Niko1221/Strata" target="_blank" rel="noopener">Niko1221/Strata</a>
             
           </header>
-          <p class="desc">Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anth</p>
+          <p class="desc">Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.</p>
           <div class="metrics">
             <span class="metric"><strong>652.2</strong> ⭐/day</span>
             <span class="metric"><strong>4.9k</strong> total</span>
@@ -217,7 +225,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/Louis-CFM/coucou" target="_blank" rel="noopener">Louis-CFM/coucou</a>
             
           </header>
-          <p class="desc">A tiny friend that lives in your notch (macOS) or at the top of your screen (Windows, Linux) and keeps an eye on your co</p>
+          <p class="desc">A tiny friend that lives in your notch (macOS) or at the top of your screen (Windows, Linux) and keeps an eye on your coding agents: Claude Code, Gemini CLI, Antigravity and more.</p>
           <div class="metrics">
             <span class="metric"><strong>592.1</strong> ⭐/day</span>
             <span class="metric"><strong>2.5k</strong> total</span>
@@ -245,7 +253,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/mizorewww/laya-mlx" target="_blank" rel="noopener">mizorewww/laya-mlx</a>
             
           </header>
-          <p class="desc">Native MLX runtime for Laya typed decision models — 7–14 ms short decisions on M3 Max. No text generation, PyTorch, or c</p>
+          <p class="desc">Native MLX runtime for Laya typed decision models — 7–14 ms short decisions on M3 Max. No text generation, PyTorch, or cloud API.</p>
           <div class="metrics">
             <span class="metric"><strong>531.6</strong> ⭐/day</span>
             <span class="metric"><strong>6.7k</strong> total</span>
@@ -259,7 +267,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/tamaratran/fast-jev-compaction" target="_blank" rel="noopener">tamaratran/fast-jev-compaction</a>
             
           </header>
-          <p class="desc">Claude Code plugin that replaces the compaction summary with Jev decisions: every tool call and result is scored in one </p>
+          <p class="desc">Claude Code plugin that replaces the compaction summary with Jev decisions: every tool call and result is scored in one fast request, stale ones are dropped or truncated, everythi…</p>
           <div class="metrics">
             <span class="metric"><strong>490</strong> ⭐/day</span>
             <span class="metric"><strong>7.3k</strong> total</span>
@@ -398,7 +406,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/yibie/awesome-jev" target="_blank" rel="noopener">yibie/awesome-jev</a>
             
           </header>
-          <p class="desc">A curated list of public projects, integrations, and discussions built on Jev — TypeSafe AI&#x27;s System One model for typed</p>
+          <p class="desc">A curated list of public projects, integrations, and discussions built on Jev — TypeSafe AI&#x27;s System One model for typed decisions.</p>
           <div class="metrics">
             <span class="metric"><strong>141.9</strong> ⭐/day</span>
             <span class="metric"><strong>2.1k</strong> total</span>
@@ -412,7 +420,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/nokia-applied-research/AnyJev" target="_blank" rel="noopener">nokia-applied-research/AnyJev</a>
             
           </header>
-          <p class="desc">Turn any LLM into a Jev-style decision model: typed decisions, real probabilities, no training. (continue updating, welc</p>
+          <p class="desc">Turn any LLM into a Jev-style decision model: typed decisions, real probabilities, no training. (continue updating, welcome any issue and PR request)</p>
           <div class="metrics">
             <span class="metric"><strong>91.8</strong> ⭐/day</span>
             <span class="metric"><strong>1.0k</strong> total</span>
@@ -426,7 +434,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/zouyuxuan122/dsh-our-free-model" target="_blank" rel="noopener">zouyuxuan122/dsh-our-free-model</a>
             
           </header>
-          <p class="desc">在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 Muse Spark 1.3、MiMo V2.6 在内的前沿模型——完全免费，不限量。 All you do is install this plugin i</p>
+          <p class="desc">在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 Muse Spark 1.3、MiMo V2.6 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier mode…</p>
           <div class="metrics">
             <span class="metric"><strong>81.1</strong> ⭐/day</span>
             <span class="metric"><strong>608</strong> total</span>
@@ -468,7 +476,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/Alex314618-create/JevRev" target="_blank" rel="noopener">Alex314618-create/JevRev</a>
             
           </header>
-          <p class="desc">An LLM + Jev workflow that changes EVERYTHING. Boost your vertebrate brain with a spine inside. </p>
+          <p class="desc">An LLM + Jev workflow that changes EVERYTHING. Boost your vertebrate brain with a spine inside.</p>
           <div class="metrics">
             <span class="metric"><strong>63.2</strong> ⭐/day</span>
             <span class="metric"><strong>701</strong> total</span>
@@ -482,7 +490,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/v-modal/awesome-jev-tools" target="_blank" rel="noopener">v-modal/awesome-jev-tools</a>
             
           </header>
-          <p class="desc">A curated list of tools  built for Jev — TypeSafe AI&#x27;s System One model for typed decisions.</p>
+          <p class="desc">A curated list of tools built for Jev — TypeSafe AI&#x27;s System One model for typed decisions.</p>
           <div class="metrics">
             <span class="metric"><strong>58.8</strong> ⭐/day</span>
             <span class="metric"><strong>734</strong> total</span>
@@ -514,7 +522,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/Avinash-jetwani/jevmem" target="_blank" rel="noopener">Avinash-jetwani/jevmem</a>
             
           </header>
-          <p class="desc">Automatic project memory for Claude Code: decisions, rules and dead ends saved to JEVMEM.md in your repo, brought back n</p>
+          <p class="desc">Automatic project memory for Claude Code: decisions, rules and dead ends saved to JEVMEM.md in your repo, brought back next session. In the Claude plugin directory and on the MCP…</p>
           <div class="metrics">
             <span class="metric"><strong>10.7</strong> ⭐/day</span>
             <span class="metric"><strong>104</strong> total</span>
@@ -528,7 +536,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/PyModel/jev-judge-mcp" target="_blank" rel="noopener">PyModel/jev-judge-mcp</a>
             
           </header>
-          <p class="desc">Typed judgment tools for MCP agents. TypeSafe&#x27;s Jev model as verify, screen, find, classify, rerank, decide, compare, ex</p>
+          <p class="desc">Typed judgment tools for MCP agents. TypeSafe&#x27;s Jev model as verify, screen, find, classify, rerank, decide, compare, extract, review, gate, and score: the model judges, policy de…</p>
           <div class="metrics">
             <span class="metric"><strong>10.2</strong> ⭐/day</span>
             <span class="metric"><strong>84</strong> total</span>
@@ -542,7 +550,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/GetBrew/growth-engineer" target="_blank" rel="noopener">GetBrew/growth-engineer</a>
             
           </header>
-          <p class="desc">Open-source catalog of go-to-market tools and workflows, written as markdown files any agent can run. Includes a read-on</p>
+          <p class="desc">Open-source catalog of go-to-market tools and workflows, written as markdown files any agent can run. Includes a read-only MCP server.</p>
           <div class="metrics">
             <span class="metric"><strong>7.9</strong> ⭐/day</span>
             <span class="metric"><strong>122</strong> total</span>
@@ -556,7 +564,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/PerryLink/jevcore" target="_blank" rel="noopener">PerryLink/jevcore</a>
             
           </header>
-          <p class="desc">TypeSafe Jev for DeepSeek Harness, the Model Context Protocol, and plain Node: typed judgments instead of prose, offline</p>
+          <p class="desc">TypeSafe Jev for DeepSeek Harness, the Model Context Protocol, and plain Node: typed judgments instead of prose, offline by default.</p>
           <div class="metrics">
             <span class="metric"><strong>7.8</strong> ⭐/day</span>
             <span class="metric"><strong>93</strong> total</span>
@@ -570,7 +578,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/INSANE0777/Awwwards-mcp" target="_blank" rel="noopener">INSANE0777/Awwwards-mcp</a>
             
           </header>
-          <p class="desc">Free, open-source MCP server that gives AI coding agents (Claude Code, Codex, Cursor, OpenCode, ZCode…) design inspirati</p>
+          <p class="desc">Free, open-source MCP server that gives AI coding agents (Claude Code, Codex, Cursor, OpenCode, ZCode…) design inspiration from award-winning websites — search with real screensho…</p>
           <div class="metrics">
             <span class="metric"><strong>6.9</strong> ⭐/day</span>
             <span class="metric"><strong>94</strong> total</span>
@@ -584,7 +592,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/AkashPriyadarshii/jev-seo" target="_blank" rel="noopener">AkashPriyadarshii/jev-seo</a>
             
           </header>
-          <p class="desc">Free Rust SEO and GEO toolkit powered by TypeSafe Jev: 58-rule audits, site crawls, AI citation checks, rank drift, CI g</p>
+          <p class="desc">Free Rust SEO and GEO toolkit powered by TypeSafe Jev: 58-rule audits, site crawls, AI citation checks, rank drift, CI gates, 15-tool MCP. Zero cost.</p>
           <div class="metrics">
             <span class="metric"><strong>6.6</strong> ⭐/day</span>
             <span class="metric"><strong>90</strong> total</span>
@@ -644,7 +652,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/mikehasa/golive-skill" target="_blank" rel="noopener">mikehasa/golive-skill</a>
             
           </header>
-          <p class="desc">Take your agent-built product live: hosting, database, domain, email, payments — on your own accounts. Open-source Agent</p>
+          <p class="desc">Take your agent-built product live: hosting, database, domain, email, payments — on your own accounts. Open-source Agent Skill + zero-dependency Node CLI: detect → plan → approve…</p>
           <div class="metrics">
             <span class="metric"><strong>136.1</strong> ⭐/day</span>
             <span class="metric"><strong>1.2k</strong> total</span>
@@ -658,7 +666,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/alpcanaydin/tusk" target="_blank" rel="noopener">alpcanaydin/tusk</a>
             
           </header>
-          <p class="desc">A fast, native, keyboard-driven database client for macOS. 20 databases, an AI assistant that shows its work, free and o</p>
+          <p class="desc">A fast, native, keyboard-driven database client for macOS. 20 databases, an AI assistant that shows its work, free and open source.</p>
           <div class="metrics">
             <span class="metric"><strong>75.2</strong> ⭐/day</span>
             <span class="metric"><strong>255</strong> total</span>
@@ -672,7 +680,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/LockedinLabs-AI/agent-console" target="_blank" rel="noopener">LockedinLabs-AI/agent-console</a>
             
           </header>
-          <p class="desc">Local-first observability for AI coding agents. Every Claude Code and Codex session&#x27;s tokens, cache, models and cost, on</p>
+          <p class="desc">Local-first observability for AI coding agents. Every Claude Code and Codex session&#x27;s tokens, cache, models and cost, on this machine and every machine you connect through a self-…</p>
           <div class="metrics">
             <span class="metric"><strong>68.4</strong> ⭐/day</span>
             <span class="metric"><strong>781</strong> total</span>
@@ -686,7 +694,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/ethanplusai/astra-flash-orchestrator" target="_blank" rel="noopener">ethanplusai/astra-flash-orchestrator</a>
             
           </header>
-          <p class="desc">Astra plans and reviews; DeepSeek Flash builds. A native Codex workflow with phased tasks, verification, safe installati</p>
+          <p class="desc">Astra plans and reviews; DeepSeek Flash builds. A native Codex workflow with phased tasks, verification, safe installation and reversible setup.</p>
           <div class="metrics">
             <span class="metric"><strong>48.5</strong> ⭐/day</span>
             <span class="metric"><strong>725</strong> total</span>
@@ -728,7 +736,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/penso/herdr-gpui" target="_blank" rel="noopener">penso/herdr-gpui</a>
             
           </header>
-          <p class="desc">Native macOS client for Herdr, built with Rust and GPUI. View terminal sessions, workspaces, Git worktrees, and agent ac</p>
+          <p class="desc">Native macOS client for Herdr, built with Rust and GPUI. View terminal sessions, workspaces, Git worktrees, and agent activity through your local Herdr daemon.</p>
           <div class="metrics">
             <span class="metric"><strong>35</strong> ⭐/day</span>
             <span class="metric"><strong>418</strong> total</span>
@@ -756,7 +764,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/sno-ai/sno-station" target="_blank" rel="noopener">sno-ai/sno-station</a>
             
           </header>
-          <p class="desc">Sno Station — your Claude Code and Codex working as one squad on your own machine. Shared encrypted memory, agent-to-age</p>
+          <p class="desc">Sno Station — your Claude Code and Codex working as one squad on your own machine. Shared encrypted memory, agent-to-agent messaging (Reach), squad skills for handoff and cross-ve…</p>
           <div class="metrics">
             <span class="metric"><strong>28.6</strong> ⭐/day</span>
             <span class="metric"><strong>368</strong> total</span>
@@ -770,7 +778,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/repoboost-hq/github-launch-checklist" target="_blank" rel="noopener">repoboost-hq/github-launch-checklist</a>
             
           </header>
-          <p class="desc">Audit a GitHub repository before launch - ten readiness checks scored 0-10: name, description, topics, README, license, </p>
+          <p class="desc">Audit a GitHub repository before launch - ten readiness checks scored 0-10: name, description, topics, README, license, demo, installation, contributing guide and issue templates.…</p>
           <div class="metrics">
             <span class="metric"><strong>26.2</strong> ⭐/day</span>
             <span class="metric"><strong>379</strong> total</span>
@@ -802,7 +810,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/NandhaKishorM/laya" target="_blank" rel="noopener">NandhaKishorM/laya</a>
             
           </header>
-          <p class="desc">Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward </p>
+          <p class="desc">Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward pass, in 100+ languages, with a router that picks the right…</p>
           <div class="metrics">
             <span class="metric"><strong>2.1k</strong> ⭐/day</span>
             <span class="metric"><strong>29.9k</strong> total</span>
@@ -844,7 +852,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/Niko1221/Strata" target="_blank" rel="noopener">Niko1221/Strata</a>
             
           </header>
-          <p class="desc">Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anth</p>
+          <p class="desc">Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.</p>
           <div class="metrics">
             <span class="metric"><strong>652.2</strong> ⭐/day</span>
             <span class="metric"><strong>4.9k</strong> total</span>
@@ -872,7 +880,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/Louis-CFM/coucou" target="_blank" rel="noopener">Louis-CFM/coucou</a>
             
           </header>
-          <p class="desc">A tiny friend that lives in your notch (macOS) or at the top of your screen (Windows, Linux) and keeps an eye on your co</p>
+          <p class="desc">A tiny friend that lives in your notch (macOS) or at the top of your screen (Windows, Linux) and keeps an eye on your coding agents: Claude Code, Gemini CLI, Antigravity and more.</p>
           <div class="metrics">
             <span class="metric"><strong>592.1</strong> ⭐/day</span>
             <span class="metric"><strong>2.5k</strong> total</span>
@@ -900,7 +908,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/mizorewww/laya-mlx" target="_blank" rel="noopener">mizorewww/laya-mlx</a>
             
           </header>
-          <p class="desc">Native MLX runtime for Laya typed decision models — 7–14 ms short decisions on M3 Max. No text generation, PyTorch, or c</p>
+          <p class="desc">Native MLX runtime for Laya typed decision models — 7–14 ms short decisions on M3 Max. No text generation, PyTorch, or cloud API.</p>
           <div class="metrics">
             <span class="metric"><strong>531.6</strong> ⭐/day</span>
             <span class="metric"><strong>6.7k</strong> total</span>
@@ -914,7 +922,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
             <a class="repo-name" href="https://github.com/tamaratran/fast-jev-compaction" target="_blank" rel="noopener">tamaratran/fast-jev-compaction</a>
             
           </header>
-          <p class="desc">Claude Code plugin that replaces the compaction summary with Jev decisions: every tool call and result is scored in one </p>
+          <p class="desc">Claude Code plugin that replaces the compaction summary with Jev decisions: every tool call and result is scored in one fast request, stale ones are dropped or truncated, everythi…</p>
           <div class="metrics">
             <span class="metric"><strong>490</strong> ⭐/day</span>
             <span class="metric"><strong>7.3k</strong> total</span>
@@ -971,6 +979,22 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 2
   <section>
     <h2><span class="emoji">🔥</span> All climbers (detail)</h2>
     <div class="card-grid"><p class="empty">No deltas vs previous snapshot.</p></div>
+    <div class="repo-table-wrap" style="margin-top:1rem">
+      <table class="repo-table">
+        <thead><tr><th>Repo</th><th>Description</th><th>Δ</th><th>⭐/day</th><th>Total</th><th>Age</th><th>Lang</th><th>Track</th></tr></thead>
+        <tbody><tr><td colspan="8" class="empty">No deltas vs previous snapshot.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="emoji">📋</span> All repos</h2>
+    <div class="repo-table-wrap">
+      <table class="repo-table">
+        <thead><tr><th>Repo</th><th>Description</th><th>⭐/day</th><th>Total</th><th>Age</th><th>Lang</th><th>Track</th></tr></thead>
+        <tbody><tr><td><a href="https://github.com/NandhaKishorM/laya" target="_blank" rel="noopener">NandhaKishorM/laya</a></td><td class="col-desc">Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward pass, in 100+ languages, with a router that picks the right…</td><td>2.1k</td><td>29.9k</td><td>14.0</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/KKKKhazix/AIHOT" target="_blank" rel="noopener">KKKKhazix/AIHOT</a></td><td class="col-desc">一个自己找热点、自己写日报的网站框架。把信源和精选标准换成你的，它就是你的行业热点站。</td><td>1.5k</td><td>4.7k</td><td>3.2</td><td>TypeScript</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/browser-use/jev-ultrafast" target="_blank" rel="noopener">browser-use/jev-ultrafast</a></td><td class="col-desc">Fastest and cheapest web agent</td><td>1.4k</td><td>21.7k</td><td>15.3</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/feder-cr/dots" target="_blank" rel="noopener">feder-cr/dots</a></td><td class="col-desc">Open-source dots for the web: an AI agent with its own browser, one that does not get blocked.</td><td>1.1k</td><td>2.4k</td><td>2.2</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/jev-chat/jev-chat-jarvis" target="_blank" rel="noopener">jev-chat/jev-chat-jarvis</a></td><td class="col-desc">装在手机上的对话副驾：在 QQ / X / 飞书里读懂对方、给出候选回复、一键填入输入框，发不发由你。非侵入，只读屏幕，不 hook 不改包。</td><td>675.8</td><td>7.2k</td><td>10.7</td><td>Kotlin</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/Niko1221/Strata" target="_blank" rel="noopener">Niko1221/Strata</a></td><td class="col-desc">Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.</td><td>652.2</td><td>4.9k</td><td>7.5</td><td>C++</td><td>General Rising</td></tr><tr><td><a href="https://github.com/zai-org/ZCode" target="_blank" rel="noopener">zai-org/ZCode</a></td><td class="col-desc">Z.ai&#x27;s coding agent harness. Powerful, intelligent, extensible.</td><td>625.8</td><td>7.3k</td><td>11.7</td><td>TypeScript</td><td>General Rising</td></tr><tr><td><a href="https://github.com/nanaism/yomiyasu" target="_blank" rel="noopener">nanaism/yomiyasu</a></td><td class="col-desc">AI生成の日本語を自然な日本語へ推敲するAgent Skill / Agent Skill for Refining AI-Generated Japanese into Natural Japanese</td><td>604.5</td><td>1.0k</td><td>1.7</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/Louis-CFM/coucou" target="_blank" rel="noopener">Louis-CFM/coucou</a></td><td class="col-desc">A tiny friend that lives in your notch (macOS) or at the top of your screen (Windows, Linux) and keeps an eye on your coding agents: Claude Code, Gemini CLI, Antigravity and more.</td><td>592.1</td><td>2.5k</td><td>4.3</td><td>Swift</td><td>General Rising</td></tr><tr><td><a href="https://github.com/jaredpalmer/kev" target="_blank" rel="noopener">jaredpalmer/kev</a></td><td class="col-desc">Jev-like family of decision models built on top of Qwen3.5/3.8 you can train and run on your own</td><td>574.3</td><td>8.2k</td><td>14.3</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/mizorewww/laya-mlx" target="_blank" rel="noopener">mizorewww/laya-mlx</a></td><td class="col-desc">Native MLX runtime for Laya typed decision models — 7–14 ms short decisions on M3 Max. No text generation, PyTorch, or cloud API.</td><td>531.6</td><td>6.7k</td><td>12.6</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/tamaratran/fast-jev-compaction" target="_blank" rel="noopener">tamaratran/fast-jev-compaction</a></td><td class="col-desc">Claude Code plugin that replaces the compaction summary with Jev decisions: every tool call and result is scored in one fast request, stale ones are dropped or truncated, everythi…</td><td>490</td><td>7.3k</td><td>14.9</td><td>TypeScript</td><td>General Rising</td></tr><tr><td><a href="https://github.com/yetone/magpie" target="_blank" rel="noopener">yetone/magpie</a></td><td class="col-desc">Every agent&#x27;s model. One place. Codex on DeepSeek, Claude Code on Kimi, from the menu bar.</td><td>484.7</td><td>4.1k</td><td>8.5</td><td>Go</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/cdyforever/how-to-live-better" target="_blank" rel="noopener">cdyforever/how-to-live-better</a></td><td class="col-desc">《高性价比人生指南》全书 528 条的在线单页阅读版：手机可读、可搜索、零依赖、支持离线</td><td>449.9</td><td>6.1k</td><td>13.6</td><td>HTML</td><td>General Rising</td></tr><tr><td><a href="https://github.com/robbietilton/Compositor" target="_blank" rel="noopener">robbietilton/Compositor</a></td><td class="col-desc">The Photoshop alternative for Mac</td><td>444.4</td><td>6.8k</td><td>15.3</td><td>Swift</td><td>General Rising</td></tr><tr><td><a href="https://github.com/Mak5er/AirCard" target="_blank" rel="noopener">Mak5er/AirCard</a></td><td class="col-desc">Apple Wallet Card Skinner for iOS 18+ (No Jailbreak Required)</td><td>366</td><td>5.6k</td><td>15.2</td><td>Swift</td><td>General Rising</td></tr><tr><td><a href="https://github.com/dzhng/jevgrep" target="_blank" rel="noopener">dzhng/jevgrep</a></td><td class="col-desc">Find code by asking what it does. A CLI for coding agents that uses Jev to discover relevant files and source context.</td><td>334.1</td><td>2.0k</td><td>6.0</td><td>TypeScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/Contrastive-LM/CLM" target="_blank" rel="noopener">Contrastive-LM/CLM</a></td><td class="col-desc">—</td><td>322.3</td><td>2.7k</td><td>8.4</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/Edwardxlai/easyread" target="_blank" rel="noopener">Edwardxlai/easyread</a></td><td class="col-desc">把英文论文读成舒服的中文：本地 PDF 论文翻译、原文对照、边读边问 AI、文献管理。Read English papers in comfortable Chinese.</td><td>318.3</td><td>521</td><td>1.6</td><td>JavaScript</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/mexicat/pdoom-video" target="_blank" rel="noopener">mexicat/pdoom-video</a></td><td class="col-desc">Code-rendered music video for &quot;I&#x27;m Upping My P(doom)&quot;</td><td>303.2</td><td>2.2k</td><td>7.3</td><td>TypeScript</td><td>General Rising</td></tr><tr><td><a href="https://github.com/TheoLeeCJ/SemIf-OpenJev" target="_blank" rel="noopener">TheoLeeCJ/SemIf-OpenJev</a></td><td class="col-desc">Semantic ifs from open models, on a 3090 at home. Independent; not affiliated with Jev or TypeSafe.</td><td>290.5</td><td>4.7k</td><td>16.0</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/tobi/disktree" target="_blank" rel="noopener">tobi/disktree</a></td><td class="col-desc">A treemap for finding and removing what fills your disk, for Omarchy. Rust + GPUI.</td><td>290.5</td><td>2.1k</td><td>7.3</td><td>Rust</td><td>General Rising</td></tr><tr><td><a href="https://github.com/newliver666/apk-reverse" target="_blank" rel="noopener">newliver666/apk-reverse</a></td><td class="col-desc">Suitable for Android APK reverse engineering analysis</td><td>248.7</td><td>3.1k</td><td>12.6</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/CopilotKit/openmuse" target="_blank" rel="noopener">CopilotKit/openmuse</a></td><td class="col-desc">A personal agent with a browser, terminal, files, and work that keeps going built with CopilotKit and AG-UI.</td><td>217.5</td><td>3.6k</td><td>16.5</td><td>TypeScript</td><td>General Rising</td></tr><tr><td><a href="https://github.com/driceroland/Search" target="_blank" rel="noopener">driceroland/Search</a></td><td class="col-desc">A small, fast WebKit browser for macOS, by Office Commun.</td><td>197.3</td><td>2.3k</td><td>11.7</td><td>Swift</td><td>General Rising</td></tr><tr><td><a href="https://github.com/jarrodwatts/jev-trader" target="_blank" rel="noopener">jarrodwatts/jev-trader</a></td><td class="col-desc">One AI trade decision every Monad block. Jev on Kuru MON-USDC.</td><td>178.9</td><td>2.7k</td><td>15.3</td><td>TypeScript</td><td>General Rising</td></tr><tr><td><a href="https://github.com/mcncarl/jianying-headless" target="_blank" rel="noopener">mcncarl/jianying-headless</a></td><td class="col-desc">Private source preview: native Jianying drafts, isolated editing/export, and standalone Agent Skill.</td><td>176.9</td><td>3.0k</td><td>16.7</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/TianyuCodings/NanoJev" target="_blank" rel="noopener">TianyuCodings/NanoJev</a></td><td class="col-desc">A nano replica of Jev: parallel decisions, dynamic candidates, and an end-to-end training pipeline.</td><td>170.5</td><td>2.5k</td><td>14.5</td><td>Python</td><td>General Rising</td></tr><tr><td><a href="https://github.com/yibie/awesome-jev" target="_blank" rel="noopener">yibie/awesome-jev</a></td><td class="col-desc">A curated list of public projects, integrations, and discussions built on Jev — TypeSafe AI&#x27;s System One model for typed decisions.</td><td>141.9</td><td>2.1k</td><td>14.6</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/mikehasa/golive-skill" target="_blank" rel="noopener">mikehasa/golive-skill</a></td><td class="col-desc">Take your agent-built product live: hosting, database, domain, email, payments — on your own accounts. Open-source Agent Skill + zero-dependency Node CLI: detect → plan → approve…</td><td>136.1</td><td>1.2k</td><td>8.6</td><td>TypeScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/nokia-applied-research/AnyJev" target="_blank" rel="noopener">nokia-applied-research/AnyJev</a></td><td class="col-desc">Turn any LLM into a Jev-style decision model: typed decisions, real probabilities, no training. (continue updating, welcome any issue and PR request)</td><td>91.8</td><td>1.0k</td><td>10.9</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/zouyuxuan122/dsh-our-free-model" target="_blank" rel="noopener">zouyuxuan122/dsh-our-free-model</a></td><td class="col-desc">在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 Muse Spark 1.3、MiMo V2.6 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier mode…</td><td>81.1</td><td>608</td><td>7.5</td><td>JavaScript</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/amitshekhariitbhu/ai-system-design" target="_blank" rel="noopener">amitshekhariitbhu/ai-system-design</a></td><td class="col-desc">AI System Design - Learn how to design AI systems built on LLMs, RAG, and AI Agents step by step.</td><td>77.6</td><td>541</td><td>7.0</td><td>Markdown</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/alpcanaydin/tusk" target="_blank" rel="noopener">alpcanaydin/tusk</a></td><td class="col-desc">A fast, native, keyboard-driven database client for macOS. 20 databases, an AI assistant that shows its work, free and open source.</td><td>75.2</td><td>255</td><td>3.4</td><td>Rust</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/LockedinLabs-AI/agent-console" target="_blank" rel="noopener">LockedinLabs-AI/agent-console</a></td><td class="col-desc">Local-first observability for AI coding agents. Every Claude Code and Codex session&#x27;s tokens, cache, models and cost, on this machine and every machine you connect through a self-…</td><td>68.4</td><td>781</td><td>11.4</td><td>JavaScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/jev-chat/jev-chat-windows" target="_blank" rel="noopener">jev-chat/jev-chat-windows</a></td><td class="col-desc">JevChat-Windows：聊天窗口旁挂的回复辅助。窗口截图 + 本地离线 OCR 读对方消息 → Jev 判断意图 → 3 条候选一键填入，发送永远手动</td><td>67.3</td><td>711</td><td>10.6</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/Alex314618-create/JevRev" target="_blank" rel="noopener">Alex314618-create/JevRev</a></td><td class="col-desc">An LLM + Jev workflow that changes EVERYTHING. Boost your vertebrate brain with a spine inside.</td><td>63.2</td><td>701</td><td>11.1</td><td>TypeScript</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/v-modal/awesome-jev-tools" target="_blank" rel="noopener">v-modal/awesome-jev-tools</a></td><td class="col-desc">A curated list of tools built for Jev — TypeSafe AI&#x27;s System One model for typed decisions.</td><td>58.8</td><td>734</td><td>12.5</td><td>—</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/kydlikebtc/awesome-jev" target="_blank" rel="noopener">kydlikebtc/awesome-jev</a></td><td class="col-desc">1207 public resources for Jev, TypeSafe AI&#x27;s System One decision model, indexed by decision pattern. Source citations, dated link checks and scheduled call-site text checks; runti…</td><td>58.4</td><td>588</td><td>10.1</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/youngyangyang04/llm-master" target="_blank" rel="noopener">youngyangyang04/llm-master</a></td><td class="col-desc">大模型（LLM）全栈学习路线与中文教程🔥：覆盖 Prompt Engineering、RAG、AI Agent、MCP、微调、模型部署、Transformer、AI 编程与大厂面试，从入门到生产实践。</td><td>53.2</td><td>1.1k</td><td>19.9</td><td>—</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/ethanplusai/astra-flash-orchestrator" target="_blank" rel="noopener">ethanplusai/astra-flash-orchestrator</a></td><td class="col-desc">Astra plans and reviews; DeepSeek Flash builds. A native Codex workflow with phased tasks, verification, safe installation and reversible setup.</td><td>48.5</td><td>725</td><td>14.9</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/logicrw/awesome-jev-projects" target="_blank" rel="noopener">logicrw/awesome-jev-projects</a></td><td class="col-desc">Awesome Jev: source-backed open-source ecosystem radar, plain-language project discovery, and automatic GitHub sync</td><td>45.9</td><td>638</td><td>13.9</td><td>JavaScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/jev-chat/jev-chat-jarvis-mac" target="_blank" rel="noopener">jev-chat/jev-chat-jarvis-mac</a></td><td class="col-desc">聊天悬浮窗助手（macOS）：屏幕感知 + 本地小模型判断意图与风险，按话术生成回复候选。纯只读。</td><td>42.1</td><td>450</td><td>10.7</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/AnotiaWang/awesome-decision-models" target="_blank" rel="noopener">AnotiaWang/awesome-decision-models</a></td><td class="col-desc">A curated list of decision models (System One / typed decision models): hosted APIs, open-weight models, runtimes, SDKs, applications, benchmarks, and papers.</td><td>40.7</td><td>597</td><td>14.7</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/AbdelStark/awesome-typesafe-jev" target="_blank" rel="noopener">AbdelStark/awesome-typesafe-jev</a></td><td class="col-desc">Awesome Jev: a source-backed field guide to TypeSafe&#x27;s System One model, with SDKs, live demos, agent tools, and independent evaluations.</td><td>37.2</td><td>554</td><td>14.9</td><td>HTML</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/scarletkc/seiso" target="_blank" rel="noopener">scarletkc/seiso</a></td><td class="col-desc">A Markdown convention and linter for project docs written by AI and read by humans and agents</td><td>35.8</td><td>165</td><td>4.6</td><td>Rust</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/penso/herdr-gpui" target="_blank" rel="noopener">penso/herdr-gpui</a></td><td class="col-desc">Native macOS client for Herdr, built with Rust and GPUI. View terminal sessions, workspaces, Git worktrees, and agent activity through your local Herdr daemon.</td><td>35</td><td>418</td><td>11.9</td><td>Rust</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/Qiuner/birdview" target="_blank" rel="noopener">Qiuner/birdview</a></td><td class="col-desc">Stop letting AI code blind. Map the architecture before every change with Birdview.</td><td>34.5</td><td>685</td><td>19.9</td><td>TypeScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/OmniJev/awesome-jev-gallery" target="_blank" rel="noopener">OmniJev/awesome-jev-gallery</a></td><td class="col-desc">🔥🔥 Awesome Jev: open-source models, projects, benchmarks, and independent evaluations for Jev and System One models.</td><td>34</td><td>487</td><td>14.3</td><td>JavaScript</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/ruc-datalab/EvoOntology" target="_blank" rel="noopener">ruc-datalab/EvoOntology</a></td><td class="col-desc">EvoOntology: A Self-Evolving Ontology Layer for Data Agents ⚙️ EvoOntology插件为Claude Code/Codex 建立&amp;进化本体层</td><td>32.9</td><td>563</td><td>17.1</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/Yinsongxu/LLM2Jev" target="_blank" rel="noopener">Yinsongxu/LLM2Jev</a></td><td class="col-desc">Turn local language models into Jev-style structured decision models. Get results from text and images with prefill alone—no token-by-token decoding required.</td><td>30</td><td>382</td><td>12.7</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/walidboulanouar/awesome-jev-use-cases" target="_blank" rel="noopener">walidboulanouar/awesome-jev-use-cases</a></td><td class="col-desc">Awesome list of TypeSafe AI Jev use cases: 74 demos ranked by likes, 150+ GitHub repos, limits, cost and API examples. CC0</td><td>29.5</td><td>367</td><td>12.4</td><td>—</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/atria-asi/Atria-Dawn-Preview" target="_blank" rel="noopener">atria-asi/Atria-Dawn-Preview</a></td><td class="col-desc">—</td><td>28.9</td><td>570</td><td>19.7</td><td>—</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/sno-ai/sno-station" target="_blank" rel="noopener">sno-ai/sno-station</a></td><td class="col-desc">Sno Station — your Claude Code and Codex working as one squad on your own machine. Shared encrypted memory, agent-to-agent messaging (Reach), squad skills for handoff and cross-ve…</td><td>28.6</td><td>368</td><td>12.9</td><td>TypeScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/repoboost-hq/github-launch-checklist" target="_blank" rel="noopener">repoboost-hq/github-launch-checklist</a></td><td class="col-desc">Audit a GitHub repository before launch - ten readiness checks scored 0-10: name, description, topics, README, license, demo, installation, contributing guide and issue templates.…</td><td>26.2</td><td>379</td><td>14.5</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/shinthink/blitzstrike" target="_blank" rel="noopener">shinthink/blitzstrike</a></td><td class="col-desc">Blitz Strike — a universal MCP security-audit toolbelt. Reconnaissance at speed. Analysis in depth. Validation before report.</td><td>25.1</td><td>493</td><td>19.7</td><td>TypeScript</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/ekzhang/openjev-sglang" target="_blank" rel="noopener">ekzhang/openjev-sglang</a></td><td class="col-desc">Jev-compatible API endpoint based on open models (prefill-only)</td><td>23.4</td><td>337</td><td>14.4</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/edison-land/paragravity" target="_blank" rel="noopener">edison-land/paragravity</a></td><td class="col-desc">Native, non-invasive parallel multi-account &amp; sandbox manager for Google Antigravity</td><td>22.4</td><td>219</td><td>9.8</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/bilibili/Index-Translate" target="_blank" rel="noopener">bilibili/Index-Translate</a></td><td class="col-desc">A Multilingual Translation Model Family</td><td>18.6</td><td>310</td><td>16.6</td><td>Python</td><td>AI / LLM</td></tr><tr><td><a href="https://github.com/Marcos66236/github-stars-history" target="_blank" rel="noopener">Marcos66236/github-stars-history</a></td><td class="col-desc">Track and visualize the stars history of any GitHub repository. Open-source growth analytics and velocity tracking.</td><td>17.8</td><td>276</td><td>15.5</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/RamitVishwakarma/Janus" target="_blank" rel="noopener">RamitVishwakarma/Janus</a></td><td class="col-desc">Switch between Claude Code accounts and clear developer caches, from the macOS menu bar.</td><td>17.8</td><td>120</td><td>6.7</td><td>Swift</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/gongdear/cline-pilot" target="_blank" rel="noopener">gongdear/cline-pilot</a></td><td class="col-desc">An Agent Skill: drive Cline CLI coding tasks as the user&#x27;s proxy.</td><td>16.8</td><td>98</td><td>5.8</td><td>Python</td><td>Agent Skills</td></tr><tr><td><a href="https://github.com/Amal-David/awesome-jev" target="_blank" rel="noopener">Amal-David/awesome-jev</a></td><td class="col-desc">Jev demos, projects, SDKs and skills, with source links and a curated X gallery.</td><td>16.6</td><td>227</td><td>13.7</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/NiazMorshed2007/jev-review" target="_blank" rel="noopener">NiazMorshed2007/jev-review</a></td><td class="col-desc">Local-first MCP plugin for continuous software-quality review by AI coding agents, powered by Jev.</td><td>15.3</td><td>229</td><td>14.9</td><td>TypeScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/nMaas8388/github-ranking-audit" target="_blank" rel="noopener">nMaas8388/github-ranking-audit</a></td><td class="col-desc">Audit your GitHub repository search ranking signals. Checks name, description, topics, README, stars, forks, and activity.</td><td>14.2</td><td>211</td><td>14.9</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/kraayenjon/awesome-jev" target="_blank" rel="noopener">kraayenjon/awesome-jev</a></td><td class="col-desc">A curated list of Jev use cases, projects, SDKs, and resources. Jev is TypeSafe AI&#x27;s System One model for fast, typed decisions in software — Choice, Score, and Noul with calibrat…</td><td>12.3</td><td>166</td><td>13.5</td><td>—</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/kerim0x1/bettercode" target="_blank" rel="noopener">kerim0x1/bettercode</a></td><td class="col-desc">Every coding agent in one desktop workspace. Run Claude Code, OpenAI Codex, Cursor Agent and Grok side by side. Bring your own CLI. Free during beta. Open source as of 21 Septembe…</td><td>12</td><td>135</td><td>11.2</td><td>TypeScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/ThinkFlowLab/system1-agents" target="_blank" rel="noopener">ThinkFlowLab/system1-agents</a></td><td class="col-desc">System 1 decision models (Jev, Laya, Cua-S1) as brain for agents: Browser use, computer use, games and robotics</td><td>11</td><td>104</td><td>9.5</td><td>Python</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/Avinash-jetwani/jevmem" target="_blank" rel="noopener">Avinash-jetwani/jevmem</a></td><td class="col-desc">Automatic project memory for Claude Code: decisions, rules and dead ends saved to JEVMEM.md in your repo, brought back next session. In the Claude plugin directory and on the MCP…</td><td>10.7</td><td>104</td><td>9.7</td><td>TypeScript</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/PyModel/jev-judge-mcp" target="_blank" rel="noopener">PyModel/jev-judge-mcp</a></td><td class="col-desc">Typed judgment tools for MCP agents. TypeSafe&#x27;s Jev model as verify, screen, find, classify, rerank, decide, compare, extract, review, gate, and score: the model judges, policy de…</td><td>10.2</td><td>84</td><td>8.2</td><td>Python</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/pliablepixels/gap-trap" target="_blank" rel="noopener">pliablepixels/gap-trap</a></td><td class="col-desc">Turns vibe coding into high quality code. Sets up rules and gates in your repo so AI-written code stays correct without you reviewing every line.</td><td>9.9</td><td>181</td><td>18.3</td><td>JavaScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/jtydhr88/music-composition-skills" target="_blank" rel="noopener">jtydhr88/music-composition-skills</a></td><td class="col-desc">Professional agent skills for composing and arranging popular music</td><td>9.8</td><td>143</td><td>14.5</td><td>—</td><td>Agent Skills</td></tr><tr><td><a href="https://github.com/kishormorol/cli-faq-shortcuts" target="_blank" rel="noopener">kishormorol/cli-faq-shortcuts</a></td><td class="col-desc">Turn repeated Claude Code, Codex, and Cursor prompts into reusable slash commands. Local Python history extractor + Agent Skill.</td><td>9.2</td><td>122</td><td>13.2</td><td>Python</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/Dicklesworthstone/skillranker" target="_blank" rel="noopener">Dicklesworthstone/skillranker</a></td><td class="col-desc">Rust CLI powered by Jev from TypeSafe.ai that ranks agent skills for the next step using live session context. Includes Claude Code hooks, structured JSON, abstention, and local f…</td><td>8.5</td><td>127</td><td>14.9</td><td>Rust</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/GetBrew/growth-engineer" target="_blank" rel="noopener">GetBrew/growth-engineer</a></td><td class="col-desc">Open-source catalog of go-to-market tools and workflows, written as markdown files any agent can run. Includes a read-only MCP server.</td><td>7.9</td><td>122</td><td>15.4</td><td>TypeScript</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/PerryLink/jevcore" target="_blank" rel="noopener">PerryLink/jevcore</a></td><td class="col-desc">TypeSafe Jev for DeepSeek Harness, the Model Context Protocol, and plain Node: typed judgments instead of prose, offline by default.</td><td>7.8</td><td>93</td><td>12.0</td><td>TypeScript</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/INSANE0777/Awwwards-mcp" target="_blank" rel="noopener">INSANE0777/Awwwards-mcp</a></td><td class="col-desc">Free, open-source MCP server that gives AI coding agents (Claude Code, Codex, Cursor, OpenCode, ZCode…) design inspiration from award-winning websites — search with real screensho…</td><td>6.9</td><td>94</td><td>13.7</td><td>TypeScript</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/lidge-jun/aside-codemode" target="_blank" rel="noopener">lidge-jun/aside-codemode</a></td><td class="col-desc">One call where Aside used to spend fifty — rg-backed search, Aside-shaped file tools, and batched browser work inside a single sandboxed JavaScript block. On a real folder, 55s of…</td><td>6.7</td><td>126</td><td>18.8</td><td>JavaScript</td><td>Dev Tools</td></tr><tr><td><a href="https://github.com/jtydhr88/lyric-writing-skills" target="_blank" rel="noopener">jtydhr88/lyric-writing-skills</a></td><td class="col-desc">Professional agent skills for writing song lyrics</td><td>6.6</td><td>96</td><td>14.5</td><td>—</td><td>Agent Skills</td></tr><tr><td><a href="https://github.com/AkashPriyadarshii/jev-seo" target="_blank" rel="noopener">AkashPriyadarshii/jev-seo</a></td><td class="col-desc">Free Rust SEO and GEO toolkit powered by TypeSafe Jev: 58-rule audits, site crawls, AI citation checks, rank drift, CI gates, 15-tool MCP. Zero cost.</td><td>6.6</td><td>90</td><td>13.6</td><td>Rust</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/Ying-Kai-Liao/jev-browser" target="_blank" rel="noopener">Ying-Kai-Liao/jev-browser</a></td><td class="col-desc">Browser automation where an LLM plans and Jev (Typesafe System One) decides. Library, CLI and MCP server.</td><td>6</td><td>93</td><td>15.5</td><td>JavaScript</td><td>Agent / MCP</td></tr><tr><td><a href="https://github.com/NativePHP/superstack" target="_blank" rel="noopener">NativePHP/superstack</a></td><td class="col-desc">Open-source Laravel starter with Filament, NativePHP SuperNative, and MCP</td><td>4.6</td><td>91</td><td>19.6</td><td>PHP</td><td>Agent / MCP</td></tr></tbody>
+      </table>
+    </div>
   </section>
 </main>
 <footer>

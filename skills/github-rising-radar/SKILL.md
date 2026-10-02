@@ -60,6 +60,12 @@ open skills/github-rising-radar/dashboard/index.html
 
 Customize: `--tracks ai,agent --days 60 --min-stars 100`
 
+## Required table columns
+
+Every ranked or scored table (scan markdown, weekly hub HTML, dashboard) must include **Description immediately after Repo** (and before Why / metrics). Source is the GitHub repo description from `gh api`. Do not publish a Verdict/Repo/Why table without Description.
+
+`scan.py`, `generate_dashboard.py`, and `generate_research_hub.py` share `scripts/radar_columns.py`. The hub inserts the column at render time when older nest markdown still lacks it.
+
 ## Metrics
 
 | Metric | Formula | Use |
@@ -133,6 +139,7 @@ Outputs: `docs/index.html` (hub), `docs/radar.html` (dashboard), `docs/reports/Y
 - [ ] Top 3–10 candidates queued or scored
 - [ ] Verified vs read distinguished in queue citations
 - [ ] No fleet install from discovery — score first
+- [ ] Description column present after Repo in scan, hub, and dashboard tables
 
 ## Example
 
@@ -140,7 +147,7 @@ Outputs: `docs/index.html` (hub), `docs/radar.html` (dashboard), `docs/reports/Y
 $ python3 skills/github-rising-radar/scripts/scan.py --tracks ai,agent --min-stars 100
 # GitHub Rising Radar — 2026-08-13 12:00 UTC
 ## 🔥 Fastest climbers since last scan
-| Repo | Δ stars | ⭐/day | ...
+| Repo | Description | Δ stars | ⭐/day | ...
 ```
 
 First run shows velocity only; second weekly run surfaces 🔥 deltas.
