@@ -3,7 +3,8 @@
 Generate the 7Ei weekly research hub for GitHub Pages (docs/).
 
 Reads radar scan + chooser markdown from the Buzz nest RESEARCH/ dir,
-copies the radar HTML dashboard, and writes docs/index.html + docs/reports/*.html.
+copies the radar HTML dashboard, and writes docs/index.html, catalog tabs
+(local-models.html, free-apis.html), and docs/reports/*.html.
 
 Usage:
     python3 skills/github-rising-radar/scripts/generate_research_hub.py
@@ -20,6 +21,15 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
+from model_catalogs import (
+    FREE_APIS,
+    LOCAL_MODELS,
+    LOCAL_RUNTIMES,
+    NOT_FREE,
+    PAGE_SOURCES,
+    SCORED,
+    CatalogItem,
+)
 from radar_columns import insert_description_column, load_description_index
 
 SKILL_ROOT = Path(__file__).resolve().parent.parent
@@ -57,6 +67,16 @@ main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
 .card p { font-size: 0.82rem; color: var(--muted); }
 .card .cta { display: inline-block; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; }
 .badge { display: inline-block; background: rgba(63,185,80,0.15); color: var(--green); font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.35rem; }
+.verdict { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; white-space: nowrap; }
+.verdict-adopt { background: rgba(63,185,80,0.15); color: var(--green); }
+.verdict-trial { background: rgba(88,166,255,0.15); color: var(--accent); }
+.verdict-hold { background: rgba(210,153,34,0.15); color: #d29922; }
+.verdict-avoid { background: rgba(247,129,102,0.15); color: var(--fire); }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--fire); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.85rem; color: var(--muted); }
+.callout strong { color: var(--text); }
+.meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+.catalog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+nav .nav-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0.85rem 0.5rem 0.2rem; }
 section { margin-bottom: 2rem; }
 section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
 .week-list { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -180,15 +200,72 @@ def load_week_content(research_dir: Path, date: str) -> tuple[str | None, str | 
     return scan_text, chooser_text
 
 
-def page_shell(title: str, nav_active: str, body: str, weeks: list[str]) -> str:
-    nav_links = ['<li><a href="index.html"' + (' class="active"' if nav_active == "home" else "") + ">Home</a></li>"]
-    nav_links.append('<li><a href="radar.html"' + (' class="active"' if nav_active == "radar" else "") + ">Radar dashboard</a></li>")
-    for w in weeks:
-        nav_links.append(
-            f'<li><a href="reports/{week_slug(w)}.html"'
-            + (' class="active"' if nav_active == w else "")
-            + f">{w}</a></li>"
+def _nav_href(path: str, nested: bool) -> str:
+    return f"../{path}" if nested else path
+
+
+def verdict_span(verdict: str) -> str:
+    key = verdict.split()[0].lower()
+    if key not in {"adopt", "trial", "hold", "avoid"}:
+        key = "hold"
+    return f'<span class="verdict verdict-{key}">{html.escape(verdict)}</span>'
+
+
+def catalog_cards(items: list[CatalogItem]) -> str:
+    parts = ['<div class="catalog-cards">']
+    for item in items:
+        parts.append(
+            "<div class=\"card\">"
+            f"<h3><a href=\"{html.escape(item['url'])}\">{html.escape(item['name'])}</a> "
+            f"{verdict_span(item['verdict'])}</h3>"
+            f"<p>{html.escape(item['description'])}</p>"
+            f"<p class=\"meta\">{html.escape(item['meta'])}</p>"
+            f"<a class=\"cta\" href=\"{html.escape(item['url'])}\">Open →</a>"
+            "</div>"
         )
+    parts.append("</div>")
+    return "".join(parts)
+
+
+def catalog_table(items: list[CatalogItem]) -> str:
+    parts = [
+        '<div class="report-body"><table><thead><tr>'
+        "<th>Name</th><th class=\"col-desc\">Description</th><th>Notes</th><th>7Ei</th>"
+        "</tr></thead><tbody>"
+    ]
+    for item in items:
+        parts.append(
+            "<tr>"
+            f"<td><a href=\"{html.escape(item['url'])}\">{html.escape(item['name'])}</a></td>"
+            f"<td class=\"col-desc\">{html.escape(item['description'])}</td>"
+            f"<td>{html.escape(item['meta'])}</td>"
+            f"<td>{verdict_span(item['verdict'])}</td>"
+            "</tr>"
+        )
+    parts.append("</tbody></table></div>")
+    return "".join(parts)
+
+
+def sources_footer(page_key: str) -> str:
+    items = "".join(f"<li><code>{html.escape(s)}</code></li>" for s in PAGE_SOURCES[page_key])
+    return f"<section><h3>Sources (scored {html.escape(SCORED)})</h3><ul>{items}</ul></section>"
+
+
+def page_shell(title: str, nav_active: str, body: str, weeks: list[str], *, nested: bool = False) -> str:
+    def link(path: str, key: str, label: str) -> str:
+        active = ' class="active"' if nav_active == key else ""
+        return f'<li><a href="{_nav_href(path, nested)}"{active}>{label}</a></li>'
+
+    nav_links = [
+        link("index.html", "home", "Home"),
+        link("radar.html", "radar", "Radar dashboard"),
+        link("local-models.html", "local-models", "Local models"),
+        link("free-apis.html", "free-apis", "Free model APIs"),
+    ]
+    if weeks:
+        nav_links.append('<li class="nav-label">Weekly archive</li>')
+    for w in weeks:
+        nav_links.append(link(f"reports/{week_slug(w)}.html", w, w))
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -202,7 +279,7 @@ def page_shell(title: str, nav_active: str, body: str, weeks: list[str]) -> str:
 <div class="layout">
 <nav>
   <h1>7Ei Research</h1>
-  <p class="sub">Weekly radar · chooser · evals</p>
+  <p class="sub">Radar · local models · free APIs</p>
   <ul>{"".join(nav_links)}</ul>
 </nav>
 <main>{body}
@@ -239,6 +316,16 @@ def render_index(weeks: list[str], latest: str | None) -> str:
   </div>
   {latest_card}
   <div class="card">
+    <h3>Local models</h3>
+    <p>On-box runtimes and weights — llama.cpp, Ollama, GGUF. Data stays on the machine.</p>
+    <a class="cta" href="local-models.html">Open catalog →</a>
+  </div>
+  <div class="card">
+    <h3>Free model APIs</h3>
+    <p>Standing-free inference APIs with limits and 7Ei verdicts. Cloud = prompts leave the box.</p>
+    <a class="cta" href="free-apis.html">Open catalog →</a>
+  </div>
+  <div class="card">
     <h3>Skill catalog</h3>
     <p>Source of truth for agent skills — bind by path, never bulk-load.</p>
     <a class="cta" href="https://github.com/Arturito7ei/7Ei_OS/blob/main/skills/catalog.md">catalog.md →</a>
@@ -268,7 +355,45 @@ def render_week_report(
     elif not chooser:
         parts.append("<p>No scan or chooser files found for this week.</p>")
     parts.append("</div>")
-    return page_shell(f"Week of {date}", date, "\n".join(parts), weeks)
+    return page_shell(f"Week of {date}", date, "\n".join(parts), weeks, nested=True)
+
+
+def render_local_models(weeks: list[str]) -> str:
+    body = f"""
+<div class="hero">
+  <h2>Local models</h2>
+  <p>Runtimes and weights that stay on-box. Precedence 01 — this is the default path for vault, secrets, and anything that must not leave the machine.</p>
+</div>
+<div class="callout"><strong>Mac mini (M4, 16 GB):</strong> Hermes llama.cpp Qwen 9B + Buzz already contest RAM. Do not pull 14B+ while that stack is loaded. <code>OLLAMA_MAX_LOADED_MODELS=1</code>.</div>
+<section>
+  <h3>Runtimes</h3>
+  {catalog_cards(LOCAL_RUNTIMES)}
+</section>
+<section>
+  <h3>Weights / tags</h3>
+  {catalog_table(LOCAL_MODELS)}
+</section>
+{sources_footer("local-models")}"""
+    return page_shell("Local models", "local-models", body, weeks)
+
+
+def render_free_apis(weeks: list[str]) -> str:
+    body = f"""
+<div class="hero">
+  <h2>Free model APIs</h2>
+  <p>Standing-free LLM inference (renewing quota, no required spend to start). Card-gated trials and “credits then pay” are listed separately and do not count.</p>
+</div>
+<div class="callout"><strong>Adopt none of these as org-default.</strong> Every cloud row sends prompts off-box (Precedence 01). Groq is the only <em>Trial</em> for Hermes personal/Telegram — keep local Qwen as fallback. Gemini unpaid trains Google products — Arturito before any real-data trial.</div>
+<section>
+  <h3>Standing free</h3>
+  {catalog_table(FREE_APIS)}
+</section>
+<section>
+  <h3>Not 100% free</h3>
+  {catalog_table(NOT_FREE)}
+</section>
+{sources_footer("free-apis")}"""
+    return page_shell("Free model APIs", "free-apis", body, weeks)
 
 
 def main() -> None:
@@ -305,6 +430,8 @@ def main() -> None:
         raise SystemExit(f"Missing dashboard: {DASHBOARD_SRC}")
 
     (output_dir / "index.html").write_text(render_index(weeks, latest))
+    (output_dir / "local-models.html").write_text(render_local_models(weeks))
+    (output_dir / "free-apis.html").write_text(render_free_apis(weeks))
 
     for w in weeks:
         scan, chooser = load_week_content(research_dir, w)
@@ -315,6 +442,8 @@ def main() -> None:
 
     print(f"Hub: {output_dir / 'index.html'}")
     print(f"Dashboard: {output_dir / 'radar.html'}")
+    print(f"Local models: {output_dir / 'local-models.html'}")
+    print(f"Free APIs: {output_dir / 'free-apis.html'}")
     print(f"Weeks: {len(weeks)}")
 
 

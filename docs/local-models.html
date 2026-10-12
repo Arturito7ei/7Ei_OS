@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local models — 7Ei Research</title>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+  --green: #3fb950; --fire: #f78166;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+nav { background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1rem; }
+nav h1 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+nav .sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; }
+nav ul { list-style: none; }
+nav li { margin-bottom: 0.35rem; }
+nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
+nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
+main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
+.hero { margin-bottom: 2rem; }
+.hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); margin-top: 0.5rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.card h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+.card p { font-size: 0.82rem; color: var(--muted); }
+.card .cta { display: inline-block; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; }
+.badge { display: inline-block; background: rgba(63,185,80,0.15); color: var(--green); font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.35rem; }
+.verdict { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; white-space: nowrap; }
+.verdict-adopt { background: rgba(63,185,80,0.15); color: var(--green); }
+.verdict-trial { background: rgba(88,166,255,0.15); color: var(--accent); }
+.verdict-hold { background: rgba(210,153,34,0.15); color: #d29922; }
+.verdict-avoid { background: rgba(247,129,102,0.15); color: var(--fire); }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--fire); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.85rem; color: var(--muted); }
+.callout strong { color: var(--text); }
+.meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+.catalog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+nav .nav-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0.85rem 0.5rem 0.2rem; }
+section { margin-bottom: 2rem; }
+section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+.week-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.week-row { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.65rem 1rem; font-size: 0.88rem; }
+.week-row .date { color: var(--muted); font-size: 0.78rem; }
+.report-body h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+.report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+.report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body { overflow-x: auto; }
+.report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+.report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
+.report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body .col-desc { min-width: 14rem; max-width: 28rem; color: var(--muted); font-weight: 400; }
+.report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
+.report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.report-body em { color: var(--muted); font-size: 0.85rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } nav { border-right: none; border-bottom: 1px solid var(--border); } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h1>7Ei Research</h1>
+  <p class="sub">Radar · local models · free APIs</p>
+  <ul><li><a href="index.html">Home</a></li><li><a href="radar.html">Radar dashboard</a></li><li><a href="local-models.html" class="active">Local models</a></li><li><a href="free-apis.html">Free model APIs</a></li><li class="nav-label">Weekly archive</li><li><a href="reports/2026-10-02.html">2026-10-02</a></li><li><a href="reports/2026-09-29.html">2026-09-29</a></li><li><a href="reports/2026-09-08.html">2026-09-08</a></li><li><a href="reports/2026-08-24.html">2026-08-24</a></li><li><a href="reports/2026-08-19.html">2026-08-19</a></li><li><a href="reports/2026-08-17.html">2026-08-17</a></li><li><a href="reports/2026-08-13.html">2026-08-13</a></li></ul>
+</nav>
+<main>
+<div class="hero">
+  <h2>Local models</h2>
+  <p>Runtimes and weights that stay on-box. Precedence 01 — this is the default path for vault, secrets, and anything that must not leave the machine.</p>
+</div>
+<div class="callout"><strong>Mac mini (M4, 16 GB):</strong> Hermes llama.cpp Qwen 9B + Buzz already contest RAM. Do not pull 14B+ while that stack is loaded. <code>OLLAMA_MAX_LOADED_MODELS=1</code>.</div>
+<section>
+  <h3>Runtimes</h3>
+  <div class="catalog-cards"><div class="card"><h3><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> <span class="verdict verdict-adopt">Adopt</span></h3><p>Local GGUF server. TARCOH / Hermes Desktop already runs this on the Mac mini (OpenAI-compat :18434).</p><p class="meta">Self-hosted · MIT · no cloud</p><a class="cta" href="https://github.com/ggml-org/llama.cpp">Open →</a></div><div class="card"><h3><a href="https://ollama.com">Ollama</a> <span class="verdict verdict-adopt">Adopt</span></h3><p>Local OpenAI-compat runtime for Mission Control / Arturita. Already the 7Ei default for on-box tags.</p><p class="meta">Self-hosted · MIT · docs.ollama.com</p><a class="cta" href="https://ollama.com">Open →</a></div><div class="card"><h3><a href="https://huggingface.co/models">Hugging Face Hub (weights)</a> <span class="verdict verdict-adopt">Adopt</span></h3><p>Download GGUF / MLX / safetensors to disk. Not a hosted inference API — weights stay local after pull.</p><p class="meta">BYOK download · do not use HF Inference Providers as “free”</p><a class="cta" href="https://huggingface.co/models">Open →</a></div><div class="card"><h3><a href="https://github.com/ml-explore/mlx-lm">mlx-lm</a> <span class="verdict verdict-trial">Trial</span></h3><p>Apple Silicon native runtime. Useful on M-class when we want MLX quants instead of GGUF.</p><p class="meta">Self-hosted · MIT · M-series only</p><a class="cta" href="https://github.com/ml-explore/mlx-lm">Open →</a></div><div class="card"><h3><a href="https://lmstudio.ai">LM Studio</a> <span class="verdict verdict-hold">Hold</span></h3><p>Desktop GUI + local OpenAI-compat server. Same 16 GB ceiling as llama.cpp / Ollama — no extra headroom.</p><p class="meta">Local GUI · closed app · skip if llama.cpp already loaded</p><a class="cta" href="https://lmstudio.ai">Open →</a></div></div>
+</section>
+<section>
+  <h3>Weights / tags</h3>
+  <div class="report-body"><table><thead><tr><th>Name</th><th class="col-desc">Description</th><th>Notes</th><th>7Ei</th></tr></thead><tbody><tr><td><a href="https://huggingface.co/HauhauCS/Qwen3.5-9B-Uncensored-HauhauCS-Aggressive">Qwen3.5-9B Uncensored (HauhauCS Q6_K)</a></td><td class="col-desc">TARCOH local fallback. 9B dense, 262k native ctx, GGUF Q6_K ~6.9 GB on disk / ~3.5 GB llama-server RSS on the M4 mini.</td><td>16 GB box · llama.cpp · Apache-2.0</td><td><span class="verdict verdict-adopt">Adopt</span></td></tr><tr><td><a href="https://ollama.com/library/llama3.2">llama3.2:3b</a></td><td class="col-desc">Command Center / Arturita pipeline primary. ~2 GB Q4 — the tag the browser path actually looks for.</td><td>Ollama · ~2 GB · pulled 2026-09-16</td><td><span class="verdict verdict-adopt">Adopt</span></td></tr><tr><td><a href="https://ollama.com/library/nomic-embed-text">nomic-embed-text</a></td><td class="col-desc">Local embeddings only (274 MB). Keep installed; it is not a chat model.</td><td>Ollama · embeddings</td><td><span class="verdict verdict-adopt">Adopt</span></td></tr><tr><td><a href="https://ollama.com/library/qwen2.5-coder">qwen2.5-coder:7b</a></td><td class="col-desc">Installed coder tag (~4.7 GB Q4). Fits, but do not load alongside the 9B Hermes server on 16 GB.</td><td>Ollama · 7B · MAX_LOADED_MODELS=1</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://ollama.com/huihui_ai/dolphin3-abliterated:8b">dolphin3-abliterated:8b</a></td><td class="col-desc">Unfiltered Dolphin 3 / Llama 3.1 8B (~5 GB). Trial only if Hermes Desktop 9B is stopped.</td><td>Ollama · ~5 GB · 7MAN 2026-09-16</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-8B">Hermes-3-Llama-3.1-8B</a></td><td class="col-desc">Nous uncensored instruct + native function-calling. Prefer this over a random 8B when the job is tool-calling.</td><td>HF / Ollama hermes3 · agent/tools</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://ollama.com/huihui_ai/qwen3-abliterated">qwen3-abliterated:14b</a></td><td class="col-desc">Stronger unfiltered Qwen3 (~9 GB Q4). Do not pull on the 16 GB mini while Buzz + Hermes are resident.</td><td>Ollama · ~9 GB · RAM contest</td><td><span class="verdict verdict-avoid">Avoid</span></td></tr><tr><td><a href="https://ollama.com/search?q=abliterated">Qwen3.8-27B Uncensored</a></td><td class="col-desc">Bleeding-edge 27B unfiltered. Hold until a 32 GB+ box and a refusal + coding smoke test.</td><td>Needs 32 GB+ · not on this mini</td><td><span class="verdict verdict-hold">Hold</span></td></tr></tbody></table></div>
+</section>
+<section><h3>Sources (scored 2026-10-12)</h3><ul><li><code>RESEARCH/SELF_HOSTED_UNFILTERED_LLM_EVAL_2026_09_16.md</code></li><li><code>RESEARCH/MAC_MINI_OLLAMA_SCAN_2026_09_16.md</code></li><li><code>RESEARCH/LLM_API_AND_LOCAL_OPTIONS_HERMES_2026_09_23.md</code></li><li><code>https://github.com/ggml-org/llama.cpp</code></li><li><code>https://ollama.com</code></li><li><code>https://huggingface.co/HauhauCS/Qwen3.5-9B-Uncensored-HauhauCS-Aggressive</code></li></ul></section>
+<footer>Generated 2026-10-12 16:47 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+</main>
+</div>
+</body>
+</html>

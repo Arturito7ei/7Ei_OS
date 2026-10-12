@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free model APIs — 7Ei Research</title>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+  --green: #3fb950; --fire: #f78166;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+nav { background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1rem; }
+nav h1 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+nav .sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; }
+nav ul { list-style: none; }
+nav li { margin-bottom: 0.35rem; }
+nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
+nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
+main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
+.hero { margin-bottom: 2rem; }
+.hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); margin-top: 0.5rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.card h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+.card p { font-size: 0.82rem; color: var(--muted); }
+.card .cta { display: inline-block; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; }
+.badge { display: inline-block; background: rgba(63,185,80,0.15); color: var(--green); font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.35rem; }
+.verdict { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; white-space: nowrap; }
+.verdict-adopt { background: rgba(63,185,80,0.15); color: var(--green); }
+.verdict-trial { background: rgba(88,166,255,0.15); color: var(--accent); }
+.verdict-hold { background: rgba(210,153,34,0.15); color: #d29922; }
+.verdict-avoid { background: rgba(247,129,102,0.15); color: var(--fire); }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--fire); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.85rem; color: var(--muted); }
+.callout strong { color: var(--text); }
+.meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+.catalog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+nav .nav-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0.85rem 0.5rem 0.2rem; }
+section { margin-bottom: 2rem; }
+section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+.week-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.week-row { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.65rem 1rem; font-size: 0.88rem; }
+.week-row .date { color: var(--muted); font-size: 0.78rem; }
+.report-body h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+.report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+.report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body { overflow-x: auto; }
+.report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+.report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
+.report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body .col-desc { min-width: 14rem; max-width: 28rem; color: var(--muted); font-weight: 400; }
+.report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
+.report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.report-body em { color: var(--muted); font-size: 0.85rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } nav { border-right: none; border-bottom: 1px solid var(--border); } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h1>7Ei Research</h1>
+  <p class="sub">Radar · local models · free APIs</p>
+  <ul><li><a href="index.html">Home</a></li><li><a href="radar.html">Radar dashboard</a></li><li><a href="local-models.html">Local models</a></li><li><a href="free-apis.html" class="active">Free model APIs</a></li><li class="nav-label">Weekly archive</li><li><a href="reports/2026-10-02.html">2026-10-02</a></li><li><a href="reports/2026-09-29.html">2026-09-29</a></li><li><a href="reports/2026-09-08.html">2026-09-08</a></li><li><a href="reports/2026-08-24.html">2026-08-24</a></li><li><a href="reports/2026-08-19.html">2026-08-19</a></li><li><a href="reports/2026-08-17.html">2026-08-17</a></li><li><a href="reports/2026-08-13.html">2026-08-13</a></li></ul>
+</nav>
+<main>
+<div class="hero">
+  <h2>Free model APIs</h2>
+  <p>Standing-free LLM inference (renewing quota, no required spend to start). Card-gated trials and “credits then pay” are listed separately and do not count.</p>
+</div>
+<div class="callout"><strong>Adopt none of these as org-default.</strong> Every cloud row sends prompts off-box (Precedence 01). Groq is the only <em>Trial</em> for Hermes personal/Telegram — keep local Qwen as fallback. Gemini unpaid trains Google products — Arturito before any real-data trial.</div>
+<section>
+  <h3>Standing free</h3>
+  <div class="report-body"><table><thead><tr><th>Name</th><th class="col-desc">Description</th><th>Notes</th><th>7Ei</th></tr></thead><tbody><tr><td><a href="https://console.groq.com/docs/models">Groq openai/gpt-oss-20b</a></td><td class="col-desc">Fastest standing free chat ID already in Hermes. ~1000 t/s listed. Keep local Qwen as fallback.</td><td>131k ctx · 30 RPM · 1K RPD · 8K TPM · 200K TPD</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://console.groq.com/docs/models">Groq openai/gpt-oss-120b</a></td><td class="col-desc">Same free Groq bucket, harder reasoning (~500 t/s). Use when 20B stalls.</td><td>131k ctx · same Groq free limits as 20b</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://console.groq.com/docs/models">Groq qwen/qwen3.8-27b</a></td><td class="col-desc">Qwen-family coding on Groq free. Preview ID; max out 16k.</td><td>131k ctx · same Groq free limits</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://developers.cloudflare.com/workers-ai/models/glm-4.7-flash/">Cloudflare GLM-4.7-Flash</a></td><td class="col-desc">Workers AI text + tools. Only if a Cloudflare account already exists — not a Hermes primary.</td><td>131k ctx · 10k Neurons/day · 300 RPM text</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://developers.cloudflare.com/workers-ai/models/gemma-4-26b-a4b-it/">Cloudflare Gemma 4 26B A4B</a></td><td class="col-desc">Open multimodal on the same Cloudflare neuron budget.</td><td>256k ctx · 10k Neurons/day</td><td><span class="verdict verdict-trial">Trial</span></td></tr><tr><td><a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini 3.8 Flash</a></td><td class="col-desc">Long-horizon coding + agents, 1M context. Unpaid Gemini: Google may use prompts/responses to improve products.</td><td>1M in / 64k out · P01 training-use · Arturito before real data</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://ai.google.dev/gemini-api/docs/models/gemini">Gemini 3.6 Flash / 3.5 Flash-Lite / 3.1 Flash-Lite / 3 Flash</a></td><td class="col-desc">Same unpaid Gemini contract as 3.8 Flash. Gemini 3.1 Pro has no free API tier.</td><td>1M-class · RPM only in AI Studio</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://openrouter.ai/thinkingmachines/inkling:free">OpenRouter thinkingmachines/inkling:free</a></td><td class="col-desc">975B / 41B active MoE, 1M ctx, tools. Daily cap is shared across all OpenRouter :free models.</td><td>20 RPM · 50 RPD until ≥$10 lifetime · else 1000 RPD</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free">OpenRouter nemotron-3-ultra-550b:free</a></td><td class="col-desc">Frontier reason + orchestration (550B / 55B). Same shared :free bucket.</td><td>1M ctx · shared OR free RPD</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://openrouter.ai/google/gemma-4-31b-it:free">OpenRouter google/gemma-4-31b-it:free</a></td><td class="col-desc">Open multimodal + thinking + tools on the :free pool.</td><td>262k ctx · shared OR free RPD</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://openrouter.ai/cohere/north-mini-code:free">OpenRouter cohere/north-mini-code:free</a></td><td class="col-desc">Agentic coding MoE (30B / 3B). Same 50 RPD until paid credits.</td><td>256k ctx · shared OR free RPD</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://cloud.sambanova.ai/plans">SambaNova DeepSeek-V3.1 / gpt-oss-120b</a></td><td class="col-desc">Frontier OSS on a tiny daily cap (20 RPD). Prefer Groq for gpt-oss-120b.</td><td>20 RPM · 20 RPD · 200k TPD · no card</td><td><span class="verdict verdict-hold">Hold</span></td></tr><tr><td><a href="https://docs.cohere.com/docs/command-a">Cohere command-a-03-2025</a></td><td class="col-desc">Trial keys only: eval/RAG, not production. 1,000 calls/month.</td><td>256k ctx · 20 RPM · production forbidden</td><td><span class="verdict verdict-hold">Hold</span></td></tr></tbody></table></div>
+</section>
+<section>
+  <h3>Not 100% free</h3>
+  <div class="report-body"><table><thead><tr><th>Name</th><th class="col-desc">Description</th><th>Notes</th><th>7Ei</th></tr></thead><tbody><tr><td><a href="https://inference-docs.cerebras.ai/support/rate-limits">Cerebras</a></td><td class="col-desc">Card + $5 / 30 days. FAQ: no permanently free tier.</td><td>Not standing free</td><td><span class="verdict verdict-avoid">Avoid</span></td></tr><tr><td><a href="https://huggingface.co/docs/inference-providers/pricing">Hugging Face Inference Providers</a></td><td class="col-desc">Free accounts: none monthly credits (changed ~7–12 Oct 2026). Hub downloads are still fine.</td><td>Pay-as-you-go inference</td><td><span class="verdict verdict-avoid">Avoid</span></td></tr><tr><td><a href="https://docs.github.com/en/github-models">GitHub Models</a></td><td class="col-desc">Fully retired 30 Jul 2026.</td><td>Gone</td><td><span class="verdict verdict-avoid">Avoid</span></td></tr><tr><td><a href="https://gravity.fast/data/free-llm-api-tiers/">Together / Chutes / Fireworks</a></td><td class="col-desc">No standing published free chat quota (Together min $5; Chutes FAQ: no free tier).</td><td>Not 100% free</td><td><span class="verdict verdict-avoid">Avoid</span></td></tr></tbody></table></div>
+</section>
+<section><h3>Sources (scored 2026-10-12)</h3><ul><li><code>RESEARCH/FREE_LLM_APIS_CLASSIFIED_2026_10_12.md</code></li><li><code>https://console.groq.com/docs/rate-limits</code></li><li><code>https://ai.google.dev/gemini-api/docs/pricing</code></li><li><code>https://openrouter.ai/api/v1/models</code></li><li><code>https://developers.cloudflare.com/workers-ai/platform/pricing/</code></li></ul></section>
+<footer>Generated 2026-10-12 16:47 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+</main>
+</div>
+</body>
+</html>
