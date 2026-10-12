@@ -113,7 +113,7 @@ python3 skills/github-rising-radar/scripts/generate_research_hub.py
 # commits docs/ → GitHub Pages at https://arturito7ei.github.io/7Ei_OS/
 ```
 
-Outputs: `docs/index.html` (hub), `docs/radar.html` (dashboard), `docs/reports/YYYY-MM-DD.html` (scan + chooser archive). Reads markdown from `~/.buzz/RESEARCH/`.
+Outputs: `docs/index.html` (hub), `docs/radar.html` (dashboard), `docs/local-models.html`, `docs/free-apis.html` (catalog tabs), `docs/reports/YYYY-MM-DD.html` (scan + chooser archive). Catalog copy lives in `scripts/model_catalogs.py`. Weekly reports still read markdown from `~/.buzz/RESEARCH/`.
 
 ## Limitations
 
