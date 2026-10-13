@@ -6,7 +6,7 @@
 >
 > **To add/edit a skill:** Edit `skills/<name>/SKILL.md`, update this catalog, then run `python3 skills/sync_vault.py` to regenerate the Obsidian vault.
 >
-> **Last updated:** 2026-08-19
+> **Last updated:** 2026-10-13
 
 ---
 
@@ -46,6 +46,7 @@
 | Investigate | workspace (gstack) | `skills/gstack-openclaw-investigate/SKILL.md` | Root cause debugging. 4-phase: Investigate → Analyze → Hypothesize → Implement. Iron Law: no fixes without root cause. |
 | Retro | workspace (gstack) | `skills/gstack-openclaw-retro/SKILL.md` | Weekly engineering retrospective. Commit history, work patterns, code quality metrics, per-person contributions, trend tracking. |
 | Self-Improving-Agent | workspace | `skills/self-improving-agent/SKILL.md` | Capture learnings, errors, corrections across sessions. Promotes after 3 occurrences or 7 days stable. |
+| Reverse-Engineer-Anything | workspace | `skills/reverse-engineer-anything/SKILL.md` | REA CLI for authorized shipped-artifact inspection (JS/Electron, .NET, Go metadata). Local analysis; no fleet MCP bind until operator setup. Refuse unauthorized/DRM/exploit work. |
 
 ---
 
