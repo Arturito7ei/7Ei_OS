@@ -65,6 +65,7 @@
 |-------|--------|------------|-------------|
 | IPTV-Browse | workspace | `skills/iptv-browse/SKILL.md` | Browse/search IPTV channels from iptv-org database. Country + category filters. |
 | Browser-Automation | plugin | `~/.openclaw/plugin-skills/browser-automation/SKILL.md` | Control web pages with OpenClaw browser tool. Multi-step flows, login checks, tab management. |
+| Playwright-MCP | workspace | `skills/playwright-mcp/SKILL.md` | Microsoft Playwright MCP — accessibility-snapshot browser automation for Cursor/MCP. Isolated profile recommended. Do not bind MCP from an agent. Distinct from OpenClaw browser-automation. |
 | Healthcheck | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/healthcheck/SKILL.md` | Audit/harden OpenClaw hosts: SSH, firewall, updates, exposure, backups, disk encryption. |
 | Obsidian-Markdown | kepano-obsidian | `skills/kepano-obsidian/skills/obsidian-markdown/SKILL.md` | Create/edit Obsidian-flavored Markdown with wikilinks, embeds, callouts, properties. |
 | Obsidian-Bases | kepano-obsidian | `skills/kepano-obsidian/skills/obsidian-bases/SKILL.md` | Create/edit Obsidian Bases (.base) with views, filters, formulas, summaries. |
