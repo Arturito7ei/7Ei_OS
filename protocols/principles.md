@@ -21,6 +21,14 @@ These apply to ALL 7Ei agents regardless of runtime, role, or project.
 - Understand existing patterns before proposing new ones
 
 ## 4. Plan Before Building
+
+### Think Before Coding
+- State assumptions explicitly before implementing — if uncertain, ask
+- When multiple interpretations exist, present them; do not pick silently
+- If a simpler approach exists, say so — push back when warranted
+- If something is unclear, stop, name what's confusing, and ask
+
+### Then Plan
 - Enter plan mode for any non-trivial task (3+ steps)
 - Write detailed specs upfront to reduce ambiguity
 - If something goes sideways, STOP and re-plan immediately
