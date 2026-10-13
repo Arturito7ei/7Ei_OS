@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week of 2026-10-13 — 7Ei Research</title>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+  --green: #3fb950; --fire: #f78166;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+nav { background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1rem; }
+nav h1 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+nav .sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; }
+nav ul { list-style: none; }
+nav li { margin-bottom: 0.35rem; }
+nav a { font-size: 0.85rem; color: var(--muted); display: block; padding: 0.35rem 0.5rem; border-radius: 6px; }
+nav a:hover, nav a.active { background: #21262d; color: var(--text); text-decoration: none; }
+main { padding: 2rem 2.5rem 4rem; max-width: 1280px; }
+.hero { margin-bottom: 2rem; }
+.hero h2 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); margin-top: 0.5rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+.card h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+.card p { font-size: 0.82rem; color: var(--muted); }
+.card .cta { display: inline-block; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; }
+.badge { display: inline-block; background: rgba(63,185,80,0.15); color: var(--green); font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.35rem; }
+.verdict { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; white-space: nowrap; }
+.verdict-adopt { background: rgba(63,185,80,0.15); color: var(--green); }
+.verdict-trial { background: rgba(88,166,255,0.15); color: var(--accent); }
+.verdict-hold { background: rgba(210,153,34,0.15); color: #d29922; }
+.verdict-avoid { background: rgba(247,129,102,0.15); color: var(--fire); }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--fire); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.85rem; color: var(--muted); }
+.callout strong { color: var(--text); }
+.meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+.catalog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+nav .nav-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0.85rem 0.5rem 0.2rem; }
+section { margin-bottom: 2rem; }
+section h3 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+.week-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.week-row { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.65rem 1rem; font-size: 0.88rem; }
+.week-row .date { color: var(--muted); font-size: 0.78rem; }
+.report-body h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.report-body h2 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+.report-body h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+.report-body p { margin: 0.75rem 0; color: var(--muted); }
+.report-body { overflow-x: auto; }
+.report-body table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+.report-body th, .report-body td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+.report-body th { background: var(--surface); color: var(--muted); font-weight: 600; }
+.report-body tr:nth-child(even) td { background: rgba(22,27,34,0.5); }
+.report-body .col-desc { min-width: 14rem; max-width: 28rem; color: var(--muted); font-weight: 400; }
+.report-body code { background: #21262d; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85em; }
+.report-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.report-body em { color: var(--muted); font-size: 0.85rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } nav { border-right: none; border-bottom: 1px solid var(--border); } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h1>7Ei Research</h1>
+  <p class="sub">Radar · local models · free APIs</p>
+  <ul><li><a href="../index.html">Home</a></li><li><a href="../radar.html">Radar dashboard</a></li><li><a href="../local-models.html">Local models</a></li><li><a href="../free-apis.html">Free model APIs</a></li><li class="nav-label">Weekly archive</li><li><a href="../reports/2026-10-13.html" class="active">2026-10-13</a></li><li><a href="../reports/2026-10-02.html">2026-10-02</a></li><li><a href="../reports/2026-09-29.html">2026-09-29</a></li><li><a href="../reports/2026-09-08.html">2026-09-08</a></li><li><a href="../reports/2026-08-24.html">2026-08-24</a></li><li><a href="../reports/2026-08-19.html">2026-08-19</a></li><li><a href="../reports/2026-08-17.html">2026-08-17</a></li><li><a href="../reports/2026-08-13.html">2026-08-13</a></li></ul>
+</nav>
+<main><div class="hero"><h2>Week of 2026-10-13</h2><p><a href="radar.html">Open interactive radar dashboard →</a></p></div>
+<div class="report-body">
+<h1>Weekly Skill Chooser — week of 2026-10-13</h1>
+<p>7-day rising window (repos created after 2026-10-06). Prior week was a 21-day scan (2026-10-02). No 🔥 deltas — zero overlap with that snapshot.</p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Scan file</td><td><code>RESEARCH/GITHUB_RISING_RADAR_2026_10_13.md</code></td></tr><tr><td>Snapshot</td><td><code>2026-10-13T015115Z</code> · 46 repos · Δ vs 2026-10-02 = none</td></tr><tr><td>Queue delta</td><td>4 new rows (2 Trial / 2 Hold) + 1 Avoid</td></tr><tr><td>Author capacity</td><td><strong>1 Trial</strong> (one machine or Hermes profile) — no fleet install</td></tr><tr><td>Thin clusters</td><td>Hermes plugin SoT · local agent-session search</td></tr></tbody></table>
+<h3>Choose up to 2 to implement (reply with IDs)</h3>
+<table><thead><tr><th>#</th><th>id</th><th>for agent(s)</th><th>cluster</th><th class="col-desc">description</th><th>ask</th><th>cost if we skip</th></tr></thead><tbody><tr><td>1</td><td><code>hermes-official-plugins</code></td><td>7RD → TARCOH</td><td>Research / Hermes</td><td class="col-desc">Official Nous first-party Hermes plugins, catalog-pinned</td><td><strong>Trial</strong> — one plugin only (<code>gh api</code> MIT, pushed 2026-10-13, 248★). Kill if catalog pulls unreviewed community or phones home</td><td>TARCOH keeps installing random community plugins</td></tr><tr><td>2</td><td><code>pensieve-local-search</code></td><td>7RD + 7OPS</td><td>Research / Mac</td><td class="col-desc">Local Mac search + MCP over files, git, agent sessions</td><td><strong>Trial</strong> — MIT <code>0.6.4</code>. Embeddings-only on 16 GB (no second 9B). Kill if index leaves the box</td><td>Agents keep grepping the disk</td></tr><tr><td>3</td><td><code>agent-standup</code></td><td>7RD</td><td>Operations</td><td class="col-desc">Local standup of Claude/Codex sessions</td><td><strong>Hold</strong> — overlaps <code>agent-console</code></td><td>Fine</td></tr><tr><td>4</td><td><code>gluon-harness</code></td><td>7RD</td><td>Research</td><td class="col-desc">Multi-harness BYOK control plane</td><td><strong>Hold</strong> — overlaps <code>magpie-gateway</code></td><td>Fine</td></tr><tr><td>5</td><td><code>diff-tour</code></td><td>7RD</td><td>Engineering</td><td class="col-desc">Read-only LLM tour of a git diff</td><td><strong>Hold</strong> — vendor CLI writes the tour</td><td>Fine</td></tr></tbody></table>
+<h3>Explicitly not recommending this week</h3>
+<table><thead><tr><th>id / repo</th><th>why parked</th></tr></thead><tbody><tr><td><code>artex-pentest</code> / mhtsec/ARTEX</td><td><strong>Avoid</strong> — autonomous pentest; 3600★ / 6000 forks</td></tr><tr><td><code>wheresryan22/anatomy</code></td><td>Star-farm illustration skill (6337★ / 4.7d)</td></tr><tr><td>storytold/wordcraft (+ craft family)</td><td>Office clones; not a 7Ei wound</td></tr><tr><td>McDonald’s <code>mcd-*</code> skills</td><td>Wrong domain / farm</td></tr><tr><td>Mega-pack <code>--all</code></td><td>Precedence 01 + context poison</td></tr></tbody></table>
+<h3>Recommended human reply</h3>
+<p><code>trial hermes-official-plugins (one plugin) + pensieve · skip rest</code></p>
+<hr>
+<p><em>Owner: 7RD · Gate: 7MAN · Final pick: Thierry</em></p>
+<hr>
+<h1>GitHub Rising Radar — 2026-10-13 01:51 UTC</h1>
+<p>7-day window (<code>created:&gt;2026-10-06</code>), tracks <code>skills,ai,agent,devtools,general</code>, <strong>46 repos</strong>. Snapshot: <code>REPOS/7Ei_OS-radar-2026-10-13/skills/github-rising-radar/data/snapshots/2026-10-13T015115Z.json</code>. Delta baseline: <code>2026-10-02T040942Z</code> (82 repos, 21-day) — <strong>no overlap</strong>, so no 🔥 climbers (every hit was created after the last scan). Scan command: <code>python3 skills/github-rising-radar/scripts/scan.py --tracks skills,ai,agent,devtools,general --days 7 --min-stars 50</code> from worktree <code>origin/main</code> @ <code>bd9421e</code>.</p>
+<p>Star velocity = total stars ÷ repo age (days). <strong>Read, not run</strong> — <code>gh api</code> + README heads only (<code>gh auth</code> Arturito7ei).</p>
+<p>Skills track produced <strong>0 unique</strong> hits in this window (all empty or already counted under other tracks).</p>
+<p>Triage + verdicts: <code>RESEARCH/GITHUB_RISING_RADAR_TRIAGE_2026_10_13.md</code> · chooser: <code>RESEARCH/WEEKLY_SKILL_CHOOSER_2026_10_13.md</code>.</p>
+<h2>7RD verdicts (this window)</h2>
+<table><thead><tr><th>Verdict</th><th>Repo</th><th class="col-desc">Description</th><th>Why</th></tr></thead><tbody><tr><td><strong>Trial</strong></td><td><a href="https://github.com/NousResearch/hermes-official-plugins">NousResearch/hermes-official-plugins</a></td><td class="col-desc">Official first-party Hermes plugins (HA, Spotify, Claude DirectSDK, …), catalog-pinned.</td><td>TARCOH already on Hermes. MIT. Pushed 2026-10-13T01:25Z. Cherry-pick one plugin — no bulk install.</td></tr><tr><td><strong>Trial</strong></td><td><a href="https://github.com/TedHaley/pensieve">TedHaley/pensieve</a></td><td class="col-desc">Local Mac search over files, git, and agent sessions; MCP to agents; on-box Qwen embeddings.</td><td>P01 pass. MIT. Release <code>0.6.4</code> 2026-10-12. Kill if RAM fights Hermes 9B.</td></tr><tr><td><strong>Hold</strong></td><td><a href="https://github.com/Atoll92/agent-standup">Atoll92/agent-standup</a></td><td class="col-desc">Local live standup of Claude Code / Codex / Mistral Vibe sessions. Zero tokens.</td><td>Overlaps queued <code>agent-console</code>. MIT <code>1.31.0</code>. Do not stack.</td></tr><tr><td><strong>Hold</strong></td><td><a href="https://github.com/fidipro/gluon">fidipro/gluon</a></td><td class="col-desc">Multi-harness control (Claude/Codex/OpenCode/…) with BYOK routing.</td><td>Overlaps queued <code>magpie-gateway</code>. Apache-2.0 <code>1.2.0</code>. 53★.</td></tr><tr><td><strong>Hold</strong></td><td><a href="https://github.com/init-co-jp/diff-tour">init-co-jp/diff-tour</a></td><td class="col-desc">Read-only TUI: LLM writes a guided tour of a git diff.</td><td>Nice DX, no wound. Tour text goes to Claude/Codex/Gemini CLI. MIT <code>v0.3.0</code>.</td></tr><tr><td><strong>Hold</strong></td><td><a href="https://github.com/wheresryan22/anatomy">wheresryan22/anatomy</a></td><td class="col-desc">Agent skill: isometric machine illustrations (SVG / WebGL).</td><td>Star velocity (6337★ / 4.7d) ≠ 7Ei wound. MIT <code>1.1</code>.</td></tr><tr><td><strong>Avoid</strong></td><td><a href="https://github.com/mhtsec/ARTEX">mhtsec/ARTEX</a></td><td class="col-desc">Autonomous pentest / “agent+” CTF winner.</td><td>Offensive cyber. AGPL-3.0. 3600★ / 6000 forks — farm-shaped.</td></tr></tbody></table>
+<p>Recommended pick: <code>trial hermes-official-plugins (one plugin) + pensieve · skip rest</code>.</p>
+<p><em>No star deltas vs previous snapshot — 7-day created-window has no overlap with the 2026-10-02 21-day set.</em></p>
+<h2>General Rising — top velocity</h2>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://github.com/storytold/wordcraft">storytold/wordcraft</a></td><td class="col-desc">An open-source, clean-room reimplementation of Microsoft Word in pure Rust</td><td>1614.0</td><td>9232</td><td>Rust</td></tr><tr><td><a href="https://github.com/wheresryan22/anatomy">wheresryan22/anatomy</a></td><td class="col-desc">An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems. Generates polished SV…</td><td>1362.3</td><td>6337</td><td>JavaScript</td></tr><tr><td><a href="https://github.com/liseami/CCBaga">liseami/CCBaga</a></td><td class="col-desc">—</td><td>870.0</td><td>1670</td><td>Rust</td></tr><tr><td><a href="https://github.com/mhtsec/ARTEX">mhtsec/ARTEX</a></td><td class="col-desc">AI 自主渗透测试系统 / 百度“agent+”攻防挑战赛冠军项目</td><td>742.9</td><td>3600</td><td>Go</td></tr><tr><td><a href="https://github.com/storytold/gridcraft">storytold/gridcraft</a></td><td class="col-desc">GridCraft: an open-source, clean-room spreadsheet (Microsoft Excel-style) in pure Rust. By ArtCraft.</td><td>659.3</td><td>3861</td><td>Rust</td></tr><tr><td><a href="https://github.com/storytold/cadcraft">storytold/cadcraft</a></td><td class="col-desc">CADCraft: computer-aided design and drafting — an open-source, clean-room AutoCAD-style app in pure Rust</td><td>598.6</td><td>3504</td><td>Rust</td></tr><tr><td><a href="https://github.com/storytold/craft-launcher">storytold/craft-launcher</a></td><td class="col-desc">The Craft App Launcher</td><td>585.8</td><td>1818</td><td>Rust</td></tr><tr><td><a href="https://github.com/t4t5/omdrop-owl">t4t5/omdrop-owl</a></td><td class="col-desc">airdrop for non-apple devices</td><td>512.4</td><td>2460</td><td>Shell</td></tr><tr><td><a href="https://github.com/nullmoth/nvidia-macos-driver">nullmoth/nvidia-macos-driver</a></td><td class="col-desc">Metal driver for NVIDIA GeForce RTX cards on macOS 15 Sequoia (Intel / OpenCore). Free, source included.</td><td>480.1</td><td>2753</td><td>Rust</td></tr><tr><td><a href="https://github.com/noahdunnagan/fsearch">noahdunnagan/fsearch</a></td><td class="col-desc">Whole-disk file search for macOS: fuzzy names, typo tolerance, indexed content grep. ~1 ms over 8M files.</td><td>455.7</td><td>1975</td><td>Rust</td></tr></tbody></table>
+<h2>AI / LLM — top velocity</h2>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://github.com/onehumanbeing/esp32-iphone-agent">onehumanbeing/esp32-iphone-agent</a></td><td class="col-desc">Let an AI model use a real iPhone with a $7 ESP32: AirPlay eyes, USB HID hands, any OpenAI-compatible vision model. No Mac, no developer ac…</td><td>538.2</td><td>688</td><td>Python</td></tr><tr><td><a href="https://github.com/deeplethe/solid-glass">deeplethe/solid-glass</a></td><td class="col-desc">A design system for AI applications. Material, physical, tactile, technical.</td><td>230.0</td><td>230</td><td>TypeScript</td></tr><tr><td><a href="https://github.com/NousResearch/hermes-official-plugins">NousResearch/hermes-official-plugins</a></td><td class="col-desc">☤ The official plugins for Hermes Agent, built and maintained by Nous Research: Home Assistant, Spotify, Claude Subscription DirectSDK and…</td><td>112.3</td><td>248</td><td>Python</td></tr><tr><td><a href="https://github.com/Ayzzz123/mcd-coupon-strategist">Ayzzz123/mcd-coupon-strategist</a></td><td class="col-desc">麦麦省钱助手 —— 基于麦当劳 MCP 的点餐成本优化 Skill。算出当前门店最省钱的点餐方案，并主动提示凑单陷阱。</td><td>91.5</td><td>232</td><td>Python</td></tr><tr><td><a href="https://github.com/sepehr071/awesome-iran-mcp">sepehr071/awesome-iran-mcp</a></td><td class="col-desc">19 open-source MCP servers (308 tools) that give AI agents the Iranian web: Digikala, Snappfood, Jabama, MrBilit, Paziresh24, Taaghche and…</td><td>42.0</td><td>65</td><td>Python</td></tr><tr><td><a href="https://github.com/lawrencewzen/wx-bot">lawrencewzen/wx-bot</a></td><td class="col-desc">把微信接入你的 AI Agent（Grok / Muse / Claude 等）· Connect WeChat to your personal AI agent via official iLink</td><td>34.4</td><td>122</td><td>TypeScript</td></tr><tr><td><a href="https://github.com/HRuiCcc/RuiC-oc-ferry">HRuiCcc/RuiC-oc-ferry</a></td><td class="col-desc">把 OpenCode 的免费模型摆渡给 WorkBuddy —— 隔离运行时、并发检测、判定缓存、一键导入、本机 OpenAI 兼容转发口</td><td>34.0</td><td>92</td><td>JavaScript</td></tr><tr><td><a href="https://github.com/init-co-jp/diff-tour">init-co-jp/diff-tour</a></td><td class="col-desc">Walk through a diff the way a senior engineer reads it. A read-only TUI that turns a git change into a guided tour.</td><td>28.6</td><td>77</td><td>Go</td></tr><tr><td><a href="https://github.com/robertkarl/UnbiasedStrata">robertkarl/UnbiasedStrata</a></td><td class="col-desc">Strata minus the bullshit. clone, rsync to prod, compile and go</td><td>13.1</td><td>69</td><td>C++</td></tr><tr><td><a href="https://github.com/fidipro/gluon">fidipro/gluon</a></td><td class="col-desc">Control platform for coding agents</td><td>10.4</td><td>53</td><td>TypeScript</td></tr></tbody></table>
+<h2>Dev Tools — top velocity</h2>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://github.com/Atoll92/agent-standup">Atoll92/agent-standup</a></td><td class="col-desc">Your Claude Code, Codex and Mistral Vibe sessions as a live, animated team call: who is working, who waits on whom, who needs you. VS Code…</td><td>54.5</td><td>150</td><td>HTML</td></tr><tr><td><a href="https://github.com/iamumeransari/claude-show-your-work">iamumeransari/claude-show-your-work</a></td><td class="col-desc">Claude Code shows images and plays videos right in your terminal: screenshots, Playwright recordings, and synced before/after QA. Ghostty &amp;…</td><td>34.3</td><td>157</td><td>TypeScript</td></tr><tr><td><a href="https://github.com/pullboard-dev/pullboard">pullboard-dev/pullboard</a></td><td class="col-desc">Autonomous development for real products. Agents build from the spec you approve, and nothing ships until another agent proves it.</td><td>18.5</td><td>109</td><td>JavaScript</td></tr><tr><td><a href="https://github.com/mcpdelta/mcpdelta">mcpdelta/mcpdelta</a></td><td class="col-desc">Delta MCP is a free app that sits between your AI apps and their MCP servers: one program per task instead of one tool call per step, up to…</td><td>15.2</td><td>81</td><td>—</td></tr><tr><td><a href="https://github.com/truongfelix/workflow">truongfelix/workflow</a></td><td class="col-desc">A Claude Code workflow for long projects: short context, decisions remembered, lessons that stick across sessions</td><td>9.5</td><td>52</td><td>Shell</td></tr></tbody></table>
+<h2>Agent / MCP — top velocity</h2>
+<table><thead><tr><th>Repo</th><th class="col-desc">Description</th><th>⭐/day</th><th>Total</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://github.com/LingCore/WinShun">LingCore/WinShun</a></td><td class="col-desc">Win顺：免费开源的 Windows 快速搜索启动器。双击 Ctrl，拼音秒搜文件、全文搜索 Word/Excel/PDF、剪贴板历史（代替 Win+V）、对话框搜索、任务栏搜索、插件、AI 助手 MCP。Free Windows search launcher: pinyin…</td><td>48.4</td><td>239</td><td>C++</td></tr><tr><td><a href="https://github.com/yzg1226/mcd-party-officer">yzg1226/mcd-party-officer</a></td><td class="col-desc">🍟 麦当劳门店派对成团调度 Skill — 把派对从「策划」推进到「办得成」：成团概率雷达 / 包场vs拼团 / 择日黄历 / 儿童营养指数 / 招募卡与邀请函</td><td>45.4</td><td>158</td><td>Python</td></tr><tr><td><a href="https://github.com/hujjun/mcd-saver-strategist">hujjun/mcd-saver-strategist</a></td><td class="col-desc">麦当劳省钱点餐助手（麦门精算师）｜麦当劳优惠券组合优化 Skill：拉取麦当劳菜单与全部可用优惠券，算出最省的点餐组合，巨无霸套餐 ¥47 → ¥21.9（省 53%）。McDonalds MCP（麦当劳 MCP）coupon optimizer · McDonalds Chi…</td><td>26.4</td><td>104</td><td>Python</td></tr><tr><td><a href="https://github.com/Zafer-Liu/mcd-event-radar">Zafer-Liu/mcd-event-radar</a></td><td class="col-desc">麦当劳 MCP Agent Skill：查「附近有什么麦麦活动」，生成卡通活动地图——门店位置取自官方经纬度，只展示已核实可预约场次 🍟</td><td>20.3</td><td>73</td><td>JavaScript</td></tr><tr><td><a href="https://github.com/OSINT-Experts-Society/Consensus-OSINT">OSINT-Experts-Society/Consensus-OSINT</a></td><td class="col-desc">OSINT tool for username search, email lookup and phone intelligence. 7,900+ lookup modules standardised from 19 projects, with enriched res…</td><td>17.0</td><td>75</td><td>Python</td></tr><tr><td><a href="https://github.com/TedHaley/pensieve">TedHaley/pensieve</a></td><td class="col-desc">Local search across your files, git repos and AI agent sessions on your Mac. An MCP server gives your agents the best context, a 3D map sho…</td><td>11.2</td><td>55</td><td>Python</td></tr></tbody></table>
+<hr>
+<p><em>Next: run <code>tech-radar-evaluate</code> on interesting candidates → append <code>RESEARCH/RD_CANDIDATE_QUEUE.md</code></em></p>
+</div>
+<footer>Generated 2026-10-13 01:52 UTC · <code>generate_research_hub.py</code> · Owner: 7RD</footer>
+</main>
+</div>
+</body>
+</html>
