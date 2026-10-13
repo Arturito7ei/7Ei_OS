@@ -6,6 +6,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [unreleased]
+
+### Added
+- `protocols/silver-board.md` — when to convene the Silver Board; pointer to private product repo `Arturito7ei/silver-board`
+- `projects/silver-board/README.md` — org-infrastructure card (not a venture)
+
+---
+
 ## [0.3.0] - 2026-09-15
 
 ### Added

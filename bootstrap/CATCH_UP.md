@@ -33,3 +33,4 @@ Write L1 memory only in `vault/Memory/agents/<your-slug>/`. Read anywhere. Propo
 
 - Brand-new instance: `onboarding/README.md`, then pass `onboarding/checklist.md`.
 - Skills inventory: `skills/catalog.md` (before taking a task).
+- Hard call or 777 Gate: `protocols/silver-board.md` (product lives in `Arturito7ei/silver-board`, not in this OS).
