@@ -21,7 +21,7 @@ Complete decoder ring for 7Ei shorthand, acronyms, and internal language.
 | Term | Meaning |
 |------|--------|
 | Mission Control | 7Ei's main product — AI virtual office app |
-| Silver Board | Virtual advisory board with persona-based advisors |
+| Silver Board | Consultation protocol (not a department): intelligence field of 50+ advisors. Product repo: Arturito7ei/silver-board. OS pointer: protocols/silver-board.md |
 | Arturito (agent) | Chief of Staff AI agent in Mission Control |
 | Dispatch | Claude Cowork's phone-first interface |
 | Sprint cycle | Plan → execute → merge → deploy → test |

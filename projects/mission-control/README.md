@@ -43,6 +43,6 @@ AI-powered virtual office in your pocket. Create an org, spin up AI agents (star
 
 - Sprint 4: Communications hub (Telegram, Gmail)
 - Sprint 5: Kanban board + Jira sync
-- Sprint 6: Silver Board multi-advisor + agent-to-agent handoff
+- Sprint 6: Silver Board multi-advisor + agent-to-agent handoff — call [Arturito7ei/silver-board](https://github.com/Arturito7ei/silver-board), do not grow a second roster (see `protocols/silver-board.md`)
 - Sprint 7: Web desktop feature parity
 - Sprint 8: Polish + App Store submission

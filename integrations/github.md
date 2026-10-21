@@ -19,6 +19,7 @@ Repository map, permissions model, and automation for the 7Ei GitHub organizatio
 | `7EiAI-Website` | 7Ei company website | Private | TBD |
 | `Arturito7ei` | GitHub profile + agent identity repo | Public | Markdown |
 | `skill-library` | Shared agent skills (open-source) | Public | Bash, Markdown |
+| `silver-board` | Interactive Silver Board (consultation protocol + local room) | Private | Node (zero-dep), Claude Code skill |
 
 ## Permissions Model
 
