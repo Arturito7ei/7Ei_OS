@@ -87,14 +87,27 @@ def parse_catalog(path: Path) -> list[dict]:
             current_category = name if name in VALID_CATEGORIES else None
             continue
 
-        # Table rows: | Name | Source | Description |
+        # Table rows:
+        #   | Skill | Source | Description |                     (3 cols)
+        #   | Skill | Source | Skill File | Description |        (4 cols — current catalog)
         if line.startswith("|") and "---" not in line and current_category:
             parts = [p.strip() for p in line.split("|")[1:-1]]
             if len(parts) >= 3 and parts[0] and parts[0] != "Skill":
-                name, source, description = parts[0], parts[1], parts[2]
+                name, source = parts[0], parts[1]
+                if len(parts) >= 4:
+                    # Prefer explicit skill-file column when present; description is last
+                    skill_file_hint, description = parts[2], parts[3]
+                else:
+                    skill_file_hint, description = "", parts[2]
                 if name and description and not name.startswith("-"):
                     skill_dir = SKILLS_DIR / _slugify(name)
                     skill_file = skill_dir / "SKILL.md"
+                    # If catalog points at a repo-relative skills/... path that exists, honor it
+                    # (e.g. kepano nested paths stay as slugify dirs unless file missing elsewhere).
+                    if skill_file_hint.startswith("`") and skill_file_hint.endswith("`"):
+                        skill_file_hint = skill_file_hint.strip("`")
+                    if skill_file_hint.startswith("skills/") and (REPO_ROOT / skill_file_hint).exists():
+                        skill_file = REPO_ROOT / skill_file_hint
                     skills.append({
                         "name": name,
                         "source": source,
@@ -116,21 +129,45 @@ def _slugify(name: str) -> str:
 
 def generate_obsidian_note(skill: dict) -> str:
     """Generate Obsidian markdown for a single skill."""
+    from datetime import date
+
     skill_file = skill["skill_file"]
-    rel_path = skill_file.relative_to(REPO_ROOT) if skill_file.exists() else None
+    if skill_file.exists():
+        try:
+            rel_path = str(skill_file.relative_to(REPO_ROOT))
+        except ValueError:
+            rel_path = str(skill_file)
+    else:
+        rel_path = None
 
     # Read the actual SKILL.md for trigger info if available
     trigger = ""
     if skill_file.exists():
         content = skill_file.read_text()
-        # Extract "Trigger" or "When to Use" sections
-        m = re.search(r"(?i)(?:trigger|when to use)[\s\n]+([^\n]+[^\n]+)", content)
-        if m:
-            trigger = m.group(0).split(":", 1)[-1].strip()
+        # Prefer YAML description frontmatter
+        fm = re.search(r"(?m)^description:\s*[\"']?(.+?)[\"']?\s*$", content)
+        if fm:
+            trigger = fm.group(1).strip()
+        else:
+            m = re.search(
+                r"(?is)##\s*(?:When to Use|Trigger)\s*\n+(.+?)(?:\n##\s|\Z)",
+                content,
+            )
+            if m:
+                # First non-empty bullet or line
+                for line in m.group(1).splitlines():
+                    line = line.strip().lstrip("-* ").strip()
+                    if line:
+                        trigger = line
+                        break
+
+    today = date.today().isoformat()
+    path_display = rel_path or "(missing — add SKILL.md under 7Ei_OS/skills/)"
 
     return f"""---
 title: "Skill: {skill['name']}"
 created: 2026-06-22
+updated: {today}
 tags: [skill, {skill['category'].lower().replace(' ', '-')}]
 status: active
 ---
@@ -143,15 +180,17 @@ status: active
 {skill['description']}
 
 ## Skill File
-`{rel_path}` (in 7Ei_OS)
+`{path_display}` (in 7Ei_OS — git `Arturito7ei/7Ei_OS`)
 
 ## Trigger
-> "{trigger or skill['description'][:80]}"
+> "{trigger or skill['description'][:120]}"
 
 ## More Info
-See `{rel_path}` in 7Ei_OS for full documentation.
-"""
+See `{path_display}` in 7Ei_OS for full documentation.
 
+---
+⬆ Registry: [[Skill-Library]] · Map: [[MOC-Skills]] · Procedures: [[MOC-Protocols]]
+"""
 
 def generate_moc(skills: list[dict]) -> str:
     """Generate the Skill-Library.md MOC."""
@@ -183,9 +222,15 @@ def generate_moc(skills: list[dict]) -> str:
         lines.append(f"## {emoji} {category}")
         lines.append("")
         for s in sorted(by_category[category], key=lambda x: x["name"]):
-            lines.append(f"- [[{category}/{s['name']}]] — {s['description']}")
+            try:
+                rel = s["skill_file"].relative_to(REPO_ROOT) if s["skill_file"].exists() else None
+            except ValueError:
+                rel = s["skill_file"] if s["skill_file"].exists() else None
+            path_bit = f"`{rel}`" if rel else s["description"]
+            lines.append(f"- [[{category}/{s['name']}]] — {path_bit}")
         lines.append("")
 
+    from datetime import date
     lines.extend([
         "---",
         "",
@@ -196,20 +241,20 @@ def generate_moc(skills: list[dict]) -> str:
         "When adding/editing a skill:",
         "1. Edit `7Ei_OS/skills/<name>/SKILL.md`",
         "2. Update `7Ei_OS/skills/catalog.md`",
-        "3. Run `python3 skills/sync_vault.py`",
-        "4. Commit + PR to 7Ei_OS",
+        "3. Run `python3 skills/sync_vault.py --vault /Users/artutito/7Ei-MC_TARCO/vault`",
+        "4. Commit + PR to 7Ei_OS **and** commit regenerated vault notes in 7Ei-MC_TARCO",
         "",
         "## 📁 Skill Sources",
         "",
         "| Source | Path |",
         "|---|---|",
-        "| 7Ei_OS skills | `7Ei_OS/skills/` |",
-        "| Obsidian vault | `TARCO-MC_Vault/Skill-Library/` |",
-        "| Workspace skills | `~/.openclaw/workspace/skills/` |",
+        "| 7Ei_OS skills | `7Ei_OS/skills/` (git `Arturito7ei/7Ei_OS`) |",
+        "| Obsidian vault | `7Ei-MC_TARCO/vault/Skill-Library/` (generated) |",
+        "| Workspace skills | `~/.openclaw/workspace/skills/` (symlinks) |",
+        "| Cursor skills | `~/.cursor/skills/<name>/SKILL.md` → symlink to 7Ei_OS when vendored |",
         "",
-        f"*Generated: 2026-06-22 by sync_vault.py*",
+        f"*Generated: {date.today().isoformat()} by sync_vault.py*",
     ])
-
     return "\n".join(lines)
 
 
@@ -260,11 +305,11 @@ def main():
     parser.add_argument("--workspace", type=Path, help="Override workspace skills path")
     args = parser.parse_args()
 
+    global OBSIDIAN_VAULT, WORKSPACE_SKILLS, SKILL_LIBRARY_DIR
     if args.vault:
-        global OBSIDIAN_VAULT
         OBSIDIAN_VAULT = args.vault.resolve()
+        SKILL_LIBRARY_DIR = OBSIDIAN_VAULT / "Skill-Library"
     if args.workspace:
-        global WORKSPACE_SKILLS
         WORKSPACE_SKILLS = args.workspace.resolve()
 
     vault_dir = SKILL_LIBRARY_DIR if not args.dry_run else None
