@@ -10,16 +10,29 @@ Repository map, permissions model, and automation for the 7Ei GitHub organizatio
 
 ## Repository Map
 
-| Repo | Purpose | Visibility | Tech Stack |
-|------|---------|-----------|------------|
-| `7Ei_OS` | Agent operating system — protocols, architecture, standards | Private | Markdown |
-| `7ei-mission-control-v2` | Mission Control platform (full-stack) | Private | Next.js 16, React 19, TypeScript, SQLite |
-| `Open7Ei-MC` | Mission Control landing/UI | Private | React 18, Vite 6, JavaScript |
-| `7EiBank` | Decentralised central bank for AI agents | Private | Documentation + architecture |
-| `7EiAI-Website` | 7Ei company website | Private | TBD |
-| `Arturito7ei` | GitHub profile + agent identity repo | Public | Markdown |
-| `skill-library` | Shared agent skills (open-source) | Public | Bash, Markdown |
-| `silver-board` | Interactive Silver Board (consultation protocol + local room) | Private | Node (zero-dep), Claude Code skill |
+Observed 2026-10-21. There is no repo named `7ei-mission-control-v2`. The Mission Control product is `7Ei-Mission_Control_App`. Work selection follows `memory/CLAUDE.md`, not this table.
+
+### Working
+
+| Repo | Purpose | Visibility | May an agent build? |
+|------|---------|------------|---------------------|
+| `7Ei_OS` | Layer 0 — protocols, board, skills | Public | Board and protocol PRs only |
+| `7Ei-MC_TARCO` | Layer 1 vault | Private | Own memory namespace only |
+| `silver-board` | Consultation room | Private | Only when the owner asks |
+| `silver-board-site` | Public static demo of the room | Public | Only when the owner asks |
+| `silver-squeeze` | COMEX early-warning prototype | Public | No. Personal prototype |
+| `7Ei-Mission_Control_App` | Virtual office. Web at app.7ei.ai | Public | No. Paused since 2026-08-29 |
+
+### Closed until further notice
+
+| Repo | Purpose | Visibility |
+|------|---------|------------|
+| `7EiBank` | Decentralised bank concept | Private |
+| `7PolyBet` | Personal Polymarket dry-run | Private |
+
+### Do not resume
+
+Dormant since March–June 2026 unless the owner names one: `Open7Ei-MC`, `7ei-mission-control`, `7ei-pixel-agents`, `skill-library`, `AgAu`, `AgAu_UNBANK`, `7EiAI-Website`, `7ei-iptv-dashboard`, `openclaw-brain-sync`, `Silversqueezedashboard`, `agent-continuity`, `7Ei-MC_TARCO_Backup`, `7Ei-Mission_Control_Backup`. Profile repo `Arturito7ei` is the GitHub profile, not a product.
 
 ## Permissions Model
 
@@ -86,9 +99,10 @@ Use issue templates when available:
 - Feature requests: `.github/ISSUE_TEMPLATE/feature_request.md`
 
 ### CI/CD
-- `7ei-mission-control-v2`: Vercel auto-deploy from `main`
-- `Open7Ei-MC`: Vercel auto-deploy from `main`
-- Other repos: manual deploy or pending CI setup
+- `7Ei-Mission_Control_App`: Fly.io backend + Vercel web. Paused. Do not deploy a feature sprint.
+- `silver-squeeze`: weekday `market-feeds` ingest, then `pages.yml`. Leave it unless the ingest is broken.
+- `silver-board-site`: GitHub Pages static demo.
+- Other repos: manual deploy or no deploy.
 
 ## Security Rules
 

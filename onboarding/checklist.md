@@ -19,7 +19,7 @@ Every item is a demonstrable action, not a claim. Run top to bottom; paste the c
 |---|-------|-----|------|
 | B1 | Layer test | Answer: "If I learn something new, which layer does it belong to and where do I store it?" (per `ARCHITECTURE.md`) | ☐ |
 | B2 | Skill lookup | Answer: "What skill do I use for X?" pointing to the correct `skills/catalog.md` entry | ☐ |
-| B3 | Awareness | Name the other active agents and one thing each is currently working on (from MC + vault Activity page) | ☐ |
+| B3 | Board | From `memory/CLAUDE.md` plus vault `Company/Goals-Now.md` and `Memory/project.md`: name what is active, what is paused, what is closed, and which trials are killed. A sprint plan that disagrees with those three files is wrong. | ☐ |
 | B4 | Protocols ack | Confirm you read all `protocols/` and state the plan→execute→verify rule in one sentence | ☐ |
 
 ## C — Tools (role-dependent)

@@ -3,6 +3,8 @@
 > Profiles of agent instances operating under 7Ei.
 >
 > **Live roster:** L0 runtimes → `README.md`. L1 seats → vault `Memory/agents/README.md` + `07-Agents/MOC-Agents.md`. Profiles in this folder may lag.
+>
+> **What you may work on:** `memory/CLAUDE.md`, then vault `Company/Goals-Now.md` and `Memory/project.md`. Profiles below are not the backlog.
 
 ## What Is an Agent Instance?
 

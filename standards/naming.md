@@ -31,15 +31,8 @@ The primordial template is **Arturito7EiT** (the "T" stands for Template). All a
 - Repos: PascalCase or kebab-case, prefixed with `7Ei` where appropriate
 
 ### Current Repos
-| Repo | Purpose |
-|------|---------|
-| `7Ei_OS` | Agent operating system (this repo) |
-| `7ei-mission-control-v2` | Mission Control platform (Next.js) |
-| `Open7Ei-MC` | Mission Control landing/UI (React + Vite) |
-| `7EiBank` | Decentralised central bank for AI agents |
-| `7EiAI-Website` | 7Ei website |
-| `Arturito7ei` | Agent identity, memory, config (profile repo) |
-| `skill-library` | Shared agent skills |
+
+Inventory and status: `integrations/github.md` (2026-10-21). Do not invent `7ei-mission-control-v2`. The product repo is `7Ei-Mission_Control_App`.
 
 ## Branch Naming
 
@@ -101,8 +94,12 @@ fix: resolve token refresh loop in auth middleware
 
 ## Project Naming
 
-7Ei projects and products:
-- **Open7Ei Mission Control** — the agent orchestration platform
-- **7EiBank** — decentralised central bank for AI agents
-- **7Ei_OS** — the agent operating system
+Names still in use:
 - **7Ei** — the parent organization (7Ei AG, Swiss)
+- **7Ei_OS** — the agent operating system
+- **Silver Board** — consultation room (`silver-board`), not a department
+- **silver-squeeze** — personal COMEX prototype
+- **Mission Control** — paused product (`7Ei-Mission_Control_App`)
+- **7EiBank**, **7PolyBet**, **Hypnomaster** — closed until the owner reopens them
+
+Which of these an agent may touch: `memory/CLAUDE.md`.

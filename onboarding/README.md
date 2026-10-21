@@ -18,7 +18,7 @@ Runtime adapters (L0 + L1 pointers only): `runtimes/buzz.md` · `arturita.md` ·
 
 ## Stage 2 — Environment (where are you?)
 
-Read, in order: `bootstrap/CATCH_UP.md`, `README.md` + `ARCHITECTURE.md` (the 5-layer knowledge model), vault `Memory/agents/README.md` + `07-Agents/MOC-Agents.md` (who else is live), `agents/README.md` (instance profiles; may lag), `projects/` (ongoing work), and the vault starting at `00-Index/MOC-home.md`. Answer for yourself: who are the other agents, what are they working on right now (vault `07-Agents/Activity.md` tells you where to look), and which projects touch your role?
+Read, in order: `bootstrap/CATCH_UP.md`, `memory/CLAUDE.md` (the board), vault `Company/Goals-Now.md` and `Memory/project.md`, `README.md` + `ARCHITECTURE.md` (the 5-layer knowledge model), vault `Memory/agents/README.md` + `07-Agents/MOC-Agents.md` (who else is live), `agents/README.md` (instance profiles; may lag). `projects/` cards are status pages. If a card disagrees with `memory/CLAUDE.md`, the hot cache wins. Answer for yourself: who are the other agents, what the board says is allowed, and which projects are closed.
 
 ## Stage 3 — Protocols (how do we work?)
 

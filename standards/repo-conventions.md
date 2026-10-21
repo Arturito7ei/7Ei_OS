@@ -6,15 +6,17 @@ Default rules for all 7Ei repositories.
 
 **Private by default.** All 7Ei repos are private unless explicitly decided otherwise.
 
+The live inventory, including which public repos already exist, is `integrations/github.md`. That map replaces the old list that named `7ei-mission-control-v2`.
+
 | Repo | Visibility | Rationale |
 |------|-----------|-----------|
-| `7Ei_OS` | Private | Internal operating system |
-| `7ei-mission-control-v2` | Private | Core platform |
-| `Open7Ei-MC` | Private | Platform UI |
-| `7EiBank` | Private | Financial product |
-| `7EiAI-Website` | Private | Company website |
-| `Arturito7ei` | Public | GitHub profile (README only) |
+| `7Ei_OS` | Public (owner, recorded 2026-06-02) | Agents must be able to read Layer 0 |
+| `silver-board-site` | Public | Static demo only. Product source stays private |
+| `silver-squeeze` | Public | Personal prototype |
+| `7Ei-Mission_Control_App` | Public | Existing product. Paused |
 | `skill-library` | Public | Shared skills — open-source (MIT) |
+| `Arturito7ei` | Public | GitHub profile (README only) |
+| Everything else | Private | Default |
 
 Public repos require human approval before creation or visibility change.
 

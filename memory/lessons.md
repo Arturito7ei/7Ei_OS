@@ -26,6 +26,12 @@ Capture mistakes, insights, and patterns. When a lesson proves durable (stable 7
 **Rule:** When setting up a new machine or new session type, run a permissions sweep first — trigger every tool with a harmless read-only call and click Always Allow on each.
 **Status:** active
 
+### 2026-10-21 — The hot cache described a sprint that had already shipped
+**Context:** Agents reading `memory/CLAUDE.md` were told Mission Control's next sprint was Telegram + Gmail, and that 7EiBank needed an architecture review.
+**What we learned:** Those sentences were months behind the app repo and the 777 Gate. A stale hot cache sends every new agent at finished or refused work.
+**Rule:** If `memory/CLAUDE.md`, vault `Company/Goals-Now.md`, and vault `Memory/project.md` disagree with a sprint plan or a project card, the three board files win. Update the board in the same session as an owner order.
+**Status:** active
+
 ### 2026-03-24 — Sprint plans should live in the OS repo, not project repos
 **Context:** Sprint execution plans were pushed to the Mission Control repo as loose files. But they contain workflow metadata (model recommendations, effort estimates) that belongs to the OS layer, not the project layer.
 **What we learned:** Sprint plans are operational knowledge, not project code. They belong in 7Ei_OS/projects/{project}/sprints/.

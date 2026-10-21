@@ -6,7 +6,7 @@
 >
 > **To add/edit a skill:** Edit `skills/<name>/SKILL.md`, update this catalog, then run `python3 skills/sync_vault.py` to regenerate the Obsidian vault.
 >
-> **Last updated:** 2026-10-13
+> **Last updated:** 2026-10-21
 
 ---
 
@@ -95,6 +95,8 @@
 ---
 
 ## 🔬 Research
+
+**Killed 2026-10-21 (owner).** Do not install or re-trial: `hermes-official-plugins`, `pensieve`. The 2026-10-13 chooser proposed them. That proposal is void. Playwright MCP and reverse-engineer-anything stay; they already shipped.
 
 | Skill | Source | Skill File | Description |
 |-------|--------|------------|-------------|
