@@ -26,7 +26,7 @@ Complete decoder ring for 7Ei shorthand, acronyms, and internal language.
 | Dispatch | Claude Cowork's phone-first interface |
 | Sprint cycle | Plan → execute → merge → deploy → test |
 | Execution plan | Markdown file with work orders pushed to repo |
-| Hot cache | CLAUDE.md working memory for quick lookups |
+| Hot cache | `memory/CLAUDE.md` — the only current-work list. Updated 2026-10-21 |
 | Knowledge promotion | Pattern: session → agent → project → org → OS |
 
 ## People

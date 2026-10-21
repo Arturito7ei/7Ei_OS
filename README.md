@@ -8,7 +8,7 @@ The living operating system for all 7Ei agents. Runtime-agnostic. LLM-agnostic. 
 
 ## Quick Start
 
-**New or swapped agent?** Read [`bootstrap/CATCH_UP.md`](bootstrap/CATCH_UP.md) first, then the files it lists, in that order.
+**New or swapped agent?** Read [`bootstrap/CATCH_UP.md`](bootstrap/CATCH_UP.md) first, then the files it lists, in that order. The current board is [`memory/CLAUDE.md`](memory/CLAUDE.md) plus vault `Company/Goals-Now.md` and `Memory/project.md`.
 
 **New project repo?** Add a thin `CLAUDE.md` that references this OS:
 ```markdown

@@ -11,6 +11,12 @@ Format: `[version] - YYYY-MM-DD`
 ### Added
 - `protocols/silver-board.md` — when to convene the Silver Board; pointer to private product repo `Arturito7ei/silver-board`
 - `projects/silver-board/README.md` — org-infrastructure card (not a venture)
+- `projects/silver-squeeze/README.md` — personal prototype card
+
+### Changed
+- `memory/CLAUDE.md` — 2026-10-21 board: Silver Board and silver-squeeze are the live surfaces, Mission Control is paused, 7EiBank / 7PolyBet / Hypnomaster stay closed, October trials `hermes-official-plugins` and `pensieve` are killed
+- `bootstrap/CATCH_UP.md` — boot order now loads the hot cache and the vault board before runtimes
+- `integrations/github.md` — repo map matches the org; removed the repo that does not exist (`7ei-mission-control-v2`)
 
 ---
 

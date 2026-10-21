@@ -2,7 +2,7 @@
 
 **Repo:** [Arturito7ei/7Ei-Mission_Control_App](https://github.com/Arturito7ei/7Ei-Mission_Control_App)
 **Backend:** https://7ei-backend.fly.dev
-**Status:** Active — Sprint 3 complete, ready for Sprint 4
+**Status:** Paused since 2026-08-29. Do not start Sprint 4.
 
 ## What It Is
 
@@ -41,8 +41,10 @@ AI-powered virtual office in your pocket. Create an org, spin up AI agents (star
 
 ## Roadmap
 
-- Sprint 4: Communications hub (Telegram, Gmail)
+Historical. Telegram, Gmail, and later Arturita Telegram work already landed in `7Ei-Mission_Control_App` (last commit 2026-08-29). Do not execute this list.
+
+- Sprint 4: Communications hub (Telegram, Gmail) — already shipped in the app repo
 - Sprint 5: Kanban board + Jira sync
-- Sprint 6: Silver Board multi-advisor + agent-to-agent handoff — call [Arturito7ei/silver-board](https://github.com/Arturito7ei/silver-board), do not grow a second roster (see `protocols/silver-board.md`)
+- Sprint 6: Silver Board — call [Arturito7ei/silver-board](https://github.com/Arturito7ei/silver-board). Do not grow a second roster (`protocols/silver-board.md`)
 - Sprint 7: Web desktop feature parity
 - Sprint 8: Polish + App Store submission
