@@ -6,7 +6,7 @@
 >
 > **To add/edit a skill:** Edit `skills/<name>/SKILL.md`, update this catalog, then run `python3 skills/sync_vault.py` to regenerate the Obsidian vault.
 >
-> **Last updated:** 2026-10-21
+> **Last updated:** 2026-10-22
 
 ---
 
@@ -130,6 +130,7 @@
 | Nano-PDF | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/nano-pdf/SKILL.md` | Edit PDFs with natural-language instructions via `nano-pdf` CLI. |
 | OpenAI-Whisper | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/openai-whisper/SKILL.md` | Local speech-to-text with Whisper CLI. No API key required. |
 | Model-Usage | bundled | `/opt/homebrew/lib/node_modules/openclaw/skills/model-usage/SKILL.md` | Summarize Codex/Claude cost logs by model. |
+| Open-Generative-AI | workspace | `skills/open-generative-ai/SKILL.md` | Open-source AI image/video/marketing studio (MuAPI + optional local engines). 7MKT creatives: Marketing/Image/Video/Lip Sync studios; OUTBOX drafts only until approved. |
 
 ---
 
